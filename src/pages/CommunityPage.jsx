@@ -6,6 +6,7 @@ import { ReactComponent as User } from "../images/User.svg";
 import { ReactComponent as Logo } from "../images/Symbol_color@300x.svg";
 import { ReactComponent as Down } from "../images/Down.svg";
 import { ReactComponent as Talk } from "../images/Talk.svg";
+import { ReactComponent as Star } from "../images/Star.svg";
 
 import {
   Aside,
@@ -119,15 +120,27 @@ const CommunityPage = () => {
                       <CommunityItemList>
                         <CommunityLink>
                           <CommunityMenuText>질문 답변</CommunityMenuText>
+                          <Star />
                         </CommunityLink>
                         <CommunityLink>
-                          <CommunityMenuText>질문 답변</CommunityMenuText>
+                          <CommunityMenuText>오픈 마이크</CommunityMenuText>
+                          <Star />
                         </CommunityLink>
                         <CommunityLink>
-                          <CommunityMenuText>질문 답변</CommunityMenuText>
+                          <CommunityMenuText>자유 게시판</CommunityMenuText>
+                          <Star />
                         </CommunityLink>
                         <CommunityLink>
-                          <CommunityMenuText>질문 답변</CommunityMenuText>
+                          <CommunityMenuText>정보 게시판</CommunityMenuText>
+                          <Star />
+                        </CommunityLink>
+                        <CommunityLink>
+                          <CommunityMenuText>장터 게시판</CommunityMenuText>
+                          <Star />
+                        </CommunityLink>
+                        <CommunityLink>
+                          <CommunityMenuText>홍보 게시판</CommunityMenuText>
+                          <Star />
                         </CommunityLink>
                       </CommunityItemList>
                     )}
