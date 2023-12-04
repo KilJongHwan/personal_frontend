@@ -202,7 +202,6 @@ export const CommunitySVG = styled.div`
 export const CommunityMenuText = styled.a`
   width: 100px;
   color: #333;
-
   font-family: Inter;
   font-size: 12.6px;
   font-style: normal;

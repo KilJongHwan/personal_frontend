@@ -115,16 +115,22 @@ const CommunityPage = () => {
                         <RotatedDown isRotated={isList}></RotatedDown>
                       </CommunityMenuButton>
                     </CommunityLink>
-                    <CommunityLink>
-                      {isList && (
-                        <CommunityItemList>
+                    {isList && (
+                      <CommunityItemList>
+                        <CommunityLink>
                           <CommunityMenuText>질문 답변</CommunityMenuText>
+                        </CommunityLink>
+                        <CommunityLink>
                           <CommunityMenuText>질문 답변</CommunityMenuText>
+                        </CommunityLink>
+                        <CommunityLink>
                           <CommunityMenuText>질문 답변</CommunityMenuText>
+                        </CommunityLink>
+                        <CommunityLink>
                           <CommunityMenuText>질문 답변</CommunityMenuText>
-                        </CommunityItemList>
-                      )}
-                    </CommunityLink>
+                        </CommunityLink>
+                      </CommunityItemList>
+                    )}
                   </CommunityMenuItem>
                 </CommunityMenuList>
               </Aside>
