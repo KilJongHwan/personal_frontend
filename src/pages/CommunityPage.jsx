@@ -34,14 +34,21 @@ import {
   CommunityMenuText,
   CommunityMenuButton,
   CommunityItem,
+  CommunityItemList,
 } from "../style/CommunityStyle";
 import { useState } from "react";
+import styled from "styled-components";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
   const ListOpen = () => {
     setIsList(!isList);
   };
+  const RotatedDown = styled(Down)`
+    transition: transform 0.3s ease-in-out;
+    transform: ${(props) =>
+      props.isRotated ? "rotate(180deg)" : "rotate(0deg)"};
+  `;
   return (
     <>
       <Page>
@@ -101,12 +108,22 @@ const CommunityPage = () => {
                     </CommunityLink>
                     <CommunityLink>
                       <CommunityMenuButton>
-                        <Talk />
                         <CommunityItem onClick={ListOpen}>
+                          <Talk />
                           <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
                         </CommunityItem>
-                        <Down />
+                        <RotatedDown isRotated={isList}></RotatedDown>
                       </CommunityMenuButton>
+                    </CommunityLink>
+                    <CommunityLink>
+                      {isList && (
+                        <CommunityItemList>
+                          <CommunityMenuText>질문 답변</CommunityMenuText>
+                          <CommunityMenuText>질문 답변</CommunityMenuText>
+                          <CommunityMenuText>질문 답변</CommunityMenuText>
+                          <CommunityMenuText>질문 답변</CommunityMenuText>
+                        </CommunityItemList>
+                      )}
                     </CommunityLink>
                   </CommunityMenuItem>
                 </CommunityMenuList>
