@@ -41,8 +41,11 @@ import {
   TableRowDataViews,
   TitleContent,
 } from "../../style/CommunityPostStyle";
+import { useNavigate } from "react-router-dom";
 
-const CommunityComponent = ({ setInputClicked }) => {
+const CommunityComponent = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <PostContainer>
@@ -96,7 +99,9 @@ const CommunityComponent = ({ setInputClicked }) => {
             <PostBoarder
               placeholder="새 글을 작성하세요"
               type="text"
-              onClick={() => setInputClicked(true)}
+              onClick={() => {
+                navigate("/community/write");
+              }}
             ></PostBoarder>
             <SendButton>
               <Write />

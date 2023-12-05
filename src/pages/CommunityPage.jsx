@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+
 import { ReactComponent as SvgS } from "../images/music-svgrepo-com.svg";
 import { ReactComponent as Menu } from "../images/Menu.svg";
 import { ReactComponent as Heart } from "../images/Heart.svg";
@@ -44,7 +46,6 @@ import WriteComponent from "../conponent/community/CommunityWriteComponent";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
-  const [isInputClicked, setInputClicked] = useState(false);
   const ListOpen = () => {
     setIsList(!isList);
   };
@@ -55,107 +56,111 @@ const CommunityPage = () => {
   `;
   return (
     <>
-      <Page>
-        <Hidden>
-          <Container>
-            <Section>
-              <Title>음악을 사랑하는 여러분의 의견을 나눠주세요.</Title>
-              <Note>
-                <SvgS />
-              </Note>
-            </Section>
-          </Container>
-          <CommunityContainer>
-            <CommunityList>
-              <Aside>
-                <CommunityDashboard>
-                  <CommunityProfile>
-                    <CommunityProfileFrame>
-                      <CommunityProfilePart></CommunityProfilePart>
-                    </CommunityProfileFrame>
-                    <CommunityProfileImg />
-                  </CommunityProfile>
-                  <TextCenter>
-                    <TextFrame>
-                      <TextLog>로그인 후 더 편하게 이용해 보세요</TextLog>
-                    </TextFrame>
-                  </TextCenter>
-                  <DashboardButtonFrame>
-                    <DashboardButton>로그인 / 회원가입</DashboardButton>
-                  </DashboardButtonFrame>
-                </CommunityDashboard>
-                <CommunityMenuList>
-                  <CommunityMenuItem>
-                    <CommunityLink>
-                      <CommunitySVG>
-                        <Menu />
-                        <CommunityMenuText>전체 게시판</CommunityMenuText>
-                      </CommunitySVG>
-                    </CommunityLink>
-                    <CommunityLink>
-                      <CommunitySVG>
-                        <Heart />
-                        <CommunityMenuText>인기 게시판</CommunityMenuText>
-                      </CommunitySVG>
-                    </CommunityLink>
-                    <CommunityLink>
-                      <CommunitySVG>
-                        <Clip />
-                        <CommunityMenuText>공지 게시판</CommunityMenuText>
-                      </CommunitySVG>
-                    </CommunityLink>
-                    <CommunityLink>
-                      <CommunitySVG>
-                        <User />
-                        <CommunityMenuText>팀원 모집</CommunityMenuText>
-                      </CommunitySVG>
-                    </CommunityLink>
-                    <CommunityLink>
-                      <CommunityMenuButton>
-                        <CommunityItem onClick={ListOpen}>
-                          <Talk />
-                          <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
-                        </CommunityItem>
-                        <RotatedDown isRotated={isList}></RotatedDown>
-                      </CommunityMenuButton>
-                    </CommunityLink>
-                    {isList && (
-                      <CommunityItemList>
-                        <CommunityLink>
-                          <CommunityMenuText>질문 답변</CommunityMenuText>
-                          <Star />
-                        </CommunityLink>
-                        <CommunityLink>
-                          <CommunityMenuText>오픈 마이크</CommunityMenuText>
-                          <Star />
-                        </CommunityLink>
-                        <CommunityLink>
-                          <CommunityMenuText>자유 게시판</CommunityMenuText>
-                          <Star />
-                        </CommunityLink>
-                        <CommunityLink>
-                          <CommunityMenuText>정보 게시판</CommunityMenuText>
-                          <Star />
-                        </CommunityLink>
-                        <CommunityLink>
-                          <CommunityMenuText>장터 게시판</CommunityMenuText>
-                          <Star />
-                        </CommunityLink>
-                        <CommunityLink>
-                          <CommunityMenuText>홍보 게시판</CommunityMenuText>
-                          <Star />
-                        </CommunityLink>
-                      </CommunityItemList>
-                    )}
-                  </CommunityMenuItem>
-                </CommunityMenuList>
-              </Aside>
-              {/* <CommunityComponent setInputClicked={setInputClicked} /> */}
-              <WriteComponent />
-            </CommunityList>
-          </CommunityContainer>
-        </Hidden>
-      </Page>
+      <Router>
+        <Page>
+          <Hidden>
+            <Container>
+              <Section>
+                <Title>음악을 사랑하는 여러분의 의견을 나눠주세요.</Title>
+                <Note>
+                  <SvgS />
+                </Note>
+              </Section>
+            </Container>
+            <CommunityContainer>
+              <CommunityList>
+                <Aside>
+                  <CommunityDashboard>
+                    <CommunityProfile>
+                      <CommunityProfileFrame>
+                        <CommunityProfilePart></CommunityProfilePart>
+                      </CommunityProfileFrame>
+                      <CommunityProfileImg />
+                    </CommunityProfile>
+                    <TextCenter>
+                      <TextFrame>
+                        <TextLog>로그인 후 더 편하게 이용해 보세요</TextLog>
+                      </TextFrame>
+                    </TextCenter>
+                    <DashboardButtonFrame>
+                      <DashboardButton>로그인 / 회원가입</DashboardButton>
+                    </DashboardButtonFrame>
+                  </CommunityDashboard>
+                  <CommunityMenuList>
+                    <CommunityMenuItem>
+                      <CommunityLink>
+                        <CommunitySVG>
+                          <Menu />
+                          <CommunityMenuText>전체 게시판</CommunityMenuText>
+                        </CommunitySVG>
+                      </CommunityLink>
+                      <CommunityLink>
+                        <CommunitySVG>
+                          <Heart />
+                          <CommunityMenuText>인기 게시판</CommunityMenuText>
+                        </CommunitySVG>
+                      </CommunityLink>
+                      <CommunityLink>
+                        <CommunitySVG>
+                          <Clip />
+                          <CommunityMenuText>공지 게시판</CommunityMenuText>
+                        </CommunitySVG>
+                      </CommunityLink>
+                      <CommunityLink>
+                        <CommunitySVG>
+                          <User />
+                          <CommunityMenuText>팀원 모집</CommunityMenuText>
+                        </CommunitySVG>
+                      </CommunityLink>
+                      <CommunityLink>
+                        <CommunityMenuButton>
+                          <CommunityItem onClick={ListOpen}>
+                            <Talk />
+                            <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
+                          </CommunityItem>
+                          <RotatedDown isRotated={isList}></RotatedDown>
+                        </CommunityMenuButton>
+                      </CommunityLink>
+                      {isList && (
+                        <CommunityItemList>
+                          <CommunityLink>
+                            <CommunityMenuText>질문 답변</CommunityMenuText>
+                            <Star />
+                          </CommunityLink>
+                          <CommunityLink>
+                            <CommunityMenuText>오픈 마이크</CommunityMenuText>
+                            <Star />
+                          </CommunityLink>
+                          <CommunityLink>
+                            <CommunityMenuText>자유 게시판</CommunityMenuText>
+                            <Star />
+                          </CommunityLink>
+                          <CommunityLink>
+                            <CommunityMenuText>정보 게시판</CommunityMenuText>
+                            <Star />
+                          </CommunityLink>
+                          <CommunityLink>
+                            <CommunityMenuText>장터 게시판</CommunityMenuText>
+                            <Star />
+                          </CommunityLink>
+                          <CommunityLink>
+                            <CommunityMenuText>홍보 게시판</CommunityMenuText>
+                            <Star />
+                          </CommunityLink>
+                        </CommunityItemList>
+                      )}
+                    </CommunityMenuItem>
+                  </CommunityMenuList>
+                </Aside>
+                <Routes>
+                  <Route path="/" element={<CommunityComponent />} />
+                  <Route path="/community/write" element={<WriteComponent />} />
+                </Routes>
+              </CommunityList>
+            </CommunityContainer>
+          </Hidden>
+        </Page>
+      </Router>
     </>
   );
 };
