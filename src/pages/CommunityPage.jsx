@@ -39,9 +39,11 @@ import {
 } from "../style/CommunityStyle";
 import { useState } from "react";
 import styled from "styled-components";
+import CommunityComponent from "../conponent/community/CommunityComponent";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
+  const [isInputClicked, setInputClicked] = useState(false);
   const ListOpen = () => {
     setIsList(!isList);
   };
@@ -147,6 +149,7 @@ const CommunityPage = () => {
                   </CommunityMenuItem>
                 </CommunityMenuList>
               </Aside>
+              <CommunityComponent setInputClicked={setInputClicked} />
             </CommunityList>
           </CommunityContainer>
         </Hidden>
