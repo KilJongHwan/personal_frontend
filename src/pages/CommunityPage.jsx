@@ -40,6 +40,7 @@ import {
 import { useState } from "react";
 import styled from "styled-components";
 import CommunityComponent from "../conponent/community/CommunityComponent";
+import WriteComponent from "../conponent/community/CommunityWriteComponent";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
@@ -149,7 +150,8 @@ const CommunityPage = () => {
                   </CommunityMenuItem>
                 </CommunityMenuList>
               </Aside>
-              <CommunityComponent setInputClicked={setInputClicked} />
+              {/* <CommunityComponent setInputClicked={setInputClicked} /> */}
+              <WriteComponent />
             </CommunityList>
           </CommunityContainer>
         </Hidden>
