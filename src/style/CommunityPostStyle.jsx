@@ -330,3 +330,52 @@ export const TableRowDataDate = styled(TableRowData)`
 export const TableRowDataViews = styled(TableRowData)`
   flex: 0.5;
 `;
+export const PostPage = styled.div`
+  display: flex;
+  padding: 28.8px 206.23px 28.8px 206.2px;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  align-self: stretch;
+  opacity: var(--, 1);
+`;
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 7.19px;
+  opacity: var(--, 1);
+`;
+export const PageContant = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #008bff;
+
+  /* ground.buv.co.kr/Inter/Medium 11.7 */
+  font-family: Inter;
+  font-size: 11.7px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17.55px; /* 150% */
+`;
+export const MiddlePage = styled.div`
+  display: flex;
+  padding-right: 0.02px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10.79px;
+  opacity: var(--, 1);
+`;
+export const PageButton = styled.button`
+  display: flex;
+  padding-right: 0.52px;
+  flex-direction: column;
+  align-items: flex-start;
+  color: ${(props) => (props.selected ? "#000" : "#C4C4C4")};
+  font-family: Inter;
+  font-size: 12.6px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 142.857% */
+`;

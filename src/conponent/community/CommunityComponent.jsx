@@ -1,17 +1,22 @@
 import { ReactComponent as Write } from "../../images/Write.svg";
-
+import { ReactComponent as Prev } from "../../images/Prev.svg";
+import { ReactComponent as Next } from "../../images/Next.svg";
 import {
   Block,
   ButtonFlex,
   ChoiceButton,
+  Pagination,
   HeadLine,
   HeadText,
   Heading,
   InputContainer,
+  MiddlePage,
+  PageContant,
   PostBoarder,
   PostContainer,
   PostList,
   PostListTitle,
+  PostPage,
   PostRankCategory,
   PostRankContent,
   PostRankFrame,
@@ -117,6 +122,21 @@ const CommunityComponent = ({ setInputClicked }) => {
                 </TableNormalRow>
               </TableBody>
             </PostTable>
+            <PostPage>
+              <Pagination>
+                <PageContant>
+                  <Prev />
+                </PageContant>
+                <PageContant>이전</PageContant>
+              </Pagination>
+              <MiddlePage></MiddlePage>
+              <Pagination>
+                <PageContant>다음</PageContant>
+                <PageContant>
+                  <Next />
+                </PageContant>
+              </Pagination>
+            </PostPage>
           </PostList>
         </PostSection>
       </PostContainer>
