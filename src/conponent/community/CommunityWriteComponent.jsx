@@ -1,9 +1,11 @@
 import "react-quill/dist/quill.snow.css"; // import styles
 
 import {
+  CancelButton,
   Line,
   StyledReactQuill,
   WriteBorder,
+  WriteButton,
   WriteContainer,
   WriteHeading,
   WriteHeadingText,
@@ -42,6 +44,14 @@ const WriteComponent = () => {
             onChange={setContent}
             modules={modules}
           />
+          <CancelButton>
+            <div className="front">취소</div>
+            <div className="back">cancel</div>
+          </CancelButton>
+          <WriteButton>
+            <div className="front">등록</div>
+            <div className="back">submit</div>
+          </WriteButton>
         </WriteSection>
       </WriteContainer>
     </>

@@ -91,3 +91,91 @@ export const StyledReactQuill = styled(ReactQuill)`
     margin-right: 2px !important; // 버튼들 사이의 간격을 2px로
   }
 `;
+export const CancelButton = styled.button`
+  --flip-button-height: 50px;
+  margin: 20px;
+  width: 150px;
+  height: var(--flip-button-height);
+  color: black;
+  background: white;
+  border-radius: 0;
+  perspective: 500px;
+  transition: 0.3s;
+  position: relative; // 추가
+
+  &:hover {
+    color: black;
+    background: white;
+    .front {
+      transform: rotateX(-90deg);
+    }
+
+    .back {
+      transform: rotateX(0deg);
+    }
+  }
+
+  .front,
+  .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: black; // 추가
+    background: var(--btn-bg); // 추가
+    transition: 0.3s;
+    transform-origin: center center calc(var(--flip-button-height) / -2);
+  }
+
+  .back {
+    transform: rotateX(88deg);
+  }
+`;
+export const WriteButton = styled.button`
+  --flip-button-height: 50px;
+  width: 150px;
+  height: var(--flip-button-height);
+  color: transparent;
+  border: none;
+  background: #018cff;
+  border-radius: 0;
+  perspective: 500px;
+  transition: 0.3s;
+  position: relative; // 추가
+
+  &:hover {
+    color: white;
+    background: #018cff;
+    .front {
+      transform: rotateX(-90deg);
+    }
+
+    .back {
+      transform: rotateX(0deg);
+    }
+  }
+
+  .front,
+  .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white; // 추가
+    background: var(--btn-bg); // 추가
+    transition: 0.3s;
+    transform-origin: center center calc(var(--flip-button-height) / -2);
+  }
+
+  .back {
+    transform: rotateX(88deg);
+  }
+`;
