@@ -259,3 +259,74 @@ export const TableHeader = styled.div`
 
   opacity: var(--, 1);
 `;
+export const TableRow = styled.div`
+  width: 718.41px;
+  height: 38px;
+  border-bottom: 1px solid #f5f5f5;
+  opacity: var(--, 1);
+  background: rgba(249, 53, 76, 0.04);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+export const TableNormalRow = styled.div`
+  width: 718.41px;
+  height: 38px;
+  border-bottom: var(--, 1px) solid #dadada;
+  opacity: var(--, 1);
+  display: flex;
+  flex-direction: row;
+`;
+export const TableHeaderCell = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: var(--, 1px) 72.77px var(--, 1px) 14.39px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #999;
+
+  font-family: Inter;
+  font-size: 12.6px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+`;
+export const TableBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-top: 2px solid #e6e6e6;
+  opacity: var(--, 1);
+`;
+export const TableRowData = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  text-align: center;
+  font-family: Inter;
+  font-size: 12.6px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+`;
+export const TableRowDataTitle = styled(TableRowData)`
+  flex: 1;
+`;
+
+export const TableRowDataContent = styled(TableRowData)`
+  flex: 3;
+`;
+
+export const TableRowDataDate = styled(TableRowData)`
+  flex: 0.5;
+`;
+
+export const TableRowDataViews = styled(TableRowData)`
+  flex: 0.5;
+`;

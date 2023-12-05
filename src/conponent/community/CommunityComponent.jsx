@@ -27,7 +27,13 @@ import {
   Swiper,
   SwiperSlide,
   SwiperWrapper,
-  TableHeader,
+  TableBody,
+  TableNormalRow,
+  TableRow,
+  TableRowDataContent,
+  TableRowDataDate,
+  TableRowDataTitle,
+  TableRowDataViews,
   TitleContent,
 } from "../../style/CommunityPostStyle";
 
@@ -96,7 +102,20 @@ const CommunityComponent = ({ setInputClicked }) => {
           </PostListTitle>
           <PostList>
             <PostTable>
-              <TableHeader></TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableRowDataTitle>제목</TableRowDataTitle>
+                  <TableRowDataContent>내용</TableRowDataContent>
+                  <TableRowDataDate>등록일</TableRowDataDate>
+                  <TableRowDataViews>조회수</TableRowDataViews>
+                </TableRow>
+                <TableNormalRow>
+                  <TableRowDataTitle>제목</TableRowDataTitle>
+                  <TableRowDataContent>내용</TableRowDataContent>
+                  <TableRowDataDate>등록일</TableRowDataDate>
+                  <TableRowDataViews>조회수</TableRowDataViews>
+                </TableNormalRow>
+              </TableBody>
             </PostTable>
           </PostList>
         </PostSection>
