@@ -18,13 +18,14 @@ const WriteComponent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const Register = async () => {
+  const PostRegister = async () => {
     const communityDTO = {
       title: title,
       content: content,
     };
     try {
       const response = await AxiosApi.communityPost(communityDTO);
+      console.log(response.data);
       if (response.status === 200) {
         alert("게시글이 등록되었습니다.");
       }
@@ -54,17 +55,20 @@ const WriteComponent = () => {
             <WriteHeadingText>게시글 작성</WriteHeadingText>
           </WriteHeading>
           <Line />
-          <WriteBorder placeholder="제목을 입력해주세요." />
+          <WriteBorder
+            placeholder="제목을 입력해주세요."
+            onChange={(e) => setTitle(e.target.value)}
+          />
           <StyledReactQuill
             value={content}
-            onChange={setContent}
+            onChange={(value) => setContent(value)}
             modules={modules}
           />
           <CancelButton>
             <div className="front">취소</div>
             <div className="back">cancel</div>
           </CancelButton>
-          <WriteButton>
+          <WriteButton onClick={PostRegister}>
             <div className="front">등록</div>
             <div className="back">submit</div>
           </WriteButton>
