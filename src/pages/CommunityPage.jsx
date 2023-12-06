@@ -43,6 +43,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import CommunityComponent from "../conponent/community/CommunityComponent";
 import WriteComponent from "../conponent/community/CommunityWriteComponent";
+import Post from "../conponent/community/PostRoomComponent";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);

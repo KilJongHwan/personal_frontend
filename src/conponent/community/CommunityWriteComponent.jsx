@@ -12,10 +12,26 @@ import {
   WriteSection,
 } from "../../style/CommunityPostWriteStyle";
 import { useState } from "react";
+import AxiosApi from "../../axios/CommunityAxios";
 
 const WriteComponent = () => {
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  const Register = async () => {
+    const communityDTO = {
+      title: title,
+      content: content,
+    };
+    try {
+      const response = await AxiosApi.communityPost(communityDTO);
+      if (response.status === 200) {
+        alert("게시글이 등록되었습니다.");
+      }
+    } catch (error) {
+      alert("게시글 등록에 실패했습니다.");
+    }
+  };
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }], // 헤더 레벨을 드롭다운 메뉴로

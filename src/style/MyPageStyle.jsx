@@ -9,6 +9,8 @@ export const MyPageContainer = styled.div`
   background: #fff;
 `;
 export const MainHead = styled.div`
+  display: flex;
+
   width: 1920px;
   height: 356px;
   flex-shrink: 0;
@@ -25,7 +27,32 @@ export const MainProfile = styled.div`
   opacity: var(--, 1);
   background: url(${profile}) no-repeat center / contain, lightgray;
   margin-top: 30px;
-  margin-left: 50px;
+  margin-left: 70px;
+`;
+export const MainHeadBox = styled.div`
+  width: 389px;
+  height: 122px;
+  flex-shrink: 0;
+`;
+export const MainHeadText = styled.div`
+  display: flex;
+  position: relative;
+  width: 20rem;
+  height: 2rem;
+  margin: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  flex-shrink: 0;
+  color: #fff;
+
+  opacity: var(--, 1);
+  color: #fff;
+  font-family: Noto Sans KR;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;
 export const NameText = styled.div`
   position: relative;
