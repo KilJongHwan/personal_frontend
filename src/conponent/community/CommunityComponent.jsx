@@ -2,13 +2,7 @@ import { ReactComponent as Write } from "../../images/Write.svg";
 import { ReactComponent as Prev } from "../../images/Prev.svg";
 import { ReactComponent as Next } from "../../images/Next.svg";
 import {
-  Block,
-  ButtonFlex,
-  ChoiceButton,
   Pagination,
-  HeadLine,
-  HeadText,
-  Heading,
   InputContainer,
   MiddlePage,
   PageContant,
@@ -17,21 +11,9 @@ import {
   PostList,
   PostListTitle,
   PostPage,
-  PostRankCategory,
-  PostRankContent,
-  PostRankFrame,
-  PostRankLink,
-  PostRankList,
-  PostRankListItem,
   PostSection,
   PostTable,
-  PostUpTime,
-  PostUpTimeList,
-  RoundedMd,
   SendButton,
-  Swiper,
-  SwiperSlide,
-  SwiperWrapper,
   TableBody,
   TableNormalRow,
   TableRow,
@@ -42,59 +24,35 @@ import {
   TitleContent,
 } from "../../style/CommunityPostStyle";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import AxiosApi from "../../axios/CommunityAxios";
+import Common from "../../utils/common";
+import CommunityRankComponent from "./CommunityRankComponent";
 
 const CommunityComponent = () => {
   const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+
+  const extractContent = (html) => {
+    const parser = new DOMParser();
+    const parsedHtml = parser.parseFromString(html, "text/html");
+    return parsedHtml.body.textContent || "";
+  };
+  useEffect(() => {
+    // 서버에서 데이터를 가져오는 함수
+    const postList = async () => {
+      const response = await AxiosApi.getCommunityList();
+      setPosts(response.data);
+    };
+
+    postList();
+  }, []);
 
   return (
     <>
       <PostContainer>
         <PostSection>
-          <Heading>
-            <HeadText>전체 게시판</HeadText>
-          </Heading>
-          <HeadLine />
-          <Block>
-            <ButtonFlex>
-              <ChoiceButton selected={true}>실시간</ChoiceButton>
-              <ChoiceButton selected={false}>주간</ChoiceButton>
-              <ChoiceButton selected={false}>월간</ChoiceButton>
-            </ButtonFlex>
-            <PostUpTime>
-              <PostUpTimeList>
-                <Swiper>
-                  <SwiperWrapper>
-                    <SwiperSlide>
-                      <RoundedMd>
-                        <PostRankList>
-                          <PostRankListItem>
-                            <PostRankLink>1</PostRankLink>
-                            <PostRankCategory>자유 게시판</PostRankCategory>
-                            <PostRankContent>
-                              <PostRankFrame>팀원모집</PostRankFrame>
-                            </PostRankContent>
-                          </PostRankListItem>
-                        </PostRankList>
-                      </RoundedMd>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <RoundedMd>
-                        <PostRankList>
-                          <PostRankListItem>
-                            <PostRankLink>6</PostRankLink>
-                            <PostRankCategory>자유 게시판</PostRankCategory>
-                            <PostRankContent>
-                              <PostRankFrame>팀원모집</PostRankFrame>
-                            </PostRankContent>
-                          </PostRankListItem>
-                        </PostRankList>
-                      </RoundedMd>
-                    </SwiperSlide>
-                  </SwiperWrapper>
-                </Swiper>
-              </PostUpTimeList>
-            </PostUpTime>
-          </Block>
+          <CommunityRankComponent />
           <InputContainer>
             <PostBoarder
               placeholder="새 글을 작성하세요"
@@ -116,15 +74,26 @@ const CommunityComponent = () => {
                 <TableRow>
                   <TableRowDataTitle>제목</TableRowDataTitle>
                   <TableRowDataContent>내용</TableRowDataContent>
-                  <TableRowDataDate>등록일</TableRowDataDate>
+                  <TableRowDataDate>작성시간</TableRowDataDate>
                   <TableRowDataViews>조회수</TableRowDataViews>
                 </TableRow>
-                <TableNormalRow>
-                  <TableRowDataTitle>제목</TableRowDataTitle>
-                  <TableRowDataContent>내용</TableRowDataContent>
-                  <TableRowDataDate>등록일</TableRowDataDate>
-                  <TableRowDataViews>조회수</TableRowDataViews>
-                </TableNormalRow>
+                {posts.map((post) => (
+                  <TableNormalRow
+                    key={post.id}
+                    onClick={() => {
+                      navigate(`/community/detail/${post.id}`);
+                    }}
+                  >
+                    <TableRowDataTitle>{post.title}</TableRowDataTitle>
+                    <TableRowDataContent>
+                      {extractContent(post.content)}
+                    </TableRowDataContent>
+                    <TableRowDataDate>
+                      {Common.timeFromNow(post.regDate)}
+                    </TableRowDataDate>
+                    <TableRowDataViews>{post.viewCount}</TableRowDataViews>
+                  </TableNormalRow>
+                ))}
               </TableBody>
             </PostTable>
             <PostPage>

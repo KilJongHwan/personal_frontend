@@ -155,6 +155,7 @@ const CommunityPage = () => {
                 </Aside>
                 <Routes>
                   <Route path="/" element={<CommunityComponent />} />
+                  <Route path="/community/detail/:id" element={<Post />} />
                   <Route path="/community/write" element={<WriteComponent />} />
                 </Routes>
               </CommunityList>

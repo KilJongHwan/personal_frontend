@@ -3,7 +3,7 @@ import Common from "../utils/common.jsx";
 
 const AxiosApi = {
   // 게시글 조회
-  communityList: async () => {
+  getCommunityList: async () => {
     return await axios.get(Common.DOMAIN + "/api/community/list", {
       headers: {
         "Content-Type": "application/json",
@@ -23,8 +23,18 @@ const AxiosApi = {
       }
     );
   },
+  getCommunityDetail: async (communityId) => {
+    return await axios.get(
+      Common.DOMAIN + `/api/community/detail/${communityId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
   // 댓글 조회
-  commentList: async (communityId) => {
+  getCommentList: async (communityId) => {
     return await axios.get(Common.DOMAIN + `/api/comment/list/${communityId}`, {
       headers: {
         "Content-Type": "application/json",
@@ -32,14 +42,14 @@ const AxiosApi = {
     });
   },
   // 댓글 쓰기
-  commentWrite: async (email, communityId, parentCommentId, content) => {
+  commentWrite: async (email, communityId, content, parentCommentId) => {
     const comment = {
-      communityId: communityId,
-      parentCommentId: parentCommentId,
       email: email,
+      communityId: communityId,
       content: content,
+      parentCommentId: parentCommentId,
     };
-    return await axios.post(Common.KH_DOMAIN + `/api/comment/new`, comment, {
+    return await axios.post(Common.DOMAIN + `/api/comment/new`, comment, {
       headers: {
         "Content-Type": "application/json",
       },

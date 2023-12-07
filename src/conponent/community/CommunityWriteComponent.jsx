@@ -13,21 +13,29 @@ import {
 } from "../../style/CommunityPostWriteStyle";
 import { useState } from "react";
 import AxiosApi from "../../axios/CommunityAxios";
+import { useNavigate } from "react-router-dom";
 
 const WriteComponent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [email, setEmail] = useState("test@email.com");
+  const [category, setCategory] = useState(5);
+
+  const navigate = useNavigate();
 
   const PostRegister = async () => {
     const communityDTO = {
+      email: email,
       title: title,
       content: content,
+      categoryId: category,
     };
     try {
       const response = await AxiosApi.communityPost(communityDTO);
       console.log(response.data);
       if (response.status === 200) {
         alert("게시글이 등록되었습니다.");
+        navigate("/");
       }
     } catch (error) {
       alert("게시글 등록에 실패했습니다.");
