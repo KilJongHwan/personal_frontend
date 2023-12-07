@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const PostContainer = styled.div`
   display: flex;
+  width: 1000px;
   padding: 0px 21.6px 0px 36px;
   flex-direction: column;
   align-items: flex-start;
@@ -30,7 +31,7 @@ export const HeadText = styled.p`
   line-height: 28.8px; /* 133.333% */
 `;
 export const HeadLine = styled.div`
-  width: 718.41px;
+  width: 100%;
   height: 2px;
   flex-shrink: 0;
   margin-bottom: 15px;
@@ -87,7 +88,7 @@ export const PostUpTimeList = styled.div`
 `;
 export const Swiper = styled.div`
   display: flex;
-  width: 718px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
 `;
@@ -179,7 +180,7 @@ export const InputContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  width: 718.41px;
+  width: 100%;
 `;
 export const SendButton = styled.button`
   position: absolute;
@@ -234,7 +235,7 @@ export const TitleContent = styled.div`
 `;
 export const PostList = styled.div`
   display: flex;
-  width: 718.41px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
 `;
@@ -260,7 +261,7 @@ export const TableHeader = styled.div`
   opacity: var(--, 1);
 `;
 export const TableRow = styled.div`
-  width: 718.41px;
+  width: 100%;
   height: 38px;
   border-bottom: 1px solid #f5f5f5;
   opacity: var(--, 1);
@@ -270,7 +271,7 @@ export const TableRow = styled.div`
   justify-content: space-between;
 `;
 export const TableNormalRow = styled.div`
-  width: 718.41px;
+  width: 100%;
   height: 38px;
   border-bottom: var(--, 1px) solid #dadada;
   opacity: var(--, 1);
@@ -297,6 +298,7 @@ export const TableHeaderCell = styled.div`
 `;
 export const TableBody = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;

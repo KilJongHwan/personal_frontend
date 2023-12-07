@@ -72,7 +72,7 @@ const WriteComponent = () => {
             onChange={(value) => setContent(value)}
             modules={modules}
           />
-          <CancelButton>
+          <CancelButton onClick={() => navigate("/")}>
             <div className="front">취소</div>
             <div className="back">cancel</div>
           </CancelButton>

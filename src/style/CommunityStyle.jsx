@@ -35,7 +35,7 @@ export const Section = styled.div`
   flex: 1 0 0;
 `;
 export const Title = styled.a`
-  width: 580px;
+  width: 16em;
   color: #000;
 
   text-align: center;
@@ -47,8 +47,9 @@ export const Title = styled.a`
 `;
 export const Note = styled.div`
   display: flex;
-  width: 100px;
-  height: 100px;
+  padding: 1em;
+  width: 7em;
+  height: 7em;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
@@ -63,14 +64,14 @@ export const CommunityContainer = styled.div`
 `;
 export const CommunityList = styled.div`
   display: flex;
-  width: 1224px;
-  max-width: 1224px;
+  width: 100%;
+  max-width: 1000px;
   padding: 57.6px 183.99px 57.6px 0px;
   align-items: flex-start;
 `;
 export const Aside = styled.div`
   display: flex;
-  width: 264px;
+  width: 100%;
   max-width: 264px;
   padding-bottom: 492.83px;
   flex-direction: column;

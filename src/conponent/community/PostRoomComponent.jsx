@@ -2,15 +2,28 @@ import React, { useEffect, useState } from "react";
 import {
   PostTitle,
   PostContent,
-  PostFooter,
   PostDate,
-  CommentContainer,
-  CommentContent,
   ReplyFormContainer,
   ReplyInput,
   ReplyButton,
+  CommentContainer,
+  CommentForm,
+  CommentInput,
+  CommentButton,
+  PostContainer,
+  PostHeader,
+  PostAuthor,
+  PostViews,
+  PostVotes,
+  PostUpvote,
+  PostDownvote,
+  CommentHeader,
+  CommentContent,
+  PostBody,
+  Dropdown,
+  WriterInfo,
+  TitleContainer,
 } from "../../style/PostRoomStyle";
-import { PostContainer, PostSection } from "../../style/CommunityPostStyle";
 import AxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
 import Common from "../../utils/common";
@@ -76,27 +89,42 @@ const Post = () => {
   };
   return (
     <PostContainer>
-      <PostSection>
-        <CommunityRankComponent />
-        <PostTitle>{post.title}</PostTitle>
+      <CommunityRankComponent />
+      <PostHeader>
+        <WriterInfo>
+          <PostAuthor>{post.email}</PostAuthor>
+          <PostDate> {Common.formatDate(post.regDate)}</PostDate>
+        </WriterInfo>
+        <TitleContainer>
+          <PostTitle>{post.title}</PostTitle>
+          <PostViews>조회수: {post.viewCount}</PostViews>
+        </TitleContainer>
+      </PostHeader>
+      <PostBody>
         <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
-        <PostFooter>
-          <PostDate>{Common.timeFromNow(post.regDate)}</PostDate>
-        </PostFooter>
-        <div>
-          {comments.map((comment) => (
-            <div key={comment.commentId}>{comment.content}</div>
-          ))}
-        </div>
-        <div>
-          <input
+      </PostBody>
+      <PostVotes>
+        <PostUpvote>추천</PostUpvote>
+        <PostDownvote>비추천</PostDownvote>
+      </PostVotes>
+      <CommentHeader>
+        전체 댓글 수: {comments.length} <Dropdown></Dropdown>
+      </CommentHeader>
+      <CommentContainer>
+        {comments.map((comment) => (
+          <CommentContent key={comment.commentId}>
+            {comment.content}
+          </CommentContent>
+        ))}
+        <CommentForm>
+          <CommentInput
             type="text"
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
-          <button onClick={commentWrite}>댓글 작성</button>
-        </div>
-      </PostSection>
+          <CommentButton onClick={commentWrite}>댓글 작성</CommentButton>
+        </CommentForm>
+      </CommentContainer>
     </PostContainer>
   );
 };
