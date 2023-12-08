@@ -1,3 +1,4 @@
+import axios from "axios";
 import moment from "moment";
 import "moment/locale/ko"; // 한글 로컬라이제이션
 moment.locale("ko"); // 한글 설정 적용
@@ -5,6 +6,7 @@ moment.locale("ko"); // 한글 설정 적용
 const Common = {
   DOMAIN: "http://localhost:8111",
   SOCKET_URL: "ws://localhost:8111/ws/chat",
+
   formatDate: (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();

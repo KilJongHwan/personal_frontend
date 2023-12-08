@@ -49,7 +49,7 @@ export const Line = styled.div`
 `;
 export const WriteBorder = styled.input`
   display: flex;
-  width: 97.2%;
+  width: ${(props) => props.width || "97.2%"};
   padding: 10px 13px;
   align-items: center;
   border-top: 1px solid #66baff;
@@ -61,6 +61,14 @@ export const WriteBorder = styled.input`
   border-left: 1px solid #66baff;
 
   opacity: var(--, 1);
+
+  background: #fff;
+`;
+export const NoneLogin = styled.div`
+  display: flex;
+  width: 100%;
+  /* padding: 10px 13px; */
+  align-items: center;
 
   background: #fff;
 `;

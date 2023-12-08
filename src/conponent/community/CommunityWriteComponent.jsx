@@ -3,6 +3,7 @@ import "react-quill/dist/quill.snow.css"; // import styles
 import {
   CancelButton,
   Line,
+  NoneLogin,
   StyledReactQuill,
   WriteBorder,
   WriteButton,
@@ -18,9 +19,10 @@ import { useNavigate } from "react-router-dom";
 const WriteComponent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [email, setEmail] = useState("test@email.com");
+  const [email, setEmail] = useState("");
   const [category, setCategory] = useState(5);
-
+  const [nickName, setNickName] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const PostRegister = async () => {
@@ -29,6 +31,8 @@ const WriteComponent = () => {
       title: title,
       content: content,
       categoryId: category,
+      nickName: nickName,
+      password: password,
     };
     try {
       const response = await AxiosApi.communityPost(communityDTO);
@@ -63,6 +67,22 @@ const WriteComponent = () => {
             <WriteHeadingText>게시글 작성</WriteHeadingText>
           </WriteHeading>
           <Line />
+          <NoneLogin>
+            <WriteBorder
+              width={"50%"}
+              type="text"
+              placeholder="닉네임"
+              value={nickName}
+              onChange={(e) => setNickName(e.target.value)}
+            />
+            <WriteBorder
+              width={"50%"}
+              type="password"
+              placeholder="패스워드"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </NoneLogin>
           <WriteBorder
             placeholder="제목을 입력해주세요."
             onChange={(e) => setTitle(e.target.value)}

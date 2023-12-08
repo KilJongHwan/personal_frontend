@@ -219,6 +219,7 @@ export const CommunityMenuButton = styled.div`
 `;
 export const CommunityItem = styled.div`
   display: flex;
+  margin-left: 10px;
   gap: 10px;
   width: 200px;
   align-items: flex-start;
@@ -226,8 +227,10 @@ export const CommunityItem = styled.div`
 `;
 export const CommunityItemList = styled.div`
   display: flex;
+  margin-left: 2em;
+  width: 100%;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   align-self: stretch;
 `;
 export const CommunitySection = styled.div`

@@ -272,7 +272,7 @@ export const TableRow = styled.div`
 `;
 export const TableNormalRow = styled.div`
   width: 100%;
-  height: 38px;
+  height: 5em;
   border-bottom: var(--, 1px) solid #dadada;
   opacity: var(--, 1);
   display: flex;
@@ -294,7 +294,7 @@ export const TableHeaderCell = styled.div`
   font-size: 12.6px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 3em;
 `;
 export const TableBody = styled.div`
   display: flex;
@@ -311,11 +311,17 @@ export const TableRowData = styled.p`
   align-items: center;
   color: #999;
   text-align: center;
+  overflow: hidden;
   font-family: Inter;
   font-size: 12.6px;
   font-style: normal;
   font-weight: 400;
-  line-height: 18px;
+  line-height: 3em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+export const TableRowDataWriter = styled(TableRowData)`
+  flex: 1;
 `;
 export const TableRowDataTitle = styled(TableRowData)`
   flex: 1;
@@ -350,7 +356,7 @@ export const Pagination = styled.div`
 `;
 export const PageContant = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   color: #008bff;
 
@@ -368,8 +374,9 @@ export const MiddlePage = styled.div`
   align-items: flex-start;
   gap: 10.79px;
   opacity: var(--, 1);
+  flex-direction: row;
 `;
-export const PageButton = styled.button`
+export const Page = styled.a`
   display: flex;
   padding-right: 0.52px;
   flex-direction: column;

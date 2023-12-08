@@ -115,8 +115,8 @@ const CommunityPage = () => {
                       </CommunityLink>
                       <CommunityLink>
                         <CommunityMenuButton>
+                          <Talk />
                           <CommunityItem onClick={ListOpen}>
-                            <Talk />
                             <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
                           </CommunityItem>
                           <RotatedDown isRotated={isList}></RotatedDown>

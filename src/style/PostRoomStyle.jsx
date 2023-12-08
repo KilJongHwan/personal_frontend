@@ -62,6 +62,8 @@ export const PostTitle = styled.h3`
 export const PostContent = styled.div`
   font-size: 1em;
   color: #666;
+  word-wrap: break-word;
+  overflow: auto;
   line-height: 1.5;
   padding: 1em 0;
 `;

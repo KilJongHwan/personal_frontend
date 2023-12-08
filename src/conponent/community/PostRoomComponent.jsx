@@ -33,6 +33,8 @@ const Post = () => {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState({});
   const [newComment, setNewComment] = useState("");
+  const segments = post.ipAddress ? post.ipAddress.split(".") : "";
+  const ipAddress = `${segments[0]}.${segments[1]}`;
 
   const { id } = useParams();
 
@@ -92,7 +94,9 @@ const Post = () => {
       <CommunityRankComponent />
       <PostHeader>
         <WriterInfo>
-          <PostAuthor>{post.email}</PostAuthor>
+          <PostAuthor>
+            {post.nickName}({ipAddress})
+          </PostAuthor>
           <PostDate> {Common.formatDate(post.regDate)}</PostDate>
         </WriterInfo>
         <TitleContainer>
