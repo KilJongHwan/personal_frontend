@@ -27,6 +27,7 @@ import {
   TitleContent,
   TableRowDataWriter,
   Page,
+  TableRowDataIcon,
 } from "../../style/CommunityPostStyle";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -46,7 +47,12 @@ const CommunityComponent = () => {
     const parsedHtml = parser.parseFromString(html, "text/html");
     const imgTag = parsedHtml.querySelector("img");
     const videoTag = parsedHtml.querySelector("video");
-    return imgTag !== null || videoTag !== null;
+    const iframeTag = parsedHtml.querySelector("iframe");
+
+    return {
+      image: imgTag !== null,
+      video: videoTag !== null || iframeTag !== null, // iframe 태그 추가
+    }; // 이미지 태그와 동영상 태그가 각각 있으면 true, 없으면 false를 반환
   };
   useEffect(() => {
     // 서버에서 데이터를 가져오는 함수
@@ -55,7 +61,7 @@ const CommunityComponent = () => {
       setPosts(response.data);
       const responsePages = await AxiosApi.getCommunityTotalPages(pageSize);
       setTotalPages(responsePages.data);
-      console.log(response);
+      console.log(response.data);
     };
 
     postList();
@@ -85,6 +91,7 @@ const CommunityComponent = () => {
             <PostTable>
               <TableBody>
                 <TableRow>
+                  <TableRowDataIcon></TableRowDataIcon>
                   <TableRowDataWriter>작성자</TableRowDataWriter>
                   <TableRowDataTitle>제목</TableRowDataTitle>
                   <TableRowDataDate>작성시간</TableRowDataDate>
@@ -106,16 +113,19 @@ const CommunityComponent = () => {
                         navigate(`/community/detail/${post.id}`);
                       }}
                     >
+                      <TableRowDataIcon>
+                        {hasMediaContent.video ? (
+                          <Video />
+                        ) : hasMediaContent.image ? (
+                          <Image />
+                        ) : (
+                          <Text />
+                        )}
+                      </TableRowDataIcon>
                       <TableRowDataWriter>
                         {post.nickName}({ipAddress})
                       </TableRowDataWriter>
-                      <TableRowDataTitle>
-                        {hasMediaContent ? <Image /> : <Text />}
-                        {post.title}
-                      </TableRowDataTitle>
-                      {/* <TableRowDataContent>
-                        {extractContent(post.content)}
-                      </TableRowDataContent> */}
+                      <TableRowDataTitle>{post.title}</TableRowDataTitle>
                       <TableRowDataDate>
                         {Common.timeFromNow(post.regDate)}
                       </TableRowDataDate>
@@ -157,10 +167,12 @@ const CommunityComponent = () => {
                 <PageContant
                   onClick={() =>
                     setCurrentPage(
-                      currentPage < totalPages ? currentPage + 1 : totalPages
+                      currentPage < totalPages - 1
+                        ? currentPage + 1
+                        : currentPage
                     )
                   }
-                  disabled={currentPage + 1 === totalPages}
+                  disabled={currentPage === totalPages - 1}
                 >
                   다음
                 </PageContant>

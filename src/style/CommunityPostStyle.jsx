@@ -180,6 +180,7 @@ export const InputContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  margin-bottom: 3em;
   width: 100%;
 `;
 export const SendButton = styled.button`
@@ -272,9 +273,11 @@ export const TableRow = styled.div`
 `;
 export const TableNormalRow = styled.div`
   width: 100%;
-  height: 5em;
-  border-bottom: var(--, 1px) solid #dadada;
-  opacity: var(--, 1);
+  height: 4em;
+  border-bottom: 1px solid #dadada;
+  border-left: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  opacity: 1;
   display: flex;
   flex-direction: row;
 `;
@@ -305,11 +308,11 @@ export const TableBody = styled.div`
   border-top: 2px solid #e6e6e6;
   opacity: var(--, 1);
 `;
-export const TableRowData = styled.p`
+export const TableRowData = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #999;
+  color: black;
   text-align: center;
   overflow: hidden;
   font-family: Inter;
@@ -319,6 +322,9 @@ export const TableRowData = styled.p`
   line-height: 3em;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+export const TableRowDataIcon = styled(TableRowData)`
+  flex: 0.3;
 `;
 export const TableRowDataWriter = styled(TableRowData)`
   flex: 1;
@@ -332,6 +338,7 @@ export const TableRowDataContent = styled(TableRowData)`
 `;
 
 export const TableRowDataDate = styled(TableRowData)`
+  color: #999;
   flex: 0.5;
 `;
 
