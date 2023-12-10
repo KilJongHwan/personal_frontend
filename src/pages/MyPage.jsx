@@ -1,3 +1,4 @@
+import MypageComponent from "../conponent/Mypage/MypageComponenet";
 import { ReactComponent as Heart } from "../images/HeartBox.svg";
 import { ReactComponent as Subs } from "../images/SubscriberBox.svg";
 
@@ -10,8 +11,9 @@ import {
   MainHeadBox,
   MainHeadText,
   MainProfile,
+  MoveButton,
   MyPageContainer,
-  NameText,
+  PointBox,
 } from "../style/MyPageStyle";
 
 const MyPage = () => {
@@ -43,8 +45,16 @@ const MyPage = () => {
               ARTIST
             </Artist>
           </ArtistContainer>
+          <PointBox>
+            <MainHeadText>MY 포인트</MainHeadText>
+            132,000 P
+            <div>
+              <MoveButton>충전하기</MoveButton>
+              <MoveButton>환전하기</MoveButton>
+            </div>
+          </PointBox>
         </MainHead>
-        <NameText>독산동 인디언</NameText>
+        <MypageComponent />
       </MyPageContainer>
     </>
   );

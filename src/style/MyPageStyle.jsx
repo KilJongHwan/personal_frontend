@@ -2,13 +2,17 @@ import styled from "styled-components";
 import profile from "../images/ProFileimage.png";
 
 export const MyPageContainer = styled.div`
-  width: 1920px;
-  height: 2608px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
   opacity: 1;
 
   background: #fff;
 `;
 export const MainHead = styled.div`
+  position: relative;
+
   display: flex;
   width: 100%;
   height: 24em;
@@ -32,6 +36,7 @@ export const MainHeadBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 6em;
   width: 35em;
   height: 10em;
   flex-shrink: 0;
@@ -40,15 +45,11 @@ export const MainHeadBox = styled.div`
 export const MainHeadText = styled.div`
   display: flex;
   position: relative;
-  width: Auto;
-  height: 2rem;
-  margin: 2rem;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  padding-left: 1em;
+  width: 10em;
+  height: 1em;
+  flex-direction: row;
   flex-shrink: 0;
-  color: #fff;
-
   opacity: 1;
   color: #fff;
   font-family: Noto Sans KR;
@@ -65,9 +66,9 @@ export const ArtistContainer = styled.div`
 `;
 export const Artist = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   width: 4em;
-  height: 1.5em;
   flex-shrink: 0;
   color: #fff;
 
@@ -75,20 +76,9 @@ export const Artist = styled.div`
   font-size: 10em;
   font-style: normal;
   font-weight: 100;
-  line-height: 0.85;
+  line-height: 1;
 `;
 
-export const NameText = styled.div`
-  position: relative;
-  color: #000;
-  width: 10em;
-  text-align: center;
-  font-family: Noto Sans KR;
-  font-size: 5em;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
 export const InterBox = styled.div`
   display: flex;
   position: relative;
@@ -119,6 +109,60 @@ export const InterBoxText = styled.div`
 
   font-family: Noto Sans KR;
   font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+export const PointBox = styled.div`
+  position: absolute;
+  right: 0;
+  width: 10em;
+  height: 6em;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Noto Sans KR;
+  font-size: 3em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  opacity: var(--, 1);
+`;
+export const MoveButton = styled.button`
+  width: 124.85px;
+  height: 57.174px;
+  flex-shrink: 0;
+  border-radius: 58.341px;
+  border: 2.334px solid #fff;
+
+  opacity: var(--, 1);
+
+  background: rgba(255, 255, 255, 0);
+  color: #fff;
+
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 23.336px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const NameText = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  width: 10em;
+
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 3em;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
