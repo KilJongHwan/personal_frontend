@@ -205,7 +205,7 @@ export const RegButton = styled.button`
 
   text-align: center;
   font-family: Noto Sans KR;
-  font-size: 17.278px;
+  font-size: 17px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -284,7 +284,128 @@ export const MusicHeart = styled.div`
   flex-shrink: 0;
   opacity: 1;
 
-  background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+  background: url(), lightgray 50% / cover no-repeat;
 
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+`;
+export const PerfomanceList = styled.div`
+  display: flex;
+  width: 100%;
+  height: 20em;
+  flex-direction: row;
+  flex: 1;
+  gap: 2em;
+`;
+
+export const PerformanceBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 406px;
+  height: 678px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  opacity: 1;
+
+  background: #fff;
+
+  box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.15);
+`;
+export const PerformancePictureBox = styled.div`
+  width: 365.776px;
+  height: 505.802px;
+  flex-shrink: 0;
+  opacity: 1;
+`;
+export const PerformancePicture = styled.div`
+  width: 365.776px;
+  height: 483px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  opacity: 1;
+
+  background: linear-gradient(180deg, #2400ff 0%, #f00 100%);
+`;
+export const PerformanceTextBox = styled.div`
+  display: flex;
+  width: 85%;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 150px;
+  flex-shrink: 0;
+`;
+export const PerformanceText1 = styled.p`
+  color: #000;
+
+  font-family: Noto Sans KR;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+`;
+export const PerformanceText2 = styled.p`
+  color: #354b45;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+`;
+export const PerformanceText3 = styled.p`
+  color: #354b45;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+`;
+export const PerformanceText4 = styled.p`
+  color: #97b0aa;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 350;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 20px;
+`;
+export const ButtonBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+`;
+export const PerformanceButton = styled.button`
+  width: 96.759px;
+  height: 41.468px;
+  flex-shrink: 0;
+  border-radius: 57.595px;
+  /* border-top: 1px solid #fff;
+
+  border-right: 1px solid #fff;
+
+  border-bottom: 1px solid #fff;
+
+  border-left: 1px solid #fff; */
+
+  opacity: 1;
+
+  background: #354b45;
+  color: #fff;
+
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;

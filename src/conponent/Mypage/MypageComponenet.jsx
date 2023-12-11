@@ -1,4 +1,5 @@
 import {
+  ButtonBox,
   ContentContainer,
   ItemList,
   ItemText1,
@@ -6,6 +7,16 @@ import {
   ItemText3,
   ItemTextContainer,
   NameText,
+  PerfomanceList,
+  PerformanceBox,
+  PerformanceButton,
+  PerformancePicture,
+  PerformancePictureBox,
+  PerformanceText1,
+  PerformanceText2,
+  PerformanceText3,
+  PerformanceText4,
+  PerformanceTextBox,
   Picture,
   RegButton,
   SubTitle,
@@ -99,6 +110,26 @@ const MypageComponent = () => {
         <SubTitle>
           공연 8<RegButton>공연 등록</RegButton>
         </SubTitle>
+        <PerfomanceList>
+          <PerformanceBox>
+            <PerformancePictureBox>
+              <PerformancePicture></PerformancePicture>
+            </PerformancePictureBox>
+            <PerformanceTextBox>
+              <PerformanceText1>공연</PerformanceText1>
+              <PerformanceText2>장소</PerformanceText2>
+              <PerformanceText3>아티스트 이름</PerformanceText3>
+              <PerformanceText4>일시</PerformanceText4>
+              <ButtonBox>
+                <PerformanceButton>공연 종료</PerformanceButton>
+                <RegButton>자세히</RegButton>
+              </ButtonBox>
+            </PerformanceTextBox>
+          </PerformanceBox>
+          <PerformanceBox></PerformanceBox>
+          <PerformanceBox></PerformanceBox>
+          <PerformanceBox></PerformanceBox>
+        </PerfomanceList>
       </ContentContainer>
     </>
   );
