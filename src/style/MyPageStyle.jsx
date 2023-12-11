@@ -139,7 +139,7 @@ export const MoveButton = styled.button`
   border-radius: 58.341px;
   border: 2.334px solid #fff;
 
-  opacity: var(--, 1);
+  opacity: 1;
 
   background: rgba(255, 255, 255, 0);
   color: #fff;
@@ -152,6 +152,8 @@ export const MoveButton = styled.button`
   line-height: normal;
 `;
 export const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 2em;
 `;
 export const NameText = styled.div`
@@ -160,7 +162,7 @@ export const NameText = styled.div`
   justify-content: center;
   align-items: center;
   color: #000;
-  width: 10em;
+  width: 15em;
 
   text-align: center;
   font-family: Noto Sans KR;
@@ -172,10 +174,14 @@ export const NameText = styled.div`
 
 export const SubTitle = styled.div`
   display: flex;
-  width: 487px;
+  width: 10em;
   height: 80px;
-  flex-direction: column;
-  justify-content: center;
+  margin-top: 2em;
+  margin-bottom: 0.1em;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
   flex-shrink: 0;
   color: #000;
 
@@ -184,4 +190,101 @@ export const SubTitle = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+`;
+
+export const RegButton = styled.button`
+  width: 96.759px;
+  height: 41.468px;
+  flex-shrink: 0;
+  border-radius: 57.595px;
+  opacity: 1;
+
+  background: #008bff;
+  flex-shrink: 0;
+  color: #fff;
+
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 17.278px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+export const ItemList = styled.div`
+  display: flex;
+  width: 100%;
+  height: 20em;
+  flex-direction: row;
+  flex: 1;
+  gap: 2em;
+`;
+export const Picture = styled.div`
+  width: 171px;
+  height: 171px;
+  flex-shrink: 0;
+  border-radius: 37.316px;
+  opacity: 1;
+
+  background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.28) 100%);
+`;
+export const ItemInfo = styled.div`
+  display: flex;
+  width: 159px;
+  height: 64px;
+  flex-shrink: 0;
+  color: #000;
+  justify-content: center;
+  align-items: center;
+`;
+export const ItemTextContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.7em;
+`;
+export const ItemText1 = styled.p`
+  color: #000;
+
+  text-align: center;
+  font-family: Noto Sans KR;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+`;
+export const ItemText2 = styled.p`
+  opacity: 1;
+  color: #008bff;
+  font-family: Noto Sans KR;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+`;
+export const ItemText3 = styled.p`
+  opacity: 1;
+  color: #97b0aa;
+  font-family: Noto Sans KR;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+`;
+export const MusicHeart = styled.div`
+  width: 39.603px;
+  height: 39.603px;
+  flex-shrink: 0;
+  opacity: 1;
+
+  background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
 `;
