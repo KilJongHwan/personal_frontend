@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
 import { ReactComponent as SvgS } from "../images/music-svgrepo-com.svg";
 import { ReactComponent as Menu } from "../images/Menu.svg";
@@ -39,14 +45,16 @@ import {
   CommunityItem,
   CommunityItemList,
 } from "../style/CommunityStyle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CommunityComponent from "../conponent/community/CommunityComponent";
 import WriteComponent from "../conponent/community/CommunityWriteComponent";
 import Post from "../conponent/community/PostRoomComponent";
+import AxiosApi from "../axios/CommunityAxios";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
+  const [categories, setCategories] = useState([]);
   const ListOpen = () => {
     setIsList(!isList);
   };
@@ -55,6 +63,18 @@ const CommunityPage = () => {
     transform: ${(props) =>
       props.isRotated ? "rotate(180deg)" : "rotate(0deg)"};
   `;
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const rsp = await AxiosApi.cateList();
+        console.log(rsp.data);
+        setCategories(rsp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCategories();
+  }, []);
   return (
     <>
       <Router>
@@ -89,30 +109,17 @@ const CommunityPage = () => {
                   </CommunityDashboard>
                   <CommunityMenuList>
                     <CommunityMenuItem>
-                      <CommunityLink>
-                        <CommunitySVG>
-                          <Menu />
-                          <CommunityMenuText>전체 게시판</CommunityMenuText>
-                        </CommunitySVG>
-                      </CommunityLink>
-                      <CommunityLink>
-                        <CommunitySVG>
-                          <Heart />
-                          <CommunityMenuText>인기 게시판</CommunityMenuText>
-                        </CommunitySVG>
-                      </CommunityLink>
-                      <CommunityLink>
-                        <CommunitySVG>
-                          <Clip />
-                          <CommunityMenuText>공지 게시판</CommunityMenuText>
-                        </CommunitySVG>
-                      </CommunityLink>
-                      <CommunityLink>
-                        <CommunitySVG>
-                          <User />
-                          <CommunityMenuText>팀원 모집</CommunityMenuText>
-                        </CommunitySVG>
-                      </CommunityLink>
+                      <Link to="/">
+                        <CommunityLink>
+                          <CommunitySVG>
+                            <Menu />
+                            <CommunityItem>
+                              <CommunityMenuText>전체 게시판</CommunityMenuText>
+                            </CommunityItem>
+                          </CommunitySVG>
+                        </CommunityLink>
+                      </Link>
+
                       <CommunityLink>
                         <CommunityMenuButton>
                           <Talk />
@@ -124,30 +131,21 @@ const CommunityPage = () => {
                       </CommunityLink>
                       {isList && (
                         <CommunityItemList>
-                          <CommunityLink>
-                            <CommunityMenuText>질문 답변</CommunityMenuText>
-                            <Star />
-                          </CommunityLink>
-                          <CommunityLink>
-                            <CommunityMenuText>오픈 마이크</CommunityMenuText>
-                            <Star />
-                          </CommunityLink>
-                          <CommunityLink>
-                            <CommunityMenuText>자유 게시판</CommunityMenuText>
-                            <Star />
-                          </CommunityLink>
-                          <CommunityLink>
-                            <CommunityMenuText>정보 게시판</CommunityMenuText>
-                            <Star />
-                          </CommunityLink>
-                          <CommunityLink>
-                            <CommunityMenuText>장터 게시판</CommunityMenuText>
-                            <Star />
-                          </CommunityLink>
-                          <CommunityLink>
-                            <CommunityMenuText>홍보 게시판</CommunityMenuText>
-                            <Star />
-                          </CommunityLink>
+                          {categories.map((category) => (
+                            <Link
+                              to={`/community/${category.categoryId}`}
+                              key={category.categoryId}
+                            >
+                              <CommunityLink key={category.categoryId}>
+                                <CommunityItem>
+                                  <CommunityMenuText>
+                                    {category.categoryName} 게시판
+                                  </CommunityMenuText>
+                                  <Star />
+                                </CommunityItem>
+                              </CommunityLink>
+                            </Link>
+                          ))}
                         </CommunityItemList>
                       )}
                     </CommunityMenuItem>
@@ -155,6 +153,10 @@ const CommunityPage = () => {
                 </Aside>
                 <Routes>
                   <Route path="/" element={<CommunityComponent />} />
+                  <Route
+                    path="/community/:categoryId"
+                    element={<CommunityComponent />}
+                  />
                   <Route path="/community/detail/:id" element={<Post />} />
                   <Route path="/community/write" element={<WriteComponent />} />
                 </Routes>

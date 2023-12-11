@@ -2,6 +2,7 @@ import "react-quill/dist/quill.snow.css"; // import styles
 
 import {
   CancelButton,
+  CategorySelect,
   Line,
   NoneLogin,
   StyledReactQuill,
@@ -12,7 +13,7 @@ import {
   WriteHeadingText,
   WriteSection,
 } from "../../style/CommunityPostWriteStyle";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AxiosApi from "../../axios/CommunityAxios";
 import { useNavigate } from "react-router-dom";
 
@@ -20,17 +21,31 @@ const WriteComponent = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [email, setEmail] = useState("");
-  const [category, setCategory] = useState(5);
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]); // 새 상태 추가
+  const [selectedCategory, setSelectedCategory] = useState("all"); // 선택된 카테고리 상태
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const rsp = await AxiosApi.cateList();
+        console.log(rsp.data);
+        setCategories(rsp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCategories();
+  }, []);
 
   const PostRegister = async () => {
     const communityDTO = {
       email: email,
       title: title,
       content: content,
-      categoryId: category,
+      categoryId: selectedCategory,
       nickName: nickName,
       password: password,
     };
@@ -45,6 +60,7 @@ const WriteComponent = () => {
       alert("게시글 등록에 실패했습니다.");
     }
   };
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }], // 헤더 레벨을 드롭다운 메뉴로
@@ -67,6 +83,16 @@ const WriteComponent = () => {
             <WriteHeadingText>게시글 작성</WriteHeadingText>
           </WriteHeading>
           <Line />
+          <CategorySelect
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map((category) => (
+              <option key={category.categoryId} value={category.categoryId}>
+                {category.categoryName}
+              </option>
+            ))}
+          </CategorySelect>
           <NoneLogin>
             <WriteBorder
               width={"50%"}

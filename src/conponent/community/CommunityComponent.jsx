@@ -20,7 +20,6 @@ import {
   TableBody,
   TableNormalRow,
   TableRow,
-  TableRowDataContent,
   TableRowDataDate,
   TableRowDataTitle,
   TableRowDataViews,
@@ -29,7 +28,7 @@ import {
   Page,
   TableRowDataIcon,
 } from "../../style/CommunityPostStyle";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AxiosApi from "../../axios/CommunityAxios";
 import Common from "../../utils/common";
@@ -40,6 +39,10 @@ const CommunityComponent = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const categoryId = Number(useParams().categoryId);
+  const validCategoryId = isNaN(categoryId) ? undefined : categoryId;
+  console.log(useParams().categoryId);
+
   const pageSize = 10;
 
   const checkMediaContent = (html) => {
@@ -56,16 +59,31 @@ const CommunityComponent = () => {
   };
   useEffect(() => {
     // 서버에서 데이터를 가져오는 함수
-    const postList = async () => {
-      const response = await AxiosApi.getCommunityList(currentPage, pageSize);
-      setPosts(response.data);
+    const postPage = async () => {
       const responsePages = await AxiosApi.getCommunityTotalPages(pageSize);
       setTotalPages(responsePages.data);
-      console.log(response.data);
     };
 
-    postList();
+    postPage();
   }, [currentPage]);
+  useEffect(() => {
+    const postList = async () => {
+      try {
+        const rsp =
+          validCategoryId === undefined
+            ? await AxiosApi.getCommunityList(currentPage, pageSize)
+            : await AxiosApi.getCommunityListByCategory(
+                validCategoryId,
+                currentPage,
+                pageSize
+              );
+        setPosts(rsp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    postList();
+  }, [categoryId, currentPage, pageSize, totalPages]);
 
   return (
     <>
@@ -77,7 +95,7 @@ const CommunityComponent = () => {
               placeholder="새 글을 작성하세요"
               type="text"
               onClick={() => {
-                navigate("/community/write");
+                navigate(`/community/write`);
               }}
             ></PostBoarder>
             <SendButton>

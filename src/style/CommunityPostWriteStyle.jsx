@@ -72,6 +72,13 @@ export const NoneLogin = styled.div`
 
   background: #fff;
 `;
+export const CategorySelect = styled.select`
+  // 카테고리 선택 드롭다운에 대한 스타일 정의
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  width: 200px; // 드롭다운 너비 조정
+`;
 export const StyledReactQuill = styled(ReactQuill)`
   .ql-container {
     margin-top: 20px;

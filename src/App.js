@@ -5,8 +5,8 @@ import MyPage from "./pages/MyPage";
 function App() {
   return (
     <>
-      {/* <CommunityPage /> */}
-      <MyPage />
+      <CommunityPage />
+      {/* <MyPage /> */}
     </>
   );
 }

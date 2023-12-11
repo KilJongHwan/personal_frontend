@@ -189,10 +189,11 @@ export const CommunityMenuItem = styled.div`
 `;
 export const CommunityLink = styled.div`
   display: flex;
-  padding: 13.39px 165.23px 14.99px 14.39px;
+  padding: 15px 10px 15px 15px;
+
   align-items: center;
+  justify-content: center;
   align-self: stretch;
-  gap: 10px;
 `;
 export const CommunitySVG = styled.div`
   display: flex;
@@ -227,11 +228,11 @@ export const CommunityItem = styled.div`
 `;
 export const CommunityItemList = styled.div`
   display: flex;
-  margin-left: 2em;
+  /* margin-left: 2em; */
   width: 100%;
   flex-direction: column;
   align-items: center;
-  align-self: stretch;
+  /* align-self: stretch; */
 `;
 export const CommunitySection = styled.div`
   display: flex;

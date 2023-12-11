@@ -99,9 +99,13 @@ export const PostDownvote = styled.button`
     background-color: #c82333;
   }
 `;
-
 export const CommentContainer = styled.div`
+  position: relative;
+  border-top: 2px solid #66baff;
   margin-top: 2em;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
 `;
 
 export const CommentHeader = styled.div`
@@ -109,39 +113,97 @@ export const CommentHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1em 0;
+  overflow: hidden;
+  width: 100%;
+  height: 38px;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #333;
 `;
 
-export const CommentForm = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em 0;
-  border-top: 1px solid #ddd;
+export const InformationContainer = styled.div`
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
+  font-style: normal;
+`;
+export const SmallInput = styled.input`
+  display: block;
+  width: 20%;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
+  font-style: normal;
 `;
 
+export const LargeInput = styled.textarea`
+  display: block;
+  width: 70%; // 원하는 폭으로 조정
+  height: 100px; // 원하는 높이로 조정
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
+  font-style: normal;
+`;
 export const CommentContent = styled.p`
   font-size: 1em;
+  text-align: center;
   color: #666;
   line-height: 1.5;
   padding: 1em 0;
-  border: 1px solid #ddd;
+  border: 0;
 `;
-
-export const CommentInput = styled.input`
-  padding: 1em;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+export const FormContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  gap: 1em;
+`;
+export const CommentForm = styled.form`
+  display: block;
+  padding: 12px;
+  background: #fafafa;
+  border-top: 2px solid #66baff;
+  border-bottom: 2px solid #66baff;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
 `;
 
 export const CommentButton = styled.button`
-  padding: 1em;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    background-color: #0056b3;
+  display: block;
+  width: 100px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
+  font-style: normal;
+  &:after {
+    clear: both;
+    display: block;
+    visibility: hidden;
+    content: "";
   }
 `;
 export const Dropdown = styled.select`
@@ -149,7 +211,7 @@ export const Dropdown = styled.select`
   height: 40px;
   margin: 10px;
   padding: 5px;
-  background: white;
+  background: transparent;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
@@ -178,7 +240,6 @@ export const ReplyButton = styled.button`
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
-
   &:hover {
     background-color: #0056b3;
   }

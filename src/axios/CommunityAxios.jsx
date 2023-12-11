@@ -13,6 +13,26 @@ const AxiosApi = {
       }
     );
   },
+  // 게시글 조회 (카테고리 별)
+  getCommunityListByCategory: async (categoryId, page, size) => {
+    return await axios.get(
+      Common.DOMAIN +
+        `/api/community/list/page/category?categoryId=${categoryId}&page=${page}&size=${size}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
+  // 카테고리 조회
+  cateList: async () => {
+    return await axios.get(Common.DOMAIN + `/api/category/list`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
   // 페이지 수 조회
   getCommunityTotalPages: async (size) => {
     return await axios.get(
@@ -46,18 +66,34 @@ const AxiosApi = {
       }
     );
   },
-  // 댓글 조회
-  getCommentList: async (communityId) => {
-    return await axios.get(Common.DOMAIN + `/api/comment/list/${communityId}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  getCommentList: async (communityId, page = 0, size = 10) => {
+    return await axios.get(
+      Common.DOMAIN + `/api/comment/list/${communityId}/page`,
+      {
+        params: {
+          page,
+          size,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   },
+
   // 댓글 쓰기
-  commentWrite: async (email, communityId, content, parentCommentId) => {
+  commentWrite: async (
+    email,
+    nickName,
+    password,
+    communityId,
+    content,
+    parentCommentId
+  ) => {
     const comment = {
       email: email,
+      nickName: nickName,
+      password: password,
       communityId: communityId,
       content: content,
       parentCommentId: parentCommentId,

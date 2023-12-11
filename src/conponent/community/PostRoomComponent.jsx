@@ -8,7 +8,6 @@ import {
   ReplyButton,
   CommentContainer,
   CommentForm,
-  CommentInput,
   CommentButton,
   PostContainer,
   PostHeader,
@@ -23,6 +22,11 @@ import {
   Dropdown,
   WriterInfo,
   TitleContainer,
+  CommentInput,
+  InformationContainer,
+  SmallInput,
+  LargeInput,
+  FormContainer,
 } from "../../style/PostRoomStyle";
 import AxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
@@ -32,7 +36,12 @@ import CommunityRankComponent from "./CommunityRankComponent";
 const Post = () => {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState({});
+  const [currentCommentPage, setCurrentCommentPage] = useState(0);
+  const [totalCommentPages, setTotalCommentPages] = useState(0);
   const [newComment, setNewComment] = useState("");
+  const [email, setEmail] = useState("");
+  const [nickName, setNickName] = useState("");
+  const [password, setPassword] = useState("");
   const segments = post.ipAddress ? post.ipAddress.split(".") : "";
   const ipAddress = `${segments[0]}.${segments[1]}`;
 
@@ -43,20 +52,26 @@ const Post = () => {
       try {
         const response = await AxiosApi.getCommunityDetail(id);
         setPost(response.data);
-        const commentResponse = await AxiosApi.getCommentList(id);
-        setComments(commentResponse.data);
+        const commentResponse = await AxiosApi.getCommentList(
+          id,
+          currentCommentPage
+        );
+        setComments(commentResponse.data.content);
+        setTotalCommentPages(commentResponse.data.totalPages);
       } catch (error) {
         console.error(error);
       }
     };
 
     postDetail();
-  }, [id]);
+  }, [id, currentCommentPage]);
 
   const commentWrite = async () => {
     try {
       const response = await AxiosApi.commentWrite(
-        "test@email.com",
+        email,
+        nickName,
+        password,
         id,
         newComment,
         null
@@ -117,15 +132,51 @@ const Post = () => {
       <CommentContainer>
         {comments.map((comment) => (
           <CommentContent key={comment.commentId}>
+            <div>
+              <span>{comment.nickName}</span> {/* 작성자 닉네임 */}
+              <span>{Common.formatDate(comment.regDate)}</span> {/* 작성시간 */}
+            </div>
             {comment.content}
           </CommentContent>
         ))}
+        {currentCommentPage > 0 && ( // 현재 페이지가 0보다 클 때만 '이전 페이지' 버튼 표시
+          <button onClick={() => setCurrentCommentPage(currentCommentPage - 1)}>
+            이전 페이지
+          </button>
+        )}
+        {currentCommentPage + 1 < totalCommentPages && ( // 현재 페이지가 마지막 페이지가 아닐 때만 '다음 페이지' 버튼 표시
+          <button onClick={() => setCurrentCommentPage(currentCommentPage + 1)}>
+            다음 페이지
+          </button>
+        )}
         <CommentForm>
-          <CommentInput
-            type="text"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
+          {!email && (
+            <>
+              <InformationContainer>
+                <FormContainer>
+                  <SmallInput
+                    type="text"
+                    value={nickName}
+                    onChange={(e) => setNickName(e.target.value)}
+                    placeholder="닉네임을 입력하세요"
+                  />
+                  <SmallInput
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="비밀번호를 입력하세요"
+                  />
+                </FormContainer>
+              </InformationContainer>
+            </>
+          )}
+          <FormContainer>
+            <LargeInput
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+          </FormContainer>
           <CommentButton onClick={commentWrite}>댓글 작성</CommentButton>
         </CommentForm>
       </CommentContainer>

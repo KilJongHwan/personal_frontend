@@ -151,7 +151,9 @@ export const MoveButton = styled.button`
   font-weight: 700;
   line-height: normal;
 `;
-
+export const ContentContainer = styled.div`
+  padding: 2em;
+`;
 export const NameText = styled.div`
   display: flex;
   position: relative;
@@ -162,7 +164,23 @@ export const NameText = styled.div`
 
   text-align: center;
   font-family: Noto Sans KR;
-  font-size: 3em;
+  font-size: 2em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+export const SubTitle = styled.div`
+  display: flex;
+  width: 487px;
+  height: 80px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #000;
+
+  font-family: Noto Sans KR;
+  font-size: 30px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
