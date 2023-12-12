@@ -18,14 +18,14 @@ import AxiosApi from "../../axios/CommunityAxios";
 import { useNavigate } from "react-router-dom";
 
 const WriteComponent = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const [email, setEmail] = useState("");
+  const [title, setTitle] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all"); // 선택된 카테고리 상태
+  const [content, setContent] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [categories, setCategories] = useState([]); // 새 상태 추가
-  const [selectedCategory, setSelectedCategory] = useState("all"); // 선택된 카테고리 상태
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const getCategories = async () => {

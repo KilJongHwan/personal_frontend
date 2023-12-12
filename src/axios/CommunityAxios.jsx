@@ -1,7 +1,7 @@
 import axios from "axios";
 import Common from "../utils/common.jsx";
 
-const AxiosApi = {
+const CommunityAxiosApi = {
   // 게시글 조회
   getCommunityList: async (page, size) => {
     return await axios.get(
@@ -104,5 +104,17 @@ const AxiosApi = {
       },
     });
   },
+  //개념글 추천
+  vote: async (communityId, isUpvote) => {
+    return await axios.post(
+      `${Common.DOMAIN}/api/community/vote/${communityId}/${isUpvote}`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
 };
-export default AxiosApi;
+export default CommunityAxiosApi;

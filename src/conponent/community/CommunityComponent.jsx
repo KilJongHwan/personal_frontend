@@ -30,7 +30,7 @@ import {
 } from "../../style/CommunityPostStyle";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AxiosApi from "../../axios/CommunityAxios";
+import CommunityAxiosApi from "../../axios/CommunityAxios";
 import Common from "../../utils/common";
 import CommunityRankComponent from "./CommunityRankComponent";
 
@@ -60,7 +60,9 @@ const CommunityComponent = () => {
   useEffect(() => {
     // 서버에서 데이터를 가져오는 함수
     const postPage = async () => {
-      const responsePages = await AxiosApi.getCommunityTotalPages(pageSize);
+      const responsePages = await CommunityAxiosApi.getCommunityTotalPages(
+        pageSize
+      );
       setTotalPages(responsePages.data);
     };
 
@@ -71,8 +73,8 @@ const CommunityComponent = () => {
       try {
         const rsp =
           validCategoryId === undefined
-            ? await AxiosApi.getCommunityList(currentPage, pageSize)
-            : await AxiosApi.getCommunityListByCategory(
+            ? await CommunityAxiosApi.getCommunityList(currentPage, pageSize)
+            : await CommunityAxiosApi.getCommunityListByCategory(
                 validCategoryId,
                 currentPage,
                 pageSize
@@ -167,7 +169,7 @@ const CommunityComponent = () => {
                   이전
                 </PageContant>
               </Pagination>
-
+              {/* for 문처럼 페이지를 생성하기 위해 Array 인스턴스 생성, _이건 아무의미없는값이고 서서히 늘어나는 현식 */}
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                 (pageNum) => (
                   <MiddlePage

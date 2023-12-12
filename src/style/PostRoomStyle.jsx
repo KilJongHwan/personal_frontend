@@ -100,8 +100,6 @@ export const PostDownvote = styled.button`
   }
 `;
 export const CommentContainer = styled.div`
-  position: relative;
-  border-top: 2px solid #66baff;
   margin-top: 2em;
   font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
@@ -128,7 +126,6 @@ export const InformationContainer = styled.div`
   margin: 0;
   padding: 0;
   border: 0;
-  vertical-align: baseline;
   background: transparent;
   font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
@@ -141,7 +138,6 @@ export const SmallInput = styled.input`
   height: 30px;
   margin: 0;
   padding: 0;
-  vertical-align: baseline;
   background: transparent;
   font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
@@ -151,11 +147,10 @@ export const SmallInput = styled.input`
 
 export const LargeInput = styled.textarea`
   display: block;
-  width: 70%; // 원하는 폭으로 조정
-  height: 100px; // 원하는 높이로 조정
+  width: 100%;
+  height: 100px;
   margin: 0;
   padding: 0;
-  vertical-align: baseline;
   background: transparent;
   font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
@@ -163,12 +158,14 @@ export const LargeInput = styled.textarea`
   font-style: normal;
 `;
 export const CommentContent = styled.p`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
   font-size: 1em;
-  text-align: center;
   color: #666;
-  line-height: 1.5;
   padding: 1em 0;
-  border: 0;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
 `;
 export const FormContainer = styled.div`
   display: flex;
@@ -179,8 +176,8 @@ export const CommentForm = styled.form`
   display: block;
   padding: 12px;
   background: #fafafa;
-  border-top: 2px solid #66baff;
-  border-bottom: 2px solid #66baff;
+  border-top: 2px solid #b566ff;
+  border-bottom: 2px solid #b566ff;
   font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
@@ -193,7 +190,6 @@ export const CommentButton = styled.button`
   margin: 0;
   padding: 0;
   border: 0;
-  vertical-align: baseline;
   background: transparent;
   font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
