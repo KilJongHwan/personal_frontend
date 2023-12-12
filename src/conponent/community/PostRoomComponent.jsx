@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   PostTitle,
   PostContent,
@@ -38,14 +38,15 @@ const Post = () => {
   const [currentCommentPage, setCurrentCommentPage] = useState(0);
   const [totalCommentPages, setTotalCommentPages] = useState(0);
   const [newComment, setNewComment] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("test@email.com");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const segments = post.ipAddress ? post.ipAddress.split(".") : "";
   const ipAddress = `${segments[0]}.${segments[1]}`;
   const [replyOpen, setReplyOpen] = useState({});
-
   const { id } = useParams();
+
+  const ws = useRef(null);
 
   useEffect(() => {
     const postDetail = async () => {
@@ -85,6 +86,8 @@ const Post = () => {
   const vote = async (isUpvote) => {
     try {
       await CommunityAxiosApi.vote(id, isUpvote);
+      const response = await CommunityAxiosApi.getCommunityDetail(id);
+      setPost(response.data);
       if (isUpvote) {
         alert("추천이 완료되었습니다.");
       } else {
@@ -103,6 +106,28 @@ const Post = () => {
     setReplyOpen((prev) => ({ ...prev, [commentId]: !prev[commentId] }));
     console.log(commentId);
   };
+
+  // 웹소켓 연결 로직
+  useEffect(() => {
+    ws.current = new WebSocket(Common.SOCKET_URL);
+    ws.current.onopen = () => {
+      console.log("connected to " + Common.SOCKET_URL);
+
+      const initMessage = {
+        type: "INIT",
+        email: "test@email.com",
+      };
+      ws.current.send(JSON.stringify(initMessage));
+    };
+    ws.current.onmessage = (evt) => {
+      const data = JSON.parse(evt.data);
+      console.log(data.message);
+    };
+    return () => {
+      ws.current.close();
+    };
+  }, []);
+
   return (
     <PostContainer>
       <CommunityRankComponent />

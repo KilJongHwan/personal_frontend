@@ -41,7 +41,6 @@ const CommunityComponent = () => {
   const [totalPages, setTotalPages] = useState(0);
   const categoryId = Number(useParams().categoryId);
   const validCategoryId = isNaN(categoryId) ? undefined : categoryId;
-  console.log(useParams().categoryId);
 
   const pageSize = 10;
 
@@ -60,14 +59,18 @@ const CommunityComponent = () => {
   useEffect(() => {
     // 서버에서 데이터를 가져오는 함수
     const postPage = async () => {
-      const responsePages = await CommunityAxiosApi.getCommunityTotalPages(
-        pageSize
-      );
+      const responsePages =
+        validCategoryId === undefined
+          ? await CommunityAxiosApi.getCommunityTotalPages(pageSize)
+          : await CommunityAxiosApi.getCommunityTotalPagesByCategory(
+              validCategoryId,
+              pageSize
+            );
       setTotalPages(responsePages.data);
     };
 
     postPage();
-  }, [currentPage]);
+  }, [validCategoryId, currentPage, pageSize]);
   useEffect(() => {
     const postList = async () => {
       try {
@@ -85,7 +88,7 @@ const CommunityComponent = () => {
       }
     };
     postList();
-  }, [categoryId, currentPage, pageSize, totalPages]);
+  }, [validCategoryId, currentPage, pageSize, totalPages]);
 
   return (
     <>

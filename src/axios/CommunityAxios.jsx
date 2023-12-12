@@ -44,6 +44,17 @@ const CommunityAxiosApi = {
       }
     );
   },
+  // 카테고리에 따른 페이지 수 조회
+  getCommunityTotalPagesByCategory: async (categoryId, size) => {
+    return await axios.get(
+      Common.DOMAIN + `/api/community/count/${categoryId}?page=0&size=${size}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
   // 게시글 등록
   communityPost: async (communityDTO) => {
     return await axios.post(
@@ -56,6 +67,7 @@ const CommunityAxiosApi = {
       }
     );
   },
+  // 게시글 상세 조회
   getCommunityDetail: async (communityId) => {
     return await axios.get(
       Common.DOMAIN + `/api/community/detail/${communityId}`,
@@ -66,6 +78,7 @@ const CommunityAxiosApi = {
       }
     );
   },
+  // 댓글 리스트 조회
   getCommentList: async (communityId, page = 0, size = 10) => {
     return await axios.get(
       Common.DOMAIN + `/api/comment/list/${communityId}/page`,

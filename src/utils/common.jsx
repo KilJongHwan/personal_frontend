@@ -5,7 +5,7 @@ moment.locale("ko"); // 한글 설정 적용
 
 const Common = {
   DOMAIN: "http://localhost:8111",
-  SOCKET_URL: "ws://localhost:8111/ws/chat",
+  SOCKET_URL: "ws://localhost:8111/ws/comment",
 
   formatDate: (dateString) => {
     const date = new Date(dateString);

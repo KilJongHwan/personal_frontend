@@ -1,17 +1,11 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import { ReactComponent as SvgS } from "../images/music-svgrepo-com.svg";
 import { ReactComponent as Menu } from "../images/Menu.svg";
-import { ReactComponent as Heart } from "../images/Heart.svg";
-import { ReactComponent as Clip } from "../images/Clip.svg";
-import { ReactComponent as User } from "../images/User.svg";
-import { ReactComponent as Logo } from "../images/Symbol_color@300x.svg";
+// import { ReactComponent as Heart } from "../images/Heart.svg";
+// import { ReactComponent as Clip } from "../images/Clip.svg";
+// import { ReactComponent as User } from "../images/User.svg";
+// import { ReactComponent as Logo } from "../images/Symbol_color@300x.svg";
 import { ReactComponent as Down } from "../images/Down.svg";
 import { ReactComponent as Talk } from "../images/Talk.svg";
 import { ReactComponent as Star } from "../images/Star.svg";
@@ -44,17 +38,20 @@ import {
   CommunityMenuButton,
   CommunityItem,
   CommunityItemList,
+  MessageBox,
 } from "../style/CommunityStyle";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import CommunityComponent from "../conponent/community/CommunityComponent";
 import WriteComponent from "../conponent/community/CommunityWriteComponent";
 import Post from "../conponent/community/PostRoomComponent";
 import AxiosApi from "../axios/CommunityAxios";
+import Common from "../utils/common";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
   const [categories, setCategories] = useState([]);
+
   const ListOpen = () => {
     setIsList(!isList);
   };
@@ -75,6 +72,7 @@ const CommunityPage = () => {
     };
     getCategories();
   }, []);
+
   return (
     <>
       <Router>
@@ -160,6 +158,7 @@ const CommunityPage = () => {
                   <Route path="/community/detail/:id" element={<Post />} />
                   <Route path="/community/write" element={<WriteComponent />} />
                 </Routes>
+                {/* {message && <MessageBox>{message}</MessageBox>} */}
               </CommunityList>
             </CommunityContainer>
           </Hidden>

@@ -241,3 +241,14 @@ export const CommunitySection = styled.div`
   padding: 57.6px 183.99px 57.6px 0px;
   align-items: flex-start;
 `;
+export const MessageBox = styled.div`
+  width: 300px;
+  height: 50px;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+`;
