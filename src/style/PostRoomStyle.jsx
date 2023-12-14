@@ -7,13 +7,11 @@ export const PostContainer = styled.div`
   padding: 0px 21.6px 0px 36px;
   flex: 1 0 0;
 `;
-
 export const PostHeader = styled.div`
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
-  /* padding: 1em; */
-  border-bottom: 1px solid #ccc;
+  border: 1px solid #ccc;
 `;
 export const TitleContainer = styled.div`
   display: flex;
@@ -157,10 +155,10 @@ export const LargeInput = styled.textarea`
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
   font-style: normal;
 `;
-export const CommentContent = styled.p`
+export const CommentContent = styled.div`
   display: flex;
-  flex: 1;
-  flex-direction: row;
+  width: 100%;
+  height: 100%;
   font-size: 1em;
   color: #666;
   padding: 1em 0;
@@ -218,7 +216,11 @@ export const Dropdown = styled.select`
 `;
 
 export const ReplyFormContainer = styled.div`
+  display: flex;
+  position: relative;
   margin-left: 20px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const ReplyInput = styled.input`
@@ -239,4 +241,18 @@ export const ReplyButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
+`;
+
+export const ReplyContent = styled.div`
+  display: flex;
+  font-size: 0.9em;
+  overflow: hidden;
+  width: 100%;
+  height: 38px;
+  margin-top: 15px;
+  margin-left: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "맑은 고딕", arial, 굴림, Gulim, sans-serif;
+  font-size: 13px;
+  color: #333;
 `;

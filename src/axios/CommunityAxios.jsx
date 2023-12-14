@@ -79,11 +79,17 @@ const CommunityAxiosApi = {
     );
   },
   // 댓글 리스트 조회
-  getCommentList: async (communityId, page = 0, size = 10) => {
+  getCommentList: async (
+    communityId,
+    sortType = "등록순",
+    page = 0,
+    size = 10
+  ) => {
     return await axios.get(
       Common.DOMAIN + `/api/comment/list/${communityId}/page`,
       {
         params: {
+          sortType,
           page,
           size,
         },
@@ -112,6 +118,29 @@ const CommunityAxiosApi = {
       parentCommentId: parentCommentId,
     };
     return await axios.post(Common.DOMAIN + `/api/comment/new`, comment, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
+  // 대댓글 쓰기
+  replyWrite: async (
+    email,
+    nickName,
+    password,
+    communityId,
+    content,
+    parentCommentId
+  ) => {
+    const reply = {
+      email: email,
+      nickName: nickName,
+      password: password,
+      communityId: communityId,
+      content: content,
+      parentCommentId: parentCommentId,
+    };
+    return await axios.post(Common.DOMAIN + `/api/comment/reply/new`, reply, {
       headers: {
         "Content-Type": "application/json",
       },

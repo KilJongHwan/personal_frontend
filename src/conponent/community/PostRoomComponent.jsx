@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PostTitle,
   PostContent,
@@ -26,6 +26,7 @@ import {
   SmallInput,
   LargeInput,
   FormContainer,
+  ReplyContent,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
@@ -38,7 +39,9 @@ const Post = ({ onMessage }) => {
   const [post, setPost] = useState({});
   const [currentCommentPage, setCurrentCommentPage] = useState(0);
   const [totalCommentPages, setTotalCommentPages] = useState(0);
+  const [sortType, setSortType] = useState("");
   const [newComment, setNewComment] = useState("");
+  const [newReply, setNewReply] = useState("");
   const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
@@ -103,6 +106,41 @@ const Post = ({ onMessage }) => {
         email ? email : post.ipAddress,
         post.email ? post.email : post.ipAddress
       );
+      // 댓글 작성 후 댓글 목록 다시 불러오기
+      const commentResponse = await CommunityAxiosApi.getCommentList(
+        id,
+        currentCommentPage
+      );
+      setComments(commentResponse.data.content);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  // 대댓글 작성 함수
+  const replyWrite = async (parentCommentId) => {
+    try {
+      const response = await CommunityAxiosApi.replyWrite(
+        email,
+        nickName,
+        password,
+        id,
+        newReply,
+        parentCommentId
+      );
+      sendCommentMessage(
+        id,
+        response.data.id,
+        newReply,
+        email ? email : post.ipAddress,
+        post.email ? post.email : post.ipAddress
+      );
+      // 댓글 목록 다시 불러오기
+      const commentResponse = await CommunityAxiosApi.getCommentList(
+        id,
+        currentCommentPage
+      );
+      setComments(commentResponse.data.content);
+      setNewReply("");
     } catch (error) {
       console.error(error);
     }
@@ -126,9 +164,11 @@ const Post = ({ onMessage }) => {
       }
     }
   };
-  const toggleReplyForm = (commentId) => {
-    setReplyOpen((prev) => ({ ...prev, [commentId]: !prev[commentId] }));
-    console.log(commentId);
+  const toggleReplyForm = (commentId, parentCommentId) => {
+    if (parentCommentId === null) {
+      setReplyOpen((prev) => ({ ...prev, [commentId]: !prev[commentId] }));
+      console.log(parentCommentId);
+    }
   };
 
   return (
@@ -155,31 +195,76 @@ const Post = ({ onMessage }) => {
         <PostDownvote onClick={() => vote(false)}>비추천</PostDownvote>
       </PostVotes>
       <CommentHeader>
-        전체 댓글 수: {comments.length} <Dropdown></Dropdown>
+        전체 댓글 수: {comments.length}
+        <Dropdown
+          options={["최신순", "등록순", "답글순"]}
+          onChange={(selected) => setSortType(selected.value)}
+        />
       </CommentHeader>
       <CommentContainer>
         {comments.map((comment) => (
-          <CommentContent
-            key={comment.commentId}
-            onClick={() => toggleReplyForm(comment.commentId)}
-          >
+          <CommentContent key={comment.commentId}>
             <span>{comment.nickName}</span>
             <span>{Common.formatDate(comment.regDate)}</span>
-            {comment.content}
+            <span
+              onClick={() =>
+                toggleReplyForm(comment.commentId, comment.parentCommentId)
+              }
+            >
+              {comment.content}
+            </span>
+
             {replyOpen[comment.commentId] && (
               <ReplyFormContainer>
-                <ReplyInput />
-                <ReplyButton></ReplyButton>
+                {!email && (
+                  <>
+                    <InformationContainer>
+                      <FormContainer>
+                        <SmallInput
+                          type="text"
+                          value={nickName}
+                          onChange={(e) => setNickName(e.target.value)}
+                          placeholder="닉네임을 입력하세요"
+                        />
+                        <SmallInput
+                          type="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="비밀번호를 입력하세요"
+                        />
+                      </FormContainer>
+                    </InformationContainer>
+                  </>
+                )}
+                <ReplyInput
+                  value={newReply}
+                  onChange={(e) => setNewReply(e.target.value)}
+                />
+                <ReplyButton
+                  type="button"
+                  onClick={() => replyWrite(comment.commentId)}
+                  required={nickName && password}
+                >
+                  댓글 작성
+                </ReplyButton>
               </ReplyFormContainer>
             )}
+            {comment.replies &&
+              comment.replies.map((reply) => (
+                <ReplyContent key={reply.commentId}>
+                  <span>{reply.nickName}</span>
+                  <span>{Common.formatDate(reply.regDate)}</span>
+                  <span>{reply.content}</span>
+                </ReplyContent>
+              ))}
           </CommentContent>
         ))}
-        {currentCommentPage > 0 && ( // 현재 페이지가 0보다 클 때만 '이전 페이지' 버튼 표시
+        {currentCommentPage > 0 && (
           <button onClick={() => setCurrentCommentPage(currentCommentPage - 1)}>
             이전
           </button>
         )}
-        {currentCommentPage + 1 < totalCommentPages && ( // 현재 페이지가 마지막 페이지가 아닐 때만 '다음 페이지' 버튼 표시
+        {currentCommentPage + 1 < totalCommentPages && (
           <button onClick={() => setCurrentCommentPage(currentCommentPage + 1)}>
             다음
           </button>
@@ -211,7 +296,11 @@ const Post = ({ onMessage }) => {
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
             />
-            <CommentButton type="button" onClick={commentWrite}>
+            <CommentButton
+              type="button"
+              onClick={commentWrite}
+              required={nickName && password}
+            >
               댓글 작성
             </CommentButton>
           </FormContainer>
