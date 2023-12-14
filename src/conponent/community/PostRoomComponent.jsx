@@ -31,14 +31,15 @@ import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
 import Common from "../../utils/common";
 import CommunityRankComponent from "./CommunityRankComponent";
+import useWebSocket from "../../context/useWebsocket";
 
-const Post = () => {
+const Post = ({ onMessage }) => {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState({});
   const [currentCommentPage, setCurrentCommentPage] = useState(0);
   const [totalCommentPages, setTotalCommentPages] = useState(0);
   const [newComment, setNewComment] = useState("");
-  const [email, setEmail] = useState("test@email.com");
+  const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const segments = post.ipAddress ? post.ipAddress.split(".") : "";
@@ -46,7 +47,7 @@ const Post = () => {
   const [replyOpen, setReplyOpen] = useState({});
   const { id } = useParams();
 
-  const ws = useRef(null);
+  const { sendMessage } = useWebSocket(Common.SOCKET_URL, email);
 
   useEffect(() => {
     const postDetail = async () => {
@@ -66,7 +67,23 @@ const Post = () => {
 
     postDetail();
   }, [id, currentCommentPage]);
-
+  const sendCommentMessage = (
+    postId,
+    commentId,
+    commentContent,
+    commenterEmail,
+    authorEmail
+  ) => {
+    const commentMessage = {
+      type: "COMMENT",
+      postId: postId,
+      commentId: commentId,
+      commentContent: commentContent,
+      commenterEmail: commenterEmail,
+      authorEmail: authorEmail,
+    };
+    sendMessage(commentMessage);
+  };
   const commentWrite = async () => {
     try {
       const response = await CommunityAxiosApi.commentWrite(
@@ -79,6 +96,13 @@ const Post = () => {
       );
       setComments([...comments, response.data]);
       setNewComment("");
+      sendCommentMessage(
+        id,
+        response.data.id,
+        newComment,
+        email ? email : post.ipAddress,
+        post.email ? post.email : post.ipAddress
+      );
     } catch (error) {
       console.error(error);
     }
@@ -106,27 +130,6 @@ const Post = () => {
     setReplyOpen((prev) => ({ ...prev, [commentId]: !prev[commentId] }));
     console.log(commentId);
   };
-
-  // 웹소켓 연결 로직
-  useEffect(() => {
-    ws.current = new WebSocket(Common.SOCKET_URL);
-    ws.current.onopen = () => {
-      console.log("connected to " + Common.SOCKET_URL);
-
-      const initMessage = {
-        type: "INIT",
-        email: "test@email.com",
-      };
-      ws.current.send(JSON.stringify(initMessage));
-    };
-    ws.current.onmessage = (evt) => {
-      const data = JSON.parse(evt.data);
-      console.log(data.message);
-    };
-    return () => {
-      ws.current.close();
-    };
-  }, []);
 
   return (
     <PostContainer>
@@ -208,7 +211,9 @@ const Post = () => {
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
             />
-            <CommentButton onClick={commentWrite}>댓글 작성</CommentButton>
+            <CommentButton type="button" onClick={commentWrite}>
+              댓글 작성
+            </CommentButton>
           </FormContainer>
         </CommentForm>
       </CommentContainer>

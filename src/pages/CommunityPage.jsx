@@ -47,10 +47,15 @@ import WriteComponent from "../conponent/community/CommunityWriteComponent";
 import Post from "../conponent/community/PostRoomComponent";
 import AxiosApi from "../axios/CommunityAxios";
 import Common from "../utils/common";
+import useWebSocket from "../context/useWebsocket";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [email, setEmail] = useState("");
+  const { message: wsMessage } = useWebSocket(Common.SOCKET_URL, email);
+
+  const ws = useRef(null);
 
   const ListOpen = () => {
     setIsList(!isList);
@@ -60,6 +65,7 @@ const CommunityPage = () => {
     transform: ${(props) =>
       props.isRotated ? "rotate(180deg)" : "rotate(0deg)"};
   `;
+
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -158,8 +164,10 @@ const CommunityPage = () => {
                   <Route path="/community/detail/:id" element={<Post />} />
                   <Route path="/community/write" element={<WriteComponent />} />
                 </Routes>
-                {/* {message && <MessageBox>{message}</MessageBox>} */}
               </CommunityList>
+              {wsMessage && (
+                <MessageBox key={wsMessage}>{wsMessage}</MessageBox>
+              )}
             </CommunityContainer>
           </Hidden>
         </Page>

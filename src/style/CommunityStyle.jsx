@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import img from "../images/ProFileimage.png";
 
 export const Page = styled.div`
@@ -241,14 +241,25 @@ export const CommunitySection = styled.div`
   padding: 57.6px 183.99px 57.6px 0px;
   align-items: flex-start;
 `;
+const fadeInOut = keyframes`
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+`;
 export const MessageBox = styled.div`
-  width: 300px;
-  height: 50px;
+  height: 6%;
   border: 1px solid black;
   padding: 10px;
   margin: 10px 0;
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   background-color: #f8f8f8;
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  width: 50%;
+  animation: ${fadeInOut} 4s ease-in-out forwards;
 `;
