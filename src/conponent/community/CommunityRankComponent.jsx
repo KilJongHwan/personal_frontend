@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Block,
   ButtonFlex,
@@ -18,8 +19,20 @@ import {
   SwiperSlide,
   SwiperWrapper,
 } from "../../style/CommunityPostStyle";
+import CommunityAxiosApi from "../../axios/CommunityAxios";
 
 const CommunityRankComponent = () => {
+  const [ranking, setRanking] = useState([]);
+
+  useEffect(() => {
+    const fetchRanking = async () => {
+      const response = await CommunityAxiosApi.getRealtimeRanking();
+      console.log(response.data);
+      setRanking(response.data);
+    };
+
+    fetchRanking();
+  }, []);
   return (
     <>
       <Heading>
@@ -36,32 +49,23 @@ const CommunityRankComponent = () => {
           <PostUpTimeList>
             <Swiper>
               <SwiperWrapper>
-                <SwiperSlide>
-                  <RoundedMd>
-                    <PostRankList>
-                      <PostRankListItem>
-                        <PostRankLink>1</PostRankLink>
-                        <PostRankCategory>자유 게시판</PostRankCategory>
-                        <PostRankContent>
-                          <PostRankFrame>팀원모집</PostRankFrame>
-                        </PostRankContent>
-                      </PostRankListItem>
-                    </PostRankList>
-                  </RoundedMd>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <RoundedMd>
-                    <PostRankList>
-                      <PostRankListItem>
-                        <PostRankLink>6</PostRankLink>
-                        <PostRankCategory>자유 게시판</PostRankCategory>
-                        <PostRankContent>
-                          <PostRankFrame>팀원모집</PostRankFrame>
-                        </PostRankContent>
-                      </PostRankListItem>
-                    </PostRankList>
-                  </RoundedMd>
-                </SwiperSlide>
+                {ranking.map((post, index) => (
+                  <SwiperSlide key={index}>
+                    <RoundedMd>
+                      <PostRankList>
+                        <PostRankListItem>
+                          <PostRankLink>{index + 1}</PostRankLink>
+                          <PostRankCategory>
+                            {post.categoryId} 게시판
+                          </PostRankCategory>
+                          <PostRankContent>
+                            <PostRankFrame>{post.title}</PostRankFrame>
+                          </PostRankContent>
+                        </PostRankListItem>
+                      </PostRankList>
+                    </RoundedMd>
+                  </SwiperSlide>
+                ))}
               </SwiperWrapper>
             </Swiper>
           </PostUpTimeList>

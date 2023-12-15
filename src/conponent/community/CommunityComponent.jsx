@@ -121,6 +121,8 @@ const CommunityComponent = () => {
                   <TableRowDataViews>조회수</TableRowDataViews>
                 </TableRow>
                 {posts.map((post) => {
+                  // memberId가 있는지 확인하고, 있다면 memberId를 사용하고 없다면 기존의 로직 수행
+
                   const segments = post.ipAddress
                     ? post.ipAddress.split(".")
                     : "";
@@ -128,6 +130,9 @@ const CommunityComponent = () => {
                     ? `${segments[0]}.${segments[1]}`
                     : "";
                   const hasMediaContent = checkMediaContent(post.content);
+                  const writerInfo = post.email
+                    ? post.email
+                    : `${post.nickName}(${ipAddress})`;
 
                   return (
                     <TableNormalRow
@@ -145,10 +150,11 @@ const CommunityComponent = () => {
                           <Text />
                         )}
                       </TableRowDataIcon>
-                      <TableRowDataWriter>
-                        {post.nickName}({ipAddress})
-                      </TableRowDataWriter>
-                      <TableRowDataTitle>{post.title}</TableRowDataTitle>
+                      <TableRowDataWriter>{writerInfo}</TableRowDataWriter>
+                      <TableRowDataTitle>
+                        {post.title}
+                        {}
+                      </TableRowDataTitle>
                       <TableRowDataDate>
                         {Common.timeFromNow(post.regDate)}
                       </TableRowDataDate>

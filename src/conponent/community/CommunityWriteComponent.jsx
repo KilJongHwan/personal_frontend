@@ -94,22 +94,24 @@ const WriteComponent = () => {
               </option>
             ))}
           </CategorySelect>
-          <NoneLogin>
-            <WriteBorder
-              width={"50%"}
-              type="text"
-              placeholder="닉네임"
-              value={nickName}
-              onChange={(e) => setNickName(e.target.value)}
-            />
-            <WriteBorder
-              width={"50%"}
-              type="password"
-              placeholder="패스워드"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </NoneLogin>
+          {!email && (
+            <NoneLogin>
+              <WriteBorder
+                width={"50%"}
+                type="text"
+                placeholder="닉네임"
+                value={nickName}
+                onChange={(e) => setNickName(e.target.value)}
+              />
+              <WriteBorder
+                width={"50%"}
+                type="password"
+                placeholder="패스워드"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </NoneLogin>
+          )}
           <WriteBorder
             placeholder="제목을 입력해주세요."
             onChange={(e) => setTitle(e.target.value)}

@@ -333,10 +333,6 @@ export const TableRowDataTitle = styled(TableRowData)`
   flex: 1;
 `;
 
-export const TableRowDataContent = styled(TableRowData)`
-  flex: 3;
-`;
-
 export const TableRowDataDate = styled(TableRowData)`
   color: #999;
   flex: 0.5;

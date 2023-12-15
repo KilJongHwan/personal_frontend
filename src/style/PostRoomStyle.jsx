@@ -29,7 +29,16 @@ export const PostAuthor = styled.div`
   font-size: 1em;
   color: #666;
 `;
-
+export const CommentText = styled.p`
+  color: #354b45;
+  font-family: Noto Sans KR;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+`;
 export const PostDate = styled.span`
   font-size: 0.8em;
   color: #999;
@@ -99,7 +108,6 @@ export const PostDownvote = styled.button`
 `;
 export const CommentContainer = styled.div`
   margin-top: 2em;
-  font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
 `;
@@ -157,6 +165,7 @@ export const LargeInput = styled.textarea`
 `;
 export const CommentContent = styled.div`
   display: flex;
+  flex: 1;
   width: 100%;
   height: 100%;
   font-size: 1em;
@@ -214,7 +223,6 @@ export const Dropdown = styled.select`
     border-color: #4a90e2;
   }
 `;
-
 export const ReplyFormContainer = styled.div`
   display: flex;
   position: relative;

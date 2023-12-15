@@ -158,5 +158,13 @@ const CommunityAxiosApi = {
       }
     );
   },
+  // 실시간 랭킹 조회
+  getRealtimeRanking: async () => {
+    return await axios.get(Common.DOMAIN + "/api/community/ranking/realtime", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
 };
 export default CommunityAxiosApi;

@@ -27,14 +27,16 @@ import {
   LargeInput,
   FormContainer,
   ReplyContent,
+  CommentText,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
 import Common from "../../utils/common";
 import CommunityRankComponent from "./CommunityRankComponent";
 import useWebSocket from "../../context/useWebsocket";
+import { HeadText } from "../../style/CommunityPostStyle";
 
-const Post = ({ onMessage }) => {
+const Post = () => {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState({});
   const [currentCommentPage, setCurrentCommentPage] = useState(0);
@@ -45,6 +47,8 @@ const Post = ({ onMessage }) => {
   const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
+  const [replyNickName, setReplyNickName] = useState("");
+  const [replyPassword, setReplyPassword] = useState("");
   const segments = post.ipAddress ? post.ipAddress.split(".") : "";
   const ipAddress = `${segments[0]}.${segments[1]}`;
   const [replyOpen, setReplyOpen] = useState({});
@@ -59,7 +63,8 @@ const Post = ({ onMessage }) => {
         setPost(response.data);
         const commentResponse = await CommunityAxiosApi.getCommentList(
           id,
-          currentCommentPage
+          currentCommentPage,
+          sortType
         );
         setComments(commentResponse.data.content);
         setTotalCommentPages(commentResponse.data.totalPages);
@@ -121,8 +126,8 @@ const Post = ({ onMessage }) => {
     try {
       const response = await CommunityAxiosApi.replyWrite(
         email,
-        nickName,
-        password,
+        replyNickName,
+        replyPassword,
         id,
         newReply,
         parentCommentId
@@ -164,6 +169,7 @@ const Post = ({ onMessage }) => {
       }
     }
   };
+  // 부모 댓글에만 대댓글을 작성할수 있다.
   const toggleReplyForm = (commentId, parentCommentId) => {
     if (parentCommentId === null) {
       setReplyOpen((prev) => ({ ...prev, [commentId]: !prev[commentId] }));
@@ -177,7 +183,7 @@ const Post = ({ onMessage }) => {
       <PostHeader>
         <WriterInfo>
           <PostAuthor>
-            {post.nickName}({ipAddress})
+            {post.email ? post.email : `${post.nickName}(${ipAddress})`}
           </PostAuthor>
           <PostDate> {Common.formatDate(post.regDate)}</PostDate>
         </WriterInfo>
@@ -197,68 +203,82 @@ const Post = ({ onMessage }) => {
       <CommentHeader>
         전체 댓글 수: {comments.length}
         <Dropdown
+          value={"등록순"}
           options={["최신순", "등록순", "답글순"]}
           onChange={(selected) => setSortType(selected.value)}
         />
       </CommentHeader>
-      <CommentContainer>
-        {comments.map((comment) => (
-          <CommentContent key={comment.commentId}>
-            <span>{comment.nickName}</span>
-            <span>{Common.formatDate(comment.regDate)}</span>
-            <span
-              onClick={() =>
-                toggleReplyForm(comment.commentId, comment.parentCommentId)
-              }
-            >
-              {comment.content}
-            </span>
 
-            {replyOpen[comment.commentId] && (
-              <ReplyFormContainer>
-                {!email && (
-                  <>
-                    <InformationContainer>
-                      <FormContainer>
-                        <SmallInput
-                          type="text"
-                          value={nickName}
-                          onChange={(e) => setNickName(e.target.value)}
-                          placeholder="닉네임을 입력하세요"
-                        />
-                        <SmallInput
-                          type="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          placeholder="비밀번호를 입력하세요"
-                        />
-                      </FormContainer>
-                    </InformationContainer>
-                  </>
-                )}
-                <ReplyInput
-                  value={newReply}
-                  onChange={(e) => setNewReply(e.target.value)}
-                />
-                <ReplyButton
-                  type="button"
-                  onClick={() => replyWrite(comment.commentId)}
-                  required={nickName && password}
+      <CommentContainer>
+        {comments
+          .filter((comment) => comment.parentCommentId === null)
+          .map((comment) => (
+            <div key={comment.commentId}>
+              <CommentContent>
+                <>{comment.nickName}</>
+                <>{Common.formatDate(comment.regDate)}</>
+                <HeadText
+                  onClick={() =>
+                    toggleReplyForm(comment.commentId, comment.parentCommentId)
+                  }
                 >
-                  댓글 작성
-                </ReplyButton>
-              </ReplyFormContainer>
-            )}
-            {comment.replies &&
-              comment.replies.map((reply) => (
-                <ReplyContent key={reply.commentId}>
-                  <span>{reply.nickName}</span>
-                  <span>{Common.formatDate(reply.regDate)}</span>
-                  <span>{reply.content}</span>
-                </ReplyContent>
-              ))}
-          </CommentContent>
-        ))}
+                  {comment.content}
+                </HeadText>
+                {replyOpen[comment.commentId] && (
+                  <ReplyFormContainer>
+                    {!email && (
+                      <>
+                        <InformationContainer>
+                          <FormContainer>
+                            <SmallInput
+                              type="text"
+                              value={replyNickName}
+                              onChange={(e) => setReplyNickName(e.target.value)}
+                              placeholder="닉네임을 입력하세요"
+                            />
+                            <SmallInput
+                              type="password"
+                              value={replyPassword}
+                              onChange={(e) => setReplyPassword(e.target.value)}
+                              placeholder="비밀번호를 입력하세요"
+                            />
+                          </FormContainer>
+                        </InformationContainer>
+                      </>
+                    )}
+                    <ReplyInput
+                      value={newReply}
+                      onChange={(e) => setNewReply(e.target.value)}
+                    />
+                    <ReplyButton
+                      type="button"
+                      onClick={() => replyWrite(comment.commentId)}
+                      required={nickName && password}
+                    >
+                      댓글 작성
+                    </ReplyButton>
+                  </ReplyFormContainer>
+                )}
+              </CommentContent>
+              {comment.childComments &&
+                comment.childComments.map((childComment) => (
+                  <CommentContent style={{ marginLeft: "20px" }}>
+                    <>{childComment.nickName}</>
+                    <>{Common.formatDate(childComment.regDate)}</>
+                    <HeadText
+                      onClick={() =>
+                        toggleReplyForm(
+                          childComment.commentId,
+                          childComment.parentCommentId
+                        )
+                      }
+                    >
+                      {childComment.content}
+                    </HeadText>
+                  </CommentContent>
+                ))}
+            </div>
+          ))}
         {currentCommentPage > 0 && (
           <button onClick={() => setCurrentCommentPage(currentCommentPage - 1)}>
             이전
