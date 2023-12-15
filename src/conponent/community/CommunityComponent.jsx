@@ -73,6 +73,7 @@ const CommunityComponent = () => {
     postPage();
   }, [validCategoryId, currentPage, pageSize]);
   useEffect(() => {
+    // 제대로 랜더링 되는지 파악하는 axios 구문 별내용은 없음
     let cancelTokenSource = axios.CancelToken.source();
     const postList = async () => {
       try {

@@ -81,7 +81,7 @@ const CommunityAxiosApi = {
   // 댓글 리스트 조회
   getCommentList: async (
     communityId,
-    sortType = "등록순",
+    sortType = "최신순",
     page = 0,
     size = 10
   ) => {

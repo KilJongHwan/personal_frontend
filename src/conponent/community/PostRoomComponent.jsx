@@ -63,18 +63,19 @@ const Post = () => {
         setPost(response.data);
         const commentResponse = await CommunityAxiosApi.getCommentList(
           id,
-          currentCommentPage,
-          sortType
+          sortType,
+          currentCommentPage
         );
+        console.log(commentResponse.data.totalPages);
         setComments(commentResponse.data.content);
         setTotalCommentPages(commentResponse.data.totalPages);
       } catch (error) {
         console.error(error);
       }
     };
-
+    console.log(sortType);
     postDetail();
-  }, [id, currentCommentPage]);
+  }, [id, currentCommentPage, sortType]);
   const sendCommentMessage = (
     postId,
     commentId,
@@ -116,7 +117,7 @@ const Post = () => {
         id,
         currentCommentPage
       );
-      setComments(commentResponse.data.content);
+      setComments(commentResponse.data);
     } catch (error) {
       console.error(error);
     }
@@ -144,7 +145,7 @@ const Post = () => {
         id,
         currentCommentPage
       );
-      setComments(commentResponse.data.content);
+      setComments(commentResponse.data);
       setNewReply("");
     } catch (error) {
       console.error(error);
@@ -202,10 +203,13 @@ const Post = () => {
       </PostVotes>
       <CommentHeader>
         전체 댓글 수: {comments.length}
-        <Dropdown
-          options={["최신순", "등록순", "답글순"]}
-          onChange={(selected) => setSortType(selected.value)}
-        />
+        <Dropdown onChange={(selected) => setSortType(selected.target.value)}>
+          {["최신순", "등록순", "답글순"].map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </Dropdown>
       </CommentHeader>
 
       <CommentContainer>
