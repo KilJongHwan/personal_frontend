@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PostContainer = styled.div`
   display: flex;
-  width: 1000px;
+  width: 100%;
   flex-direction: column;
   padding: 0px 21.6px 0px 36px;
   flex: 1 0 0;

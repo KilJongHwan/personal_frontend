@@ -203,7 +203,6 @@ const Post = () => {
       <CommentHeader>
         전체 댓글 수: {comments.length}
         <Dropdown
-          value={"등록순"}
           options={["최신순", "등록순", "답글순"]}
           onChange={(selected) => setSortType(selected.value)}
         />

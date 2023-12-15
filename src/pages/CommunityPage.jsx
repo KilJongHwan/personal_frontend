@@ -55,8 +55,6 @@ const CommunityPage = () => {
   const [email, setEmail] = useState("");
   const { message: wsMessage } = useWebSocket(Common.SOCKET_URL, email);
 
-  const ws = useRef(null);
-
   const ListOpen = () => {
     setIsList(!isList);
   };

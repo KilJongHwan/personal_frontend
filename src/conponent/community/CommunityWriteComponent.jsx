@@ -18,7 +18,7 @@ import AxiosApi from "../../axios/CommunityAxios";
 import { useNavigate } from "react-router-dom";
 
 const WriteComponent = () => {
-  const [email, setEmail] = useState("test@email.com");
+  const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [nickName, setNickName] = useState("");

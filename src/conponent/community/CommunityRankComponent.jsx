@@ -20,9 +20,11 @@ import {
   SwiperWrapper,
 } from "../../style/CommunityPostStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
+import { useNavigate } from "react-router-dom";
 
 const CommunityRankComponent = () => {
   const [ranking, setRanking] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRanking = async () => {
@@ -53,10 +55,14 @@ const CommunityRankComponent = () => {
                   <SwiperSlide key={index}>
                     <RoundedMd>
                       <PostRankList>
-                        <PostRankListItem>
+                        <PostRankListItem
+                          onClick={() =>
+                            navigate(`/community/detail/${post.communityId}`)
+                          }
+                        >
                           <PostRankLink>{index + 1}</PostRankLink>
                           <PostRankCategory>
-                            {post.categoryId} 게시판
+                            {post.categoryName} 게시판
                           </PostRankCategory>
                           <PostRankContent>
                             <PostRankFrame>{post.title}</PostRankFrame>

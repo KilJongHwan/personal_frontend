@@ -33,6 +33,7 @@ import { useEffect, useState } from "react";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import Common from "../../utils/common";
 import CommunityRankComponent from "./CommunityRankComponent";
+import axios from "axios";
 
 const CommunityComponent = () => {
   const navigate = useNavigate();
@@ -72,22 +73,31 @@ const CommunityComponent = () => {
     postPage();
   }, [validCategoryId, currentPage, pageSize]);
   useEffect(() => {
+    let cancelTokenSource = axios.CancelToken.source();
     const postList = async () => {
       try {
         const rsp =
           validCategoryId === undefined
-            ? await CommunityAxiosApi.getCommunityList(currentPage, pageSize)
+            ? await CommunityAxiosApi.getCommunityList(currentPage, pageSize, {
+                cancelToken: cancelTokenSource.token,
+              })
             : await CommunityAxiosApi.getCommunityListByCategory(
                 validCategoryId,
                 currentPage,
-                pageSize
+                pageSize,
+                { cancelToken: cancelTokenSource.token }
               );
         setPosts(rsp.data);
       } catch (error) {
-        console.log(error);
+        if (!axios.isCancel(error)) {
+          console.log(error);
+        }
       }
     };
     postList();
+    return () => {
+      cancelTokenSource.cancel();
+    };
   }, [validCategoryId, currentPage, pageSize, totalPages]);
 
   return (
@@ -122,7 +132,6 @@ const CommunityComponent = () => {
                 </TableRow>
                 {posts.map((post) => {
                   // memberId가 있는지 확인하고, 있다면 memberId를 사용하고 없다면 기존의 로직 수행
-
                   const segments = post.ipAddress
                     ? post.ipAddress.split(".")
                     : "";
@@ -151,10 +160,7 @@ const CommunityComponent = () => {
                         )}
                       </TableRowDataIcon>
                       <TableRowDataWriter>{writerInfo}</TableRowDataWriter>
-                      <TableRowDataTitle>
-                        {post.title}
-                        {}
-                      </TableRowDataTitle>
+                      <TableRowDataTitle>{post.title}</TableRowDataTitle>
                       <TableRowDataDate>
                         {Common.timeFromNow(post.regDate)}
                       </TableRowDataDate>
@@ -184,9 +190,9 @@ const CommunityComponent = () => {
                   <MiddlePage
                     key={pageNum}
                     onClick={() => setCurrentPage(pageNum - 1)}
-                    active={currentPage === pageNum}
+                    active={currentPage === pageNum ? "true" : "false"}
                   >
-                    <Page selected={currentPage === pageNum - 1}>
+                    <Page selected={currentPage === pageNum - 1} href="#">
                       {pageNum}
                     </Page>
                   </MiddlePage>
