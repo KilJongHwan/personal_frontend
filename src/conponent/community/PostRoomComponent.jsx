@@ -117,7 +117,7 @@ const Post = () => {
         id,
         currentCommentPage
       );
-      setComments(commentResponse.data);
+      setComments(commentResponse.data.content);
     } catch (error) {
       console.error(error);
     }
@@ -145,8 +145,9 @@ const Post = () => {
         id,
         currentCommentPage
       );
-      setComments(commentResponse.data);
+      setComments(commentResponse.data.content);
       setNewReply("");
+      setTotalCommentPages(commentResponse.data.totalPages);
     } catch (error) {
       console.error(error);
     }
