@@ -40,7 +40,7 @@ import {
   CommunityItemList,
   MessageBox,
 } from "../style/CommunityStyle";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CommunityComponent from "../conponent/community/CommunityComponent";
 import WriteComponent from "../conponent/community/CommunityWriteComponent";

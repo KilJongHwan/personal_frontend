@@ -115,6 +115,7 @@ const Post = () => {
       // 댓글 작성 후 댓글 목록 다시 불러오기
       const commentResponse = await CommunityAxiosApi.getCommentList(
         id,
+        sortType,
         currentCommentPage
       );
       setComments(commentResponse.data.content);
@@ -143,6 +144,7 @@ const Post = () => {
       // 댓글 목록 다시 불러오기
       const commentResponse = await CommunityAxiosApi.getCommentList(
         id,
+        sortType,
         currentCommentPage
       );
       setComments(commentResponse.data.content);
@@ -181,7 +183,7 @@ const Post = () => {
 
   return (
     <PostContainer>
-      <CommunityRankComponent />
+      <CommunityRankComponent categoryName={post.categoryName} />
       <PostHeader>
         <WriterInfo>
           <PostAuthor>

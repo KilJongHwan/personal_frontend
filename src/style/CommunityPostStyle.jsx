@@ -6,7 +6,7 @@ export const PostContainer = styled.div`
   padding: 0px 21.6px 0px 36px;
   flex-direction: column;
   align-items: flex-start;
-  flex: 1 0 0;
+  flex: 1;
 `;
 export const PostSection = styled.div`
   height: 1494.03px;

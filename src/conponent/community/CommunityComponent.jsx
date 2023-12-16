@@ -89,6 +89,7 @@ const CommunityComponent = () => {
                 { cancelToken: cancelTokenSource.token }
               );
         setPosts(rsp.data);
+        console.log(posts);
       } catch (error) {
         if (!axios.isCancel(error)) {
           console.log(error);
@@ -105,7 +106,11 @@ const CommunityComponent = () => {
     <>
       <PostContainer>
         <PostSection>
-          <CommunityRankComponent />
+          <CommunityRankComponent
+            categoryName={
+              validCategoryId !== undefined ? posts[0]?.categoryName : "전체"
+            }
+          />
           <InputContainer>
             <PostBoarder
               placeholder="새 글을 작성하세요"

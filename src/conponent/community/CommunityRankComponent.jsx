@@ -22,7 +22,7 @@ import {
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useNavigate } from "react-router-dom";
 
-const CommunityRankComponent = () => {
+const CommunityRankComponent = ({ categoryName }) => {
   const [ranking, setRanking] = useState([]);
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const CommunityRankComponent = () => {
   return (
     <>
       <Heading>
-        <HeadText>전체 게시판</HeadText>
+        <HeadText>{categoryName} 게시판</HeadText>
       </Heading>
       <HeadLine />
       <Block>

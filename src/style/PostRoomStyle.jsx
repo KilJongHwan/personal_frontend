@@ -5,7 +5,7 @@ export const PostContainer = styled.div`
   width: 100%;
   flex-direction: column;
   padding: 0px 21.6px 0px 36px;
-  flex: 1 0 0;
+  flex: 1;
 `;
 export const PostHeader = styled.div`
   display: flex;
