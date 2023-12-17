@@ -28,6 +28,8 @@ import {
   FormContainer,
   ReplyContent,
   CommentText,
+  PostNickName,
+  CommentBox,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
@@ -47,11 +49,12 @@ const Post = () => {
   const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
-  const [replyNickName, setReplyNickName] = useState("");
-  const [replyPassword, setReplyPassword] = useState("");
+  const [replyNickName, setReplyNickName] = useState({});
+  const [replyPassword, setReplyPassword] = useState({});
   const segments = post.ipAddress ? post.ipAddress.split(".") : "";
   const ipAddress = `${segments[0]}.${segments[1]}`;
   const [replyOpen, setReplyOpen] = useState({});
+
   const { id } = useParams();
 
   const { sendMessage } = useWebSocket(Common.SOCKET_URL, email);
@@ -126,10 +129,13 @@ const Post = () => {
   // 대댓글 작성 함수
   const replyWrite = async (parentCommentId) => {
     try {
+      const replyAuthorName = replyNickName[parentCommentId];
+      const replyAuthorPassword = replyPassword[parentCommentId];
+
       const response = await CommunityAxiosApi.replyWrite(
         email,
-        replyNickName,
-        replyPassword,
+        replyAuthorName,
+        replyAuthorPassword,
         id,
         newReply,
         parentCommentId
@@ -176,9 +182,20 @@ const Post = () => {
   // 부모 댓글에만 대댓글을 작성할수 있다.
   const toggleReplyForm = (commentId, parentCommentId) => {
     if (parentCommentId === null) {
+      // 이미 열려있는 댓글 창이면 닫고, 닫혀있는 댓글 창이면 열기
       setReplyOpen((prev) => ({ ...prev, [commentId]: !prev[commentId] }));
-      console.log(parentCommentId);
+      if (replyOpen[commentId]) {
+        // 해당 댓글 창이 이미 열려있는 경우, 상태 업데이트하여 해당 창의 내용 초기화
+        setNewReply((prev) => ({ ...prev, [commentId]: "" }));
+      }
     }
+  };
+  // 답글 작성자 정보를 변경하는 함수
+  const handleReplyAuthorChange = (commentId, name, pass) => {
+    // 댓글 ID에 해당하는 답글 작성자의 닉네임 업데이트
+    setReplyNickName((prev) => ({ ...prev, [commentId]: name }));
+    // 댓글 ID에 해당하는 답글 작성자의 비밀번호 업데이트
+    setReplyPassword((prev) => ({ ...prev, [commentId]: pass }));
   };
 
   return (
@@ -186,15 +203,17 @@ const Post = () => {
       <CommunityRankComponent categoryName={post.categoryName} />
       <PostHeader>
         <WriterInfo>
+          <TitleContainer>
+            <PostTitle>{post.title}</PostTitle>
+            <PostViews>조회수: {post.viewCount}</PostViews>
+          </TitleContainer>
           <PostAuthor>
-            {post.email ? post.email : `${post.nickName}(${ipAddress})`}
+            <PostNickName>
+              {post.email ? post.email : `${post.nickName}(${ipAddress})`}
+            </PostNickName>
+            <PostDate> {Common.formatDate(post.regDate)}</PostDate>
           </PostAuthor>
-          <PostDate> {Common.formatDate(post.regDate)}</PostDate>
         </WriterInfo>
-        <TitleContainer>
-          <PostTitle>{post.title}</PostTitle>
-          <PostViews>조회수: {post.viewCount}</PostViews>
-        </TitleContainer>
       </PostHeader>
       <PostBody>
         <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
@@ -219,7 +238,7 @@ const Post = () => {
         {comments
           .filter((comment) => comment.parentCommentId === null)
           .map((comment) => (
-            <div key={comment.commentId}>
+            <CommentBox key={comment.commentId}>
               <CommentContent>
                 <>{comment.nickName}</>
                 <>{Common.formatDate(comment.regDate)}</>
@@ -238,14 +257,26 @@ const Post = () => {
                           <FormContainer>
                             <SmallInput
                               type="text"
-                              value={replyNickName}
-                              onChange={(e) => setReplyNickName(e.target.value)}
+                              value={replyNickName[comment.commentId] || ""}
+                              onChange={(e) =>
+                                handleReplyAuthorChange(
+                                  comment.commentId,
+                                  e.target.value,
+                                  replyPassword[comment.commentId]
+                                )
+                              }
                               placeholder="닉네임을 입력하세요"
                             />
                             <SmallInput
                               type="password"
-                              value={replyPassword}
-                              onChange={(e) => setReplyPassword(e.target.value)}
+                              value={replyPassword[comment.commentId] || ""}
+                              onChange={(e) =>
+                                handleReplyAuthorChange(
+                                  comment.commentId,
+                                  replyNickName[comment.commentId],
+                                  e.target.value
+                                )
+                              }
                               placeholder="비밀번호를 입력하세요"
                             />
                           </FormContainer>
@@ -253,8 +284,14 @@ const Post = () => {
                       </>
                     )}
                     <ReplyInput
-                      value={newReply}
-                      onChange={(e) => setNewReply(e.target.value)}
+                      type="text"
+                      value={newReply[comment.commentId] || ""}
+                      onChange={(e) =>
+                        setNewReply({
+                          ...newReply,
+                          [comment.commentId]: e.target.value,
+                        })
+                      }
                     />
                     <ReplyButton
                       type="button"
@@ -283,7 +320,7 @@ const Post = () => {
                     </HeadText>
                   </CommentContent>
                 ))}
-            </div>
+            </CommentBox>
           ))}
         {currentCommentPage > 0 && (
           <button onClick={() => setCurrentCommentPage(currentCommentPage - 1)}>

@@ -137,7 +137,7 @@ const CommunityAxiosApi = {
       nickName: nickName,
       password: password,
       communityId: communityId,
-      content: content,
+      content: content[parentCommentId],
       parentCommentId: parentCommentId,
     };
     return await axios.post(Common.DOMAIN + `/api/comment/reply/new`, reply, {
