@@ -158,6 +158,29 @@ const CommunityAxiosApi = {
       }
     );
   },
+  // 전체 댓글 수 조회
+  getTotalComments: async (communityId) => {
+    return await axios.get(
+      Common.DOMAIN + `/api/comment/count/${communityId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
+
+  // 댓글 삭제
+  commentDelete: async (commentId) => {
+    return await axios.delete(
+      Common.DOMAIN + `/api/comment/delete/${commentId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
   // 실시간 랭킹 조회
   getRealtimeRanking: async () => {
     return await axios.get(Common.DOMAIN + "/api/community/ranking/realtime", {

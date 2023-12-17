@@ -328,9 +328,15 @@ export const TableRowDataIcon = styled(TableRowData)`
 `;
 export const TableRowDataWriter = styled(TableRowData)`
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 export const TableRowDataTitle = styled(TableRowData)`
   flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const TableRowDataDate = styled(TableRowData)`

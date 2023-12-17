@@ -42,6 +42,7 @@ const CommunityComponent = () => {
   const [totalPages, setTotalPages] = useState(0);
   const categoryId = Number(useParams().categoryId);
   const validCategoryId = isNaN(categoryId) ? undefined : categoryId;
+  const [totalComments, setTotalComments] = useState([]);
 
   const pageSize = 10;
 
@@ -89,7 +90,15 @@ const CommunityComponent = () => {
                 { cancelToken: cancelTokenSource.token }
               );
         setPosts(rsp.data);
-        console.log(posts);
+        console.log(rsp.data);
+        // 전체 댓글 수 조회
+        const totalCommentsResponses = await Promise.all(
+          rsp.data.map((post) => CommunityAxiosApi.getTotalComments(post.id))
+        );
+        const totalComments = totalCommentsResponses.map(
+          (response) => response.data
+        );
+        setTotalComments(totalComments);
       } catch (error) {
         if (!axios.isCancel(error)) {
           console.log(error);
@@ -166,7 +175,9 @@ const CommunityComponent = () => {
                         )}
                       </TableRowDataIcon>
                       <TableRowDataWriter>{writerInfo}</TableRowDataWriter>
-                      <TableRowDataTitle>{post.title}</TableRowDataTitle>
+                      <TableRowDataTitle>
+                        {post.title}({totalComments[posts.indexOf(post)]})
+                      </TableRowDataTitle>
                       <TableRowDataDate>
                         {Common.timeFromNow(post.regDate)}
                       </TableRowDataDate>

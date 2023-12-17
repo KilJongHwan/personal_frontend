@@ -6,6 +6,7 @@ export const PostContainer = styled.div`
   flex-direction: column;
   padding: 0px 21.6px 0px 36px;
   flex: 1;
+  word-wrap: break-word;
 `;
 export const PostHeader = styled.div`
   display: flex;
@@ -117,6 +118,7 @@ export const CommentBox = styled.div`
   border-bottom: 1px solid black;
 `;
 export const CommentContainer = styled.div`
+  width: 100%;
   margin-top: 2em;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;

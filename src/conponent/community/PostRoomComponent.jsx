@@ -26,8 +26,6 @@ import {
   SmallInput,
   LargeInput,
   FormContainer,
-  ReplyContent,
-  CommentText,
   PostNickName,
   CommentBox,
 } from "../../style/PostRoomStyle";
@@ -51,13 +49,19 @@ const Post = () => {
   const [password, setPassword] = useState("");
   const [replyNickName, setReplyNickName] = useState({});
   const [replyPassword, setReplyPassword] = useState({});
-  const segments = post.ipAddress ? post.ipAddress.split(".") : "";
-  const ipAddress = `${segments[0]}.${segments[1]}`;
   const [replyOpen, setReplyOpen] = useState({});
+  const [totalComment, setTotalComment] = useState(0);
 
   const { id } = useParams();
 
   const { sendMessage } = useWebSocket(Common.SOCKET_URL, email);
+
+  const getPartialIp = (ipAddress) => {
+    if (!ipAddress) return "";
+    const segments = ipAddress.split(".");
+    return `${segments[0]}.${segments[1]}`;
+  };
+  const ipAddress = getPartialIp(post.ipAddress);
 
   useEffect(() => {
     const postDetail = async () => {
@@ -72,11 +76,15 @@ const Post = () => {
         console.log(commentResponse.data.totalPages);
         setComments(commentResponse.data.content);
         setTotalCommentPages(commentResponse.data.totalPages);
+        // 전체 댓글 수 조회
+        const totalCommentsResponse = await CommunityAxiosApi.getTotalComments(
+          id
+        );
+        setTotalComment(totalCommentsResponse.data);
       } catch (error) {
         console.error(error);
       }
     };
-    console.log(sortType);
     postDetail();
   }, [id, currentCommentPage, sortType]);
   const sendCommentMessage = (
@@ -224,7 +232,7 @@ const Post = () => {
         <PostDownvote onClick={() => vote(false)}>비추천</PostDownvote>
       </PostVotes>
       <CommentHeader>
-        전체 댓글 수: {comments.length}
+        전체 댓글 수: {totalComment}
         <Dropdown onChange={(selected) => setSortType(selected.target.value)}>
           {["최신순", "등록순", "답글순"].map((option, index) => (
             <option key={index} value={option}>
@@ -240,7 +248,7 @@ const Post = () => {
           .map((comment) => (
             <CommentBox key={comment.commentId}>
               <CommentContent>
-                <>{comment.nickName}</>
+                <>{comment.nickName(getPartialIp(comment.ipAddress))}</>
                 <>{Common.formatDate(comment.regDate)}</>
                 <HeadText
                   onClick={() =>
@@ -306,7 +314,11 @@ const Post = () => {
               {comment.childComments &&
                 comment.childComments.map((childComment) => (
                   <CommentContent style={{ marginLeft: "20px" }}>
-                    <>{childComment.nickName}</>
+                    <>
+                      {childComment.nickName(
+                        getPartialIp(childComment.ipAddress)
+                      )}
+                    </>
                     <>{Common.formatDate(childComment.regDate)}</>
                     <HeadText
                       onClick={() =>
