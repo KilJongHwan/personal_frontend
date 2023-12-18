@@ -182,8 +182,8 @@ const CommunityAxiosApi = {
     );
   },
   // 실시간 랭킹 조회
-  getRealtimeRanking: async () => {
-    return await axios.get(Common.DOMAIN + "/api/community/ranking/realtime", {
+  getRanking: async (period) => {
+    return await axios.get(Common.DOMAIN + "/api/community/ranking/" + period, {
       headers: {
         "Content-Type": "application/json",
       },

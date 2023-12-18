@@ -176,7 +176,9 @@ const CommunityComponent = () => {
                       </TableRowDataIcon>
                       <TableRowDataWriter>{writerInfo}</TableRowDataWriter>
                       <TableRowDataTitle>
-                        {post.title}({totalComments[posts.indexOf(post)]})
+                        {post.title}{" "}
+                        {totalComments[posts.indexOf(post)] > 0 &&
+                          `(${totalComments[posts.indexOf(post)]})`}
                       </TableRowDataTitle>
                       <TableRowDataDate>
                         {Common.timeFromNow(post.regDate)}

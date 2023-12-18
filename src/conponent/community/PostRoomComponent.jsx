@@ -248,7 +248,10 @@ const Post = () => {
           .map((comment) => (
             <CommentBox key={comment.commentId}>
               <CommentContent>
-                <>{comment.nickName(getPartialIp(comment.ipAddress))}</>
+                <>
+                  {comment.nickName}({getPartialIp(comment.ipAddress)})
+                </>
+
                 <>{Common.formatDate(comment.regDate)}</>
                 <HeadText
                   onClick={() =>
@@ -315,9 +318,8 @@ const Post = () => {
                 comment.childComments.map((childComment) => (
                   <CommentContent style={{ marginLeft: "20px" }}>
                     <>
-                      {childComment.nickName(
-                        getPartialIp(childComment.ipAddress)
-                      )}
+                      {childComment.nickName} (
+                      {getPartialIp(childComment.ipAddress)})
                     </>
                     <>{Common.formatDate(childComment.regDate)}</>
                     <HeadText
