@@ -63,7 +63,6 @@ const CommunityPage = () => {
     transform: ${(props) =>
       props.isRotated ? "rotate(180deg)" : "rotate(0deg)"};
   `;
-
   useEffect(() => {
     const getCategories = async () => {
       try {
