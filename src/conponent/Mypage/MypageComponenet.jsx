@@ -22,7 +22,7 @@ import {
   SubTitle,
 } from "../../style/MyPageStyle";
 
-const MypageComponent = ({ userMusic }) => {
+const MypageComponent = ({ userMusic, userPerformance }) => {
   return (
     <>
       <ContentContainer>
@@ -74,28 +74,35 @@ const MypageComponent = ({ userMusic }) => {
           </div>
         </ItemList>
         <SubTitle>
-          공연 8<RegButton>공연 등록</RegButton>
+          공연 {userPerformance.performances.length}
+          <RegButton>공연 등록</RegButton>
         </SubTitle>
-        <PerfomanceList>
-          <PerformanceBox>
-            <PerformancePictureBox>
-              <PerformancePicture></PerformancePicture>
-            </PerformancePictureBox>
-            <PerformanceTextBox>
-              <PerformanceText1>공연</PerformanceText1>
-              <PerformanceText2>장소</PerformanceText2>
-              <PerformanceText3>아티스트 이름</PerformanceText3>
-              <PerformanceText4>일시</PerformanceText4>
-              <ButtonBox>
-                <PerformanceButton>공연 종료</PerformanceButton>
-                <RegButton>자세히</RegButton>
-              </ButtonBox>
-            </PerformanceTextBox>
-          </PerformanceBox>
-          <PerformanceBox></PerformanceBox>
-          <PerformanceBox></PerformanceBox>
-          <PerformanceBox></PerformanceBox>
-        </PerfomanceList>
+        {userPerformance.performances &&
+          userPerformance.performances.map((performance) => (
+            <PerformanceBox key={performance.performanceId}>
+              <PerformancePictureBox>
+                <PerformancePicture
+                  src={performance.performanceImage}
+                ></PerformancePicture>
+              </PerformancePictureBox>
+              <PerformanceTextBox>
+                <PerformanceText1>
+                  {performance.performanceName}
+                </PerformanceText1>
+                <PerformanceText2>{performance.venue}</PerformanceText2>
+                <PerformanceText3>
+                  {performance.nicknames.join(", ")}
+                </PerformanceText3>
+                <PerformanceText4>
+                  {performance.performanceDate}
+                </PerformanceText4>
+                <ButtonBox>
+                  <PerformanceButton>공연 종료</PerformanceButton>
+                  <RegButton>자세히</RegButton>
+                </ButtonBox>
+              </PerformanceTextBox>
+            </PerformanceBox>
+          ))}
       </ContentContainer>
     </>
   );
