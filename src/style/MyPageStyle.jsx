@@ -431,3 +431,22 @@ export const PerformanceButton = styled.button`
   font-weight: 700;
   line-height: normal;
 `;
+export const PayBox = styled.div`
+  width: 500px;
+  height: 100%;
+  overflow: auto;
+`;
+
+export const RadioButton = styled.button`
+  background: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-right: 10px;
+  transition: all 0.3s ease-in-out; // 부드럽게 변화하는 효과를 위해 transition 추가
+
+  &.checked {
+    background-color: #525970;
+    color: white;
+  }
+`;

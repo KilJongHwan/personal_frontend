@@ -33,13 +33,13 @@ const MyPage = () => {
       try {
         const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
         setUserInfo(userInfoResponse.data);
+        console.log(userInfoResponse.data);
 
         if (userInfoResponse.data) {
           const musicResponse = await MemberInfoAxiosApi.getUserMusic(
             userInfoResponse.data.id
           );
           setUserMusic(musicResponse.data);
-          console.log(musicResponse.data);
         }
       } catch (error) {
         console.error(error);
@@ -49,7 +49,6 @@ const MyPage = () => {
       const response = await MemberInfoAxiosApi.getUserInfoByPerformanceEmail(
         email
       );
-      console.log(response.data);
       setUserPerformance(response.data);
     };
     fetchData();
@@ -95,8 +94,14 @@ const MyPage = () => {
             <MoveButtonBox>
               <ModalComponent
                 open={<MoveButton>충전하기</MoveButton>}
-                content={<PayComponent />}
-                customButton="충전하기"
+                content={
+                  <PayComponent
+                    email={userInfo && userInfo.userEmail}
+                    username={userInfo && userInfo.userName}
+                    phone={userInfo && userInfo.userPhone}
+                  />
+                }
+                // customButton="충전하기"
                 openButtonStyle={{
                   bgColor: "rgba(0,0,0,0)",
                   textColor: "black",

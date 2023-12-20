@@ -26,6 +26,20 @@ const MemberInfoAxiosApi = {
       }
     );
   },
+  increasePoints: async (email, points) => {
+    return await axios.post(
+      Common.DOMAIN + `/user/increasePoints`,
+      {
+        email: email,
+        points: points.toString(), // points 값을 문자열로 변환
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
 };
 
 export default MemberInfoAxiosApi;
