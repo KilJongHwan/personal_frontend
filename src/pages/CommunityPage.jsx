@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Route, Routes, Link } from "react-router-dom";
 
 import { ReactComponent as SvgS } from "../images/music-svgrepo-com.svg";
 import { ReactComponent as Menu } from "../images/Menu.svg";
@@ -46,7 +46,7 @@ import CommunityComponent from "../conponent/community/CommunityComponent";
 import WriteComponent from "../conponent/community/CommunityWriteComponent";
 import Post from "../conponent/community/PostRoomComponent";
 import AxiosApi from "../axios/CommunityAxios";
-import Common from "../utils/common";
+import Common from "../utils/Common";
 import useWebSocket from "../context/useWebsocket";
 
 const CommunityPage = () => {
@@ -78,97 +78,93 @@ const CommunityPage = () => {
 
   return (
     <>
-      <Router>
-        <Page>
-          <Hidden>
-            <Container>
-              <Section>
-                <Title>음악을 사랑하는 여러분의 의견을 나눠주세요.</Title>
-                <Note>
-                  <SvgS />
-                </Note>
-              </Section>
-            </Container>
-            <CommunityContainer>
-              <CommunityList>
-                <Aside>
-                  <CommunityDashboard>
-                    <CommunityProfile>
-                      <CommunityProfileFrame>
-                        <CommunityProfilePart></CommunityProfilePart>
-                      </CommunityProfileFrame>
-                      <CommunityProfileImg />
-                    </CommunityProfile>
-                    <TextCenter>
-                      <TextFrame>
-                        <TextLog>로그인 후 더 편하게 이용해 보세요</TextLog>
-                      </TextFrame>
-                    </TextCenter>
-                    <DashboardButtonFrame>
-                      <DashboardButton>로그인 / 회원가입</DashboardButton>
-                    </DashboardButtonFrame>
-                  </CommunityDashboard>
-                  <CommunityMenuList>
-                    <CommunityMenuItem>
-                      <Link to="/">
-                        <CommunityLink>
-                          <CommunitySVG>
-                            <Menu />
-                            <CommunityItem>
-                              <CommunityMenuText>전체 게시판</CommunityMenuText>
-                            </CommunityItem>
-                          </CommunitySVG>
-                        </CommunityLink>
-                      </Link>
-
+      <Page>
+        <Hidden>
+          <Container>
+            <Section>
+              <Title>음악을 사랑하는 여러분의 의견을 나눠주세요.</Title>
+              <Note>
+                <SvgS />
+              </Note>
+            </Section>
+          </Container>
+          <CommunityContainer>
+            <CommunityList>
+              <Aside>
+                <CommunityDashboard>
+                  <CommunityProfile>
+                    <CommunityProfileFrame>
+                      <CommunityProfilePart></CommunityProfilePart>
+                    </CommunityProfileFrame>
+                    <CommunityProfileImg />
+                  </CommunityProfile>
+                  <TextCenter>
+                    <TextFrame>
+                      <TextLog>로그인 후 더 편하게 이용해 보세요</TextLog>
+                    </TextFrame>
+                  </TextCenter>
+                  <DashboardButtonFrame>
+                    <DashboardButton>로그인 / 회원가입</DashboardButton>
+                  </DashboardButtonFrame>
+                </CommunityDashboard>
+                <CommunityMenuList>
+                  <CommunityMenuItem>
+                    <Link to="/">
                       <CommunityLink>
-                        <CommunityMenuButton>
-                          <Talk />
-                          <CommunityItem onClick={ListOpen}>
-                            <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
+                        <CommunitySVG>
+                          <Menu />
+                          <CommunityItem>
+                            <CommunityMenuText>전체 게시판</CommunityMenuText>
                           </CommunityItem>
-                          <RotatedDown isRotated={isList}></RotatedDown>
-                        </CommunityMenuButton>
+                        </CommunitySVG>
                       </CommunityLink>
-                      {isList && (
-                        <CommunityItemList>
-                          {categories.map((category) => (
-                            <Link
-                              to={`/community/${category.categoryId}`}
-                              key={category.categoryId}
-                            >
-                              <CommunityLink key={category.categoryId}>
-                                <CommunityItem>
-                                  <CommunityMenuText>
-                                    {category.categoryName} 게시판
-                                  </CommunityMenuText>
-                                  <Star />
-                                </CommunityItem>
-                              </CommunityLink>
-                            </Link>
-                          ))}
-                        </CommunityItemList>
-                      )}
-                    </CommunityMenuItem>
-                  </CommunityMenuList>
-                </Aside>
-                <Routes>
-                  <Route path="/" element={<CommunityComponent />} />
-                  <Route
-                    path="/community/:categoryId"
-                    element={<CommunityComponent />}
-                  />
-                  <Route path="/community/detail/:id" element={<Post />} />
-                  <Route path="/community/write" element={<WriteComponent />} />
-                </Routes>
-              </CommunityList>
-              {wsMessage && (
-                <MessageBox key={wsMessage}>{wsMessage}</MessageBox>
-              )}
-            </CommunityContainer>
-          </Hidden>
-        </Page>
-      </Router>
+                    </Link>
+
+                    <CommunityLink>
+                      <CommunityMenuButton>
+                        <Talk />
+                        <CommunityItem onClick={ListOpen}>
+                          <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
+                        </CommunityItem>
+                        <RotatedDown isRotated={isList}></RotatedDown>
+                      </CommunityMenuButton>
+                    </CommunityLink>
+                    {isList && (
+                      <CommunityItemList>
+                        {categories.map((category) => (
+                          <Link
+                            to={`/community/${category.categoryId}`}
+                            key={category.categoryId}
+                          >
+                            <CommunityLink key={category.categoryId}>
+                              <CommunityItem>
+                                <CommunityMenuText>
+                                  {category.categoryName} 게시판
+                                </CommunityMenuText>
+                                <Star />
+                              </CommunityItem>
+                            </CommunityLink>
+                          </Link>
+                        ))}
+                      </CommunityItemList>
+                    )}
+                  </CommunityMenuItem>
+                </CommunityMenuList>
+              </Aside>
+              <Routes>
+                <Route path="/" element={<CommunityComponent />} />
+                <Route
+                  path="/community/:categoryId"
+                  element={<CommunityComponent />}
+                />
+                <Route path="/community/detail/:id" element={<Post />} />
+                <Route path="/community/write" element={<WriteComponent />} />
+              </Routes>
+            </CommunityList>
+            {wsMessage && <MessageBox key={wsMessage}>{wsMessage}</MessageBox>}
+          </CommunityContainer>
+        </Hidden>
+      </Page>
     </>
   );
 };

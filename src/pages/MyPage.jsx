@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MypageComponent from "../conponent/Mypage/MypageComponenet";
+import MypageComponent from "../conponent/Mypage/MypageComponent";
 import { ReactComponent as Heart } from "../images/HeartBox.svg";
 import { ReactComponent as Subs } from "../images/SubscriberBox.svg";
 
@@ -19,6 +19,8 @@ import {
   PointBox,
 } from "../style/MyPageStyle";
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
+import ModalComponent from "../utils/ModalComponent";
+import PayComponent from "../conponent/Mypage/PayComponent.tsx";
 
 const MyPage = () => {
   const [email, setEmail] = useState("asd123@naver.com");
@@ -91,8 +93,26 @@ const MyPage = () => {
             {userInfo && userInfo.userPoint}
 
             <MoveButtonBox>
-              <MoveButton>충전하기</MoveButton>
-              <MoveButton>환전하기</MoveButton>
+              <ModalComponent
+                open={<MoveButton>충전하기</MoveButton>}
+                content={<PayComponent />}
+                customButton="충전하기"
+                openButtonStyle={{
+                  bgColor: "rgba(0,0,0,0)",
+                  textColor: "black",
+                }}
+                close="닫기"
+              />
+              <ModalComponent
+                open={<MoveButton>환전하기</MoveButton>}
+                content="환전 모달 내용"
+                customButton="환전하기"
+                openButtonStyle={{
+                  bgColor: "rgba(0,0,0,0)",
+                  textColor: "black",
+                }}
+                close="닫기"
+              />
             </MoveButtonBox>
           </PointBox>
         </MainHead>

@@ -35,7 +35,7 @@ const MypageComponent = ({ userMusic, userPerformance }) => {
           {userMusic &&
             userMusic.map((music) => (
               <div key={music.musicId}>
-                <Picture></Picture>
+                <Picture bgimg={music.musicDTO.thumbnailImage} />
                 <ItemTextContainer>
                   <ItemText1>{music.musicDTO.musicTitle}</ItemText1>
                   <ItemText2>
@@ -74,10 +74,14 @@ const MypageComponent = ({ userMusic, userPerformance }) => {
           </div>
         </ItemList>
         <SubTitle>
-          공연 {userPerformance.performances.length}
+          공연{" "}
+          {userPerformance && userPerformance.performances
+            ? userPerformance.performances.length
+            : 0}
           <RegButton>공연 등록</RegButton>
         </SubTitle>
-        {userPerformance.performances &&
+        {userPerformance &&
+          userPerformance.performances &&
           userPerformance.performances.map((performance) => (
             <PerformanceBox key={performance.performanceId}>
               <PerformancePictureBox>
@@ -91,6 +95,7 @@ const MypageComponent = ({ userMusic, userPerformance }) => {
                 </PerformanceText1>
                 <PerformanceText2>{performance.venue}</PerformanceText2>
                 <PerformanceText3>
+                  {/* performance.nicknames 배열이 ["아티스트1", "아티스트2", "아티스트3"]라면, performance.nicknames.join(", ")의 결과는 "아티스트1, 아티스트2, 아티스트3" */}
                   {performance.nicknames.join(", ")}
                 </PerformanceText3>
                 <PerformanceText4>

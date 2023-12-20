@@ -31,7 +31,7 @@ import {
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
-import Common from "../../utils/common";
+import Common from "../../utils/Common";
 import CommunityRankComponent from "./CommunityRankComponent";
 import useWebSocket from "../../context/useWebsocket";
 import { HeadText } from "../../style/CommunityPostStyle";

@@ -31,7 +31,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
-import Common from "../../utils/common";
+import Common from "../../utils/Common";
 import CommunityRankComponent from "./CommunityRankComponent";
 import axios from "axios";
 

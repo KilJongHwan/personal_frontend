@@ -94,7 +94,7 @@ export const Artist = styled.div`
 export const InterBox = styled.div`
   display: flex;
   position: relative;
-  width: 6em;
+  width: 100px;
   height: 3.3em;
   flex-shrink: 0;
   border-radius: 10em;
@@ -104,14 +104,14 @@ export const InterBox = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex: 1;
 
   background: #fff;
 `;
 export const InterBoxText = styled.div`
   display: flex;
   width: 3em;
-  height: 1.5emx;
-  flex-direction: row;
+  height: 100%;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -129,7 +129,6 @@ export const PointBox = styled.div`
   position: absolute;
   display: flex;
   right: 50px;
-  bottom: 50px;
   height: 100%;
   flex-direction: column;
   justify-content: center;
@@ -242,7 +241,10 @@ export const Picture = styled.div`
   border-radius: 37.316px;
   opacity: 1;
 
-  background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.28) 100%);
+  background: ${(props) =>
+    props.bgimg
+      ? `url(${props.bgimg}) no-repeat center/cover`
+      : `linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.28) 100%)`};
 `;
 export const ItemInfo = styled.div`
   display: flex;
@@ -343,7 +345,10 @@ export const PerformancePicture = styled.div`
   border-radius: 20px;
   opacity: 1;
 
-  background: linear-gradient(180deg, #2400ff 0%, #f00 100%);
+  background: ${(props) =>
+    props.src
+      ? `url(${props.src}) no-repeat center/cover`
+      : `linear-gradient(180deg, #2400ff 0%, #f00 100%)`};
 `;
 export const PerformanceTextBox = styled.div`
   display: flex;

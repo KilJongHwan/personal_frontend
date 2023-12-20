@@ -1,5 +1,5 @@
 import axios from "axios";
-import Common from "../utils/common.jsx";
+import Common from "../utils/Common.jsx";
 
 const CommunityAxiosApi = {
   // 게시글 조회
