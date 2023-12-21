@@ -1,4 +1,10 @@
-import { BrowserRouter as Route, Routes, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
 import { ReactComponent as SvgS } from "../images/music-svgrepo-com.svg";
 import { ReactComponent as Menu } from "../images/Menu.svg";
@@ -48,13 +54,28 @@ import Post from "../conponent/community/PostRoomComponent";
 import AxiosApi from "../axios/CommunityAxios";
 import Common from "../utils/Common";
 import useWebSocket from "../context/useWebsocket";
+import { SearchInput } from "../style/CommunityPostStyle";
+import CommunityAxiosApi from "../axios/CommunityAxios";
+import CommunitySearchComponent from "../conponent/community/CommunitySearchComponent";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
   const [categories, setCategories] = useState([]);
   const [email, setEmail] = useState("");
   const { message: wsMessage } = useWebSocket(Common.SOCKET_URL, email);
+  const [keyword, setKeyword] = useState("");
+  const [searchType, setSearchType] = useState("titleAndContent");
+  const navigate = useNavigate();
 
+  const search = async () => {
+    const result = await CommunityAxiosApi.searchCommunity(searchType, keyword);
+
+    // navigate를 사용하여 결과 페이지로 이동. 두번째 파라미터로 상태를 전달.
+    console.log(result.data);
+    navigate(`/community/search/${keyword}`, {
+      state: { result: result.data },
+    });
+  };
   const ListOpen = () => {
     setIsList(!isList);
   };
@@ -154,12 +175,30 @@ const CommunityPage = () => {
               <Routes>
                 <Route path="/" element={<CommunityComponent />} />
                 <Route
+                  path="/community/search/:searchTerm"
+                  element={<CommunitySearchComponent />}
+                />
+                <Route
                   path="/community/:categoryId"
                   element={<CommunityComponent />}
                 />
                 <Route path="/community/detail/:id" element={<Post />} />
                 <Route path="/community/write" element={<WriteComponent />} />
               </Routes>
+              <div>
+                <select onChange={(event) => setSearchType(event.target.value)}>
+                  <option value="titleAndContent">제목+내용</option>
+                  <option value="title">제목</option>
+                  <option value="comment">댓글</option>
+                </select>
+                <SearchInput
+                  type="text"
+                  value={keyword}
+                  onChange={(event) => setKeyword(event.target.value)}
+                  placeholder="검색어를 입력하세요"
+                />
+                <button onClick={search}> 검색</button>
+              </div>
             </CommunityList>
             {wsMessage && <MessageBox key={wsMessage}>{wsMessage}</MessageBox>}
           </CommunityContainer>

@@ -189,5 +189,17 @@ const CommunityAxiosApi = {
       },
     });
   },
+  // 게시글 검색
+  searchCommunity: async (searchType, keyword, page = 0, size = 10) => {
+    return await axios.get(
+      Common.DOMAIN +
+        `/api/community/search/${searchType}?page=${page}&size=${size}&keyword=${keyword}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
 };
 export default CommunityAxiosApi;

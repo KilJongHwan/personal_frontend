@@ -3,15 +3,15 @@ import { SuccessPage } from "./conponent/Mypage/SuccessComponent";
 import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";
 import GlobalStyle from "./style/GlobalStyle";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <Router>
-        {/* <CommunityPage /> */}
-        <MyPage />
+        <CommunityPage />
+        {/* <MyPage /> */}
         <Routes>
           <Route path="/success" element={<SuccessPage />} />
         </Routes>

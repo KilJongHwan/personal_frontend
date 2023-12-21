@@ -145,7 +145,8 @@ export const PostRankLink = styled.div`
 `;
 export const PostRankCategory = styled.div`
   display: flex;
-  height: 18.89px;
+  width: 100%;
+  height: 100%;
   padding-right: 5.2px;
   align-items: center;
   color: #999;
@@ -155,12 +156,14 @@ export const PostRankCategory = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 18.9px;
+  flex: 1;
 `;
 export const PostRankContent = styled.div`
   display: flex;
   padding-right: 5.2px;
   align-items: center;
   margin-left: 20px;
+  flex: 1;
 `;
 export const PostRankFrame = styled.div`
   display: flex;
@@ -173,6 +176,9 @@ export const PostRankFrame = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 18.9px;
+  flex: 1;
+  width: ${(props) => props.width || "100%"};
+  white-space: nowrap;
 `;
 
 export const InputContainer = styled.div`
@@ -394,4 +400,10 @@ export const Page = styled.a`
   font-style: normal;
   font-weight: 700;
   line-height: 18px;
+`;
+export const SearchInput = styled.input`
+  width: 200px;
+  height: 30px;
+  padding: 5px;
+  margin: 10px;
 `;

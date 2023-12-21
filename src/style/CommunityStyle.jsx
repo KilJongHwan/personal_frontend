@@ -78,6 +78,15 @@ export const Aside = styled.div`
   gap: 14.39px;
   flex-shrink: 0;
   align-self: stretch;
+  @media (max-width: 768px) {
+    flex: 1; // 화면 크기가 768px 이하일 때 유동적으로 확장
+    max-width: none; // max-width 해제
+    position: fixed; // 고정 위치 설정
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+  }
 `;
 
 export const CommunityDashboard = styled.div`
@@ -90,7 +99,7 @@ export const CommunityDashboard = styled.div`
 `;
 export const TextCenter = styled.div`
   display: flex;
-  width: 218.81px;
+  width: 200px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
@@ -160,7 +169,6 @@ export const CommunityProfilePart = styled.div`
   align-items: center;
 `;
 export const CommunityProfileImg = styled.div`
-  /* width: 218.81px; */
   height: 91px;
   min-width: 218.81px;
   max-width: 218.81px;

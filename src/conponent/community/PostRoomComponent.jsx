@@ -3,9 +3,6 @@ import {
   PostTitle,
   PostContent,
   PostDate,
-  ReplyFormContainer,
-  ReplyInput,
-  ReplyButton,
   CommentContainer,
   CommentForm,
   CommentButton,
@@ -28,6 +25,7 @@ import {
   FormContainer,
   PostNickName,
   CommentBox,
+  ButtonText,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useParams } from "react-router-dom";
@@ -227,7 +225,9 @@ const Post = () => {
         <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
       </PostBody>
       <PostVotes>
-        <PostUpvote onClick={() => vote(true)}>추천</PostUpvote>
+        <PostUpvote onClick={() => vote(true)}>
+          <ButtonText>추천</ButtonText>
+        </PostUpvote>
         <PostTitle>{post.voteCount}</PostTitle>
         <PostDownvote onClick={() => vote(false)}>비추천</PostDownvote>
       </PostVotes>
@@ -261,40 +261,38 @@ const Post = () => {
                   {comment.content}
                 </HeadText>
                 {replyOpen[comment.commentId] && (
-                  <ReplyFormContainer>
+                  <FormContainer>
                     {!email && (
-                      <>
-                        <InformationContainer>
-                          <FormContainer>
-                            <SmallInput
-                              type="text"
-                              value={replyNickName[comment.commentId] || ""}
-                              onChange={(e) =>
-                                handleReplyAuthorChange(
-                                  comment.commentId,
-                                  e.target.value,
-                                  replyPassword[comment.commentId]
-                                )
-                              }
-                              placeholder="닉네임을 입력하세요"
-                            />
-                            <SmallInput
-                              type="password"
-                              value={replyPassword[comment.commentId] || ""}
-                              onChange={(e) =>
-                                handleReplyAuthorChange(
-                                  comment.commentId,
-                                  replyNickName[comment.commentId],
-                                  e.target.value
-                                )
-                              }
-                              placeholder="비밀번호를 입력하세요"
-                            />
-                          </FormContainer>
-                        </InformationContainer>
-                      </>
+                      <InformationContainer>
+                        <FormContainer>
+                          <SmallInput
+                            type="text"
+                            value={replyNickName[comment.commentId] || ""}
+                            onChange={(e) =>
+                              handleReplyAuthorChange(
+                                comment.commentId,
+                                e.target.value,
+                                replyPassword[comment.commentId]
+                              )
+                            }
+                            placeholder="닉네임을 입력하세요"
+                          />
+                          <SmallInput
+                            type="password"
+                            value={replyPassword[comment.commentId] || ""}
+                            onChange={(e) =>
+                              handleReplyAuthorChange(
+                                comment.commentId,
+                                replyNickName[comment.commentId],
+                                e.target.value
+                              )
+                            }
+                            placeholder="비밀번호를 입력하세요"
+                          />
+                        </FormContainer>
+                      </InformationContainer>
                     )}
-                    <ReplyInput
+                    <LargeInput
                       type="text"
                       value={newReply[comment.commentId] || ""}
                       onChange={(e) =>
@@ -304,14 +302,14 @@ const Post = () => {
                         })
                       }
                     />
-                    <ReplyButton
+                    <CommentButton
                       type="button"
                       onClick={() => replyWrite(comment.commentId)}
                       required={nickName && password}
                     >
                       댓글 작성
-                    </ReplyButton>
-                  </ReplyFormContainer>
+                    </CommentButton>
+                  </FormContainer>
                 )}
               </CommentContent>
               {comment.childComments &&
