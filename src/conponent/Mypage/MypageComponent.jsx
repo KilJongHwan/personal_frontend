@@ -2,6 +2,7 @@ import {
   ButtonBox,
   ContentContainer,
   ItemList,
+  ItemSlider,
   ItemText1,
   ItemText2,
   ItemText3,
@@ -20,12 +21,56 @@ import {
   RegButton,
   SubTitle,
 } from "../../style/MyPageStyle";
+import Slider from "react-slick";
 
 const MypageComponent = ({ userMusic, userPerformance }) => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    rows: 1,
+    vertical: false,
+
+    // responsive: [
+    //   {
+    //     breakpoint: 768, // 화면 크기가 768px 이하일 때
+    //     settings: {
+    //       slidesToShow: 1,
+    //       arrows: false,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 9999, // 화면 크기가 9999px 이하일 때 (무제한)
+    //     settings: {
+    //       slidesToShow: 3,
+    //     },
+    //   },
+    // ],
+  };
+  // 테스트용 데이터
+  const testData = [
+    {
+      title: "음원 제목1",
+      artist: "아티스트 이름1",
+      genre: "장르1",
+    },
+    {
+      title: "음원 제목2",
+      artist: "아티스트 이름2",
+      genre: "장르2",
+    },
+    {
+      title: "음원 제목3",
+      artist: "아티스트 이름3",
+      genre: "장르3",
+    },
+  ];
   return (
     <>
       <ContentContainer>
-        <NameText>독산동 인디언</NameText>
+        <NameText></NameText>
         <SubTitle>
           노래 {userMusic ? userMusic.length : 0}
           <RegButton>음원 등록</RegButton>
@@ -45,17 +90,21 @@ const MypageComponent = ({ userMusic, userPerformance }) => {
               </div>
             ))}
         </ItemList>
-        {/* <SubTitle>작사/작곡 3</SubTitle>
-        <ItemList>
-          <div>
-            <Picture></Picture>
-            <ItemTextContainer>
-              <ItemText1>음원 제목</ItemText1>
-              <ItemText2>아티스트 이름</ItemText2>
-              <ItemText3>장르</ItemText3>
-            </ItemTextContainer>
-          </div>
-        </ItemList> */}
+        <SubTitle>작사/작곡 3</SubTitle>
+        <Slider {...settings}>
+          {testData.map((data, index) => (
+            <div key={index}>
+              <ItemSlider>
+                <Picture></Picture>
+                <ItemTextContainer>
+                  <ItemText1>음원 제목</ItemText1>
+                  <ItemText2>아티스트 이름</ItemText2>
+                  <ItemText3>장르</ItemText3>
+                </ItemTextContainer>
+              </ItemSlider>
+            </div>
+          ))}
+        </Slider>
         <SubTitle>
           공연{" "}
           {userPerformance && userPerformance.performances

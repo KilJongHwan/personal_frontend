@@ -234,6 +234,10 @@ export const ItemList = styled.div`
   flex: 1;
   gap: 2em;
 `;
+export const ItemSlider = styled.div`
+  width: 100%;
+  height: 45vh;
+`;
 export const Picture = styled.div`
   width: 171px;
   height: 171px;
