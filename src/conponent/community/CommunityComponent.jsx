@@ -34,6 +34,7 @@ import CommunityAxiosApi from "../../axios/CommunityAxios";
 import Common from "../../utils/Common";
 import CommunityRankComponent from "./CommunityRankComponent";
 import axios from "axios";
+import SearchComponent from "./SearchComponent";
 
 const CommunityComponent = () => {
   const navigate = useNavigate();
@@ -189,7 +190,7 @@ const CommunityComponent = () => {
                 })}
               </TableBody>
             </PostTable>
-
+            <SearchComponent />
             <PostPage>
               <Pagination>
                 <PageContant>

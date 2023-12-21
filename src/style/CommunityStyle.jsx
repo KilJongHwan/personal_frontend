@@ -3,7 +3,6 @@ import img from "../images/ProFileimage.png";
 
 export const Page = styled.div`
   display: flex;
-  width: 100%;
   height: auto;
   flex-direction: column;
   align-items: flex-start;
@@ -27,7 +26,6 @@ export const Container = styled.div`
 
 export const Section = styled.div`
   display: flex;
-  /* height: 220px; */
   flex-direction: column;
   align-items: center;
   gap: 24px;

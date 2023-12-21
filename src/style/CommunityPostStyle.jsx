@@ -401,9 +401,46 @@ export const Page = styled.a`
   font-weight: 700;
   line-height: 18px;
 `;
+export const SearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+`;
+
 export const SearchInput = styled.input`
-  width: 200px;
-  height: 30px;
+  flex: 3;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+`;
+
+export const SearchButton = styled.button`
+  width: 150px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+`;
+
+export const Select = styled.select`
+  flex: 1;
+  width: 100%;
+  height: 100%;
   padding: 5px;
   margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
 `;

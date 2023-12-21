@@ -10,8 +10,8 @@ function App() {
     <>
       <GlobalStyle />
       <Router>
-        <CommunityPage />
-        {/* <MyPage /> */}
+        {/* <CommunityPage /> */}
+        <MyPage />
         <Routes>
           <Route path="/success" element={<SuccessPage />} />
         </Routes>

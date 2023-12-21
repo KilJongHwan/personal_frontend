@@ -46,7 +46,7 @@ const MypageComponent = ({ userMusic, userPerformance }) => {
               </div>
             ))}
         </ItemList>
-        <SubTitle>작사/작곡 3</SubTitle>
+        {/* <SubTitle>작사/작곡 3</SubTitle>
         <ItemList>
           <div>
             <Picture></Picture>
@@ -56,23 +56,7 @@ const MypageComponent = ({ userMusic, userPerformance }) => {
               <ItemText3>장르</ItemText3>
             </ItemTextContainer>
           </div>
-          <div>
-            <Picture></Picture>
-            <ItemTextContainer>
-              <ItemText1>음원 제목</ItemText1>
-              <ItemText2>아티스트 이름</ItemText2>
-              <ItemText3>장르</ItemText3>
-            </ItemTextContainer>
-          </div>
-          <div>
-            <Picture></Picture>
-            <ItemTextContainer>
-              <ItemText1>음원 제목</ItemText1>
-              <ItemText2>아티스트 이름</ItemText2>
-              <ItemText3>장르</ItemText3>
-            </ItemTextContainer>
-          </div>
-        </ItemList>
+        </ItemList> */}
         <SubTitle>
           공연{" "}
           {userPerformance && userPerformance.performances
