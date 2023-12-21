@@ -13,7 +13,7 @@ function App() {
         {/* <CommunityPage /> */}
         <MyPage />
         <Routes>
-          <Route path="/success" component={SuccessPage} />
+          <Route path="/success" element={<SuccessPage />} />
         </Routes>
       </Router>
     </>

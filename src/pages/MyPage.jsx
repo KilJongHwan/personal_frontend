@@ -6,11 +6,13 @@ import { ReactComponent as Subs } from "../images/SubscriberBox.svg";
 import {
   Artist,
   ArtistContainer,
+  CashInput,
+  ExchangeButton,
+  ExchangeContainer,
   InterBox,
   InterBoxText,
   MainHead,
   MainHeadBox,
-  MainHeadDateText,
   MainHeadText,
   MainProfile,
   MoveButton,
@@ -27,13 +29,22 @@ const MyPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [userMusic, setUserMusic] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
+  const [amount, setAmount] = useState(0);
 
+  const amountChange = (e) => {
+    const inputAmount = e.target.value;
+
+    if (inputAmount < 0) {
+      alert("음수는 입력하실 수 없습니다.");
+      return;
+    }
+    setAmount(inputAmount);
+  };
   useEffect(() => {
     const fetchUserInfoAndMusic = async () => {
       try {
         const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
         setUserInfo(userInfoResponse.data);
-        console.log(userInfoResponse.data);
 
         if (userInfoResponse.data) {
           const musicResponse = await MemberInfoAxiosApi.getUserMusic(
@@ -53,7 +64,20 @@ const MyPage = () => {
     };
     fetchData();
     fetchUserInfoAndMusic();
+    console.log(userInfo);
   }, [email]);
+  const exchangePoints = async () => {
+    try {
+      const response = await MemberInfoAxiosApi.exchangePoints(email, amount);
+      if (response.status === 200) {
+        alert("환전이 성공적으로 완료되었습니다.");
+      } else {
+        alert("환전에 실패하였습니다. 다시 시도해주세요.");
+      }
+    } catch (error) {
+      console.error("환전 요청 중 에러가 발생했습니다:", error);
+    }
+  };
   return (
     <>
       <MyPageContainer>
@@ -74,12 +98,6 @@ const MyPage = () => {
                   1000
                 </InterBoxText>
               </InterBox>
-              <InterBox>
-                <InterBoxText>
-                  <Subs />
-                  1000
-                </InterBoxText>
-              </InterBox>
             </MainHeadBox>
 
             <Artist>
@@ -92,26 +110,37 @@ const MyPage = () => {
             {userInfo && userInfo.userPoint}
 
             <MoveButtonBox>
-              <ModalComponent
-                open={<MoveButton>충전하기</MoveButton>}
-                content={
-                  <PayComponent
-                    email={userInfo && userInfo.userEmail}
-                    username={userInfo && userInfo.userName}
-                    phone={userInfo && userInfo.userPhone}
-                  />
-                }
-                // customButton="충전하기"
-                openButtonStyle={{
-                  bgColor: "rgba(0,0,0,0)",
-                  textColor: "black",
-                }}
-                close="닫기"
-              />
+              {userInfo && (
+                <ModalComponent
+                  open={<MoveButton>충전하기</MoveButton>}
+                  content={
+                    <PayComponent
+                      email={userInfo.userEmail}
+                      username={userInfo.userName}
+                      phone={userInfo.userPhone}
+                    />
+                  }
+                  openButtonStyle={{
+                    bgColor: "rgba(0,0,0,0)",
+                    textColor: "black",
+                  }}
+                  close="닫기"
+                />
+              )}
               <ModalComponent
                 open={<MoveButton>환전하기</MoveButton>}
-                content="환전 모달 내용"
-                customButton="환전하기"
+                content={
+                  <ExchangeContainer>
+                    <CashInput
+                      type="number"
+                      value={amount}
+                      onChange={amountChange}
+                    />
+                    <ExchangeButton onClick={exchangePoints}>
+                      환전하기
+                    </ExchangeButton>
+                  </ExchangeContainer>
+                }
                 openButtonStyle={{
                   bgColor: "rgba(0,0,0,0)",
                   textColor: "black",

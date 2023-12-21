@@ -34,7 +34,7 @@ export const PayComponent = ({ email, username, phone }) => {
         customerName: username,
         customerEmail: email,
         customerMobilePhone: phone,
-        successUrl: `${window.location.origin}/success`,
+        successUrl: `${window.location.origin}/success?username=${username}&email=${email}&phone=${phone}`,
         failUrl: `${window.location.origin}/fail`,
       });
     } catch (error) {
@@ -89,6 +89,15 @@ export const PayComponent = ({ email, username, phone }) => {
       <span>{`${price.toLocaleString()}원`}</span>
       <div>
         <div>
+          <RadioButton
+            id="1000"
+            name="charge"
+            value="1000"
+            className={price === 1000 ? "checked" : ""}
+            onClick={() => setPrice(1000)}
+          >
+            1,000원
+          </RadioButton>
           <RadioButton
             id="5000"
             name="charge"

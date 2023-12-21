@@ -1,19 +1,18 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import MemberInfoAxiosApi from "../../axios/MemberInfoAxios";
 import { useEffect } from "react";
 
-export function SuccessPage() {
+export const SuccessPage = () => {
   const [searchParams] = useSearchParams();
-
+  const navigate = useNavigate();
   // 서버로 승인 요청
-  const paymentSuccess = async () => {
+  const paymentSuccess = async (email, price) => {
     try {
-      const response = await MemberInfoAxiosApi.increasePoints(
-        searchParams.email,
-        searchParams.price
-      );
+      const response = await MemberInfoAxiosApi.increasePoints(email, price);
       if (response.status === 200 && response.data === true) {
         console.log("API response: ", response);
+        alert("충전완료되었습니다.");
+        navigate("/");
       } else {
         throw new Error("충전에 실패하였습니다");
       }
@@ -24,10 +23,10 @@ export function SuccessPage() {
   };
   useEffect(() => {
     const email = searchParams.get("email");
-    const price = searchParams.get("price");
+    const price = searchParams.get("amount");
 
     console.log("email: ", email);
-    console.log("price: ", price);
+    console.log("amount: ", price);
 
     paymentSuccess(email, price);
   }, []);
@@ -40,4 +39,4 @@ export function SuccessPage() {
       ).toLocaleString()}원`}</div>
     </div>
   );
-}
+};

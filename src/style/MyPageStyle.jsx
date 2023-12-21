@@ -411,14 +411,6 @@ export const PerformanceButton = styled.button`
   height: 41.468px;
   flex-shrink: 0;
   border-radius: 57.595px;
-  /* border-top: 1px solid #fff;
-
-  border-right: 1px solid #fff;
-
-  border-bottom: 1px solid #fff;
-
-  border-left: 1px solid #fff; */
-
   opacity: 1;
 
   background: #354b45;
@@ -448,5 +440,58 @@ export const RadioButton = styled.button`
   &.checked {
     background-color: #525970;
     color: white;
+  }
+`;
+export const ExchangeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const CashInput = styled.input`
+  width: 300px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  color: #333;
+  background-color: #f5f5f5;
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+`;
+
+export const ExchangeButton = styled.button`
+  width: 300px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  color: #333;
+  background-color: #f5f5f5;
+  transition: all 0.3s ease-in-out;
+  margin-top: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
   }
 `;
