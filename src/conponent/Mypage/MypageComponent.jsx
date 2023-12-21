@@ -7,7 +7,6 @@ import {
   ItemText3,
   ItemTextContainer,
   NameText,
-  PerfomanceList,
   PerformanceBox,
   PerformanceButton,
   PerformancePicture,
