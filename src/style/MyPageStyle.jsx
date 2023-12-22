@@ -236,7 +236,10 @@ export const ItemList = styled.div`
 `;
 export const ItemSlider = styled.div`
   width: 100%;
-  height: 45vh;
+  height: 30vh;
+`;
+export const ItemSlider2 = styled.div`
+  width: 100%;
 `;
 export const Picture = styled.div`
   width: 171px;
@@ -497,5 +500,42 @@ export const ExchangeButton = styled.button`
     outline: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
     background-color: #fff;
+  }
+`;
+export const NextArrow = styled.div`
+  width: 30px;
+  height: 30px;
+  background: #000;
+  position: absolute;
+  right: -15px;
+  top: calc(50% - 15px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  &:before {
+    content: ">";
+    font-size: 20px;
+  }
+`;
+
+export const PrevArrow = styled.div`
+  width: 30px;
+  height: 30px;
+  background: #000;
+  position: absolute;
+  left: -15px;
+  top: calc(50% - 15px);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  &:before {
+    content: "<";
+    font-size: 20px;
   }
 `;
