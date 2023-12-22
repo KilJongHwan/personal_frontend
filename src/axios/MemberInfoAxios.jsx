@@ -59,6 +59,53 @@ const MemberInfoAxiosApi = {
       }
     );
   },
+  // 채팅방 목록 보기
+  chatList: async () => {
+    return await axios.get(Common.DOMAIN + "/chat/room", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
+  // 채팅방 정보 보기
+  chatDetail: async (roomId) => {
+    return await axios.get(Common.DOMAIN + `/chat/room/${roomId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
+  // 채팅방 생성
+  chatCreate: async (email, name) => {
+    const chat = {
+      email: email,
+      name: name,
+    };
+    return await axios.post(Common.DOMAIN + "/chat/new", chat, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
+  // 이전 채팅 가져오기
+  recentChatLoad: async (roomId) => {
+    return await axios.get(Common.DOMAIN + `/chat/message/${roomId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
+  // 채팅방 세션 수 가져오기
+  chatSessionCount: async (roomId) => {
+    return await axios.get(
+      Common.DOMAIN + `/chat/room/${roomId}/sessioncount`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
 };
 
 export default MemberInfoAxiosApi;

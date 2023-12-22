@@ -45,7 +45,6 @@ const MyPage = () => {
       try {
         const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
         setUserInfo(userInfoResponse.data);
-
         if (userInfoResponse.data) {
           const musicResponse = await MemberInfoAxiosApi.getUserMusic(
             userInfoResponse.data.id
@@ -64,7 +63,6 @@ const MyPage = () => {
     };
     fetchData();
     fetchUserInfoAndMusic();
-    console.log(userInfo);
   }, [email]);
   const exchangePoints = async () => {
     try {
@@ -111,48 +109,51 @@ const MyPage = () => {
 
             <MoveButtonBox>
               {userInfo && (
-                <ModalComponent
-                  open={<MoveButton>충전하기</MoveButton>}
-                  content={
-                    <PayComponent
-                      email={userInfo.userEmail}
-                      username={userInfo.userName}
-                      phone={userInfo.userPhone}
-                    />
-                  }
-                  openButtonStyle={{
-                    bgColor: "rgba(0,0,0,0)",
-                    textColor: "black",
-                  }}
-                  close="닫기"
-                />
+                <>
+                  <ModalComponent
+                    open={<MoveButton>충전하기</MoveButton>}
+                    content={
+                      <PayComponent
+                        email={userInfo.userEmail}
+                        username={userInfo.userName}
+                        phone={userInfo.userPhone}
+                      />
+                    }
+                    openButtonStyle={{
+                      bgColor: "rgba(0,0,0,0)",
+                      textColor: "black",
+                    }}
+                    close="닫기"
+                  />
+                  <ModalComponent
+                    open={<MoveButton>환전하기</MoveButton>}
+                    content={
+                      <ExchangeContainer>
+                        <CashInput
+                          type="number"
+                          value={amount}
+                          onChange={amountChange}
+                        />
+                        <ExchangeButton onClick={exchangePoints}>
+                          환전하기
+                        </ExchangeButton>
+                      </ExchangeContainer>
+                    }
+                    openButtonStyle={{
+                      bgColor: "rgba(0,0,0,0)",
+                      textColor: "black",
+                    }}
+                    close="닫기"
+                  />
+                </>
               )}
-              <ModalComponent
-                open={<MoveButton>환전하기</MoveButton>}
-                content={
-                  <ExchangeContainer>
-                    <CashInput
-                      type="number"
-                      value={amount}
-                      onChange={amountChange}
-                    />
-                    <ExchangeButton onClick={exchangePoints}>
-                      환전하기
-                    </ExchangeButton>
-                  </ExchangeContainer>
-                }
-                openButtonStyle={{
-                  bgColor: "rgba(0,0,0,0)",
-                  textColor: "black",
-                }}
-                close="닫기"
-              />
             </MoveButtonBox>
           </PointBox>
         </MainHead>
         <MypageComponent
           userMusic={userMusic}
           userPerformance={userPerformance}
+          userInfo={userInfo}
         />
       </MyPageContainer>
     </>

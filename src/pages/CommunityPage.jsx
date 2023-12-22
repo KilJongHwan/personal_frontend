@@ -1,10 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import { ReactComponent as SvgS } from "../images/music-svgrepo-com.svg";
 import { ReactComponent as Menu } from "../images/Menu.svg";
@@ -48,14 +42,13 @@ import {
 } from "../style/CommunityStyle";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import CommunityComponent from "../conponent/community/CommunityComponent";
-import WriteComponent from "../conponent/community/CommunityWriteComponent";
-import Post from "../conponent/community/PostRoomComponent";
 import AxiosApi from "../axios/CommunityAxios";
 import Common from "../utils/Common";
 import useWebSocket from "../context/useWebsocket";
-
+import CommunityComponent from "../conponent/community/CommunityComponent";
 import CommunitySearchComponent from "../conponent/community/CommunitySearchComponent";
+import Post from "../conponent/community/PostRoomComponent";
+import WriteComponent from "../conponent/community/CommunityWriteComponent";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
@@ -116,7 +109,7 @@ const CommunityPage = () => {
                 </CommunityDashboard>
                 <CommunityMenuList>
                   <CommunityMenuItem>
-                    <Link to="/">
+                    <Link to="/community">
                       <CommunityLink>
                         <CommunitySVG>
                           <Menu />
@@ -158,19 +151,15 @@ const CommunityPage = () => {
                   </CommunityMenuItem>
                 </CommunityMenuList>
               </Aside>
-
               <Routes>
                 <Route path="/" element={<CommunityComponent />} />
                 <Route
-                  path="/community/search/:searchTerm"
+                  path="search/:searchTerm"
                   element={<CommunitySearchComponent />}
                 />
-                <Route
-                  path="/community/:categoryId"
-                  element={<CommunityComponent />}
-                />
-                <Route path="/community/detail/:id" element={<Post />} />
-                <Route path="/community/write" element={<WriteComponent />} />
+                <Route path=":categoryId" element={<CommunityComponent />} />
+                <Route path="detail/:id" element={<Post />} />
+                <Route path="write" element={<WriteComponent />} />
               </Routes>
             </CommunityList>
             {wsMessage && <MessageBox key={wsMessage}>{wsMessage}</MessageBox>}

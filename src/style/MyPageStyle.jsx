@@ -179,7 +179,9 @@ export const NameText = styled.div`
   align-items: center;
   color: #000;
   width: 15em;
+  gap: 5px;
 
+  margin-left: 30px;
   text-align: center;
   font-family: Noto Sans KR;
   font-size: 2em;
@@ -538,5 +540,155 @@ export const PrevArrow = styled.div`
   &:before {
     content: "<";
     font-size: 20px;
+  }
+`;
+
+export const CardContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 800px;
+  height: 100px;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+`;
+
+export const CardTitle = styled.h2`
+  -size: 24px;
+  color: #000000;
+`;
+
+export const CardMembers = styled.p`
+  font-size: 16px;
+  color: #828282;
+`;
+
+export const CardButton = styled.button`
+  width: 100px;
+  height: 50px;
+  background-color: #2f80ed;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+`;
+export const ChatingContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 1820px;
+  height: 478px;
+  justify-content: space-between;
+  align-content: space-between;
+`;
+// 채팅방 생성 모달
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+`;
+
+export const Title = styled.h1`
+  color: #333;
+`;
+
+export const Input = styled.input`
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 300px;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px; // 버튼 사이의 간격
+`;
+
+export const Button = styled.button`
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
+export const ChatContainer = styled.div`
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+export const ChatHeader = styled.div`
+  font-size: 1.5em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+`;
+
+export const MessagesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  overflow-y: auto;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+`;
+
+export const Message = styled.div`
+  max-width: 60%;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 20px;
+  background-color: ${(props) => (props.isSender ? "#DCF8C6" : "#E0E0E0")};
+  align-self: ${(props) => (props.isSender ? "flex-end" : "flex-start")};
+  border: ${(props) =>
+    props.isSender ? "1px solid #DCF8C6" : "1px solid #E0E0E0"};
+`;
+
+export const ChatInput = styled.input`
+  padding: 10px;
+  width: 70%;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+`;
+
+export const SendButton = styled.button`
+  padding: 10px 15px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+export const CloseButton = styled.button`
+  padding: 10px 15px;
+  border: none;
+  background-color: #f44336;
+  color: white;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d32f2f;
   }
 `;
