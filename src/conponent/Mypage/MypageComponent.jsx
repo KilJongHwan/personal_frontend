@@ -61,10 +61,37 @@ const MypageComponent = ({ userMusic, userPerformance }) => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1, // 한 줄에 보여질 아이템 수
-    slidesToScroll: 1, // 슬라이드할 때 한 번에 넘어갈 아이템 수
+    slidesToShow: 4,
+    slidesToScroll: 4,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+
+    responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 1700,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          arrows: false,
+        },
+      },
+    ],
   };
 
   return (
@@ -117,7 +144,7 @@ const MypageComponent = ({ userMusic, userPerformance }) => {
         {userPerformance &&
         userPerformance.performances &&
         userPerformance.performances.length >= 5 ? (
-          <Slider {...settings}>
+          <Slider {...settings2}>
             {userPerformance.performances.map((performance, index) => (
               <ItemSlider2 key={index}>
                 <PerformanceBox>

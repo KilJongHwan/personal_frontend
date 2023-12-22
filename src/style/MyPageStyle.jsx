@@ -240,6 +240,7 @@ export const ItemSlider = styled.div`
 `;
 export const ItemSlider2 = styled.div`
   width: 100%;
+  height: 80vh;
 `;
 export const Picture = styled.div`
   width: 171px;
