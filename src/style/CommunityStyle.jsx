@@ -16,7 +16,6 @@ export const Hidden = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  width: 100%;
   padding: 60px 170px;
   justify-content: center;
   align-items: center;
@@ -40,7 +39,7 @@ export const Title = styled.a`
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
-  line-height: 48px; /* 120% */
+  /* line-height: 48px; */
 `;
 export const Note = styled.div`
   display: flex;
@@ -52,13 +51,13 @@ export const Note = styled.div`
   flex-shrink: 0;
 `;
 
-export const CommunityContainer = styled.div`
-  display: flex;
-  padding: 0px 348px;
-  flex-direction: column;
-  align-items: center;
-  align-self: stretch;
-`;
+// export const CommunityContainer = styled.div`
+//   display: flex;
+//   padding: 0px 348px;
+//   flex-direction: column;
+//   align-items: center;
+//   align-self: stretch;
+// `;
 export const CommunityList = styled.div`
   display: flex;
   width: 100%;

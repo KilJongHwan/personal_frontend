@@ -14,14 +14,12 @@ export const PostSection = styled.div`
 `;
 export const Heading = styled.div`
   display: flex;
-  width: 718.41px;
   padding-right: 614.04px;
   flex-direction: column;
   align-items: flex-start;
 `;
 export const HeadText = styled.p`
   width: 300px;
-  max-width: 718.41px;
   color: #000;
 
   font-family: Inter;
@@ -218,8 +216,6 @@ export const PostBoarder = styled.input`
 `;
 export const PostListTitle = styled.div`
   display: flex;
-  width: 718.41px;
-  padding-right: 688.41px;
   align-items: flex-start;
 `;
 export const TitleContent = styled.div`
