@@ -36,8 +36,7 @@ const StreamPlayer = () => {
       console.log("Error starting stream: ", err);
     }
 
-    // 이 예제에서는 임시로 스트림 URL을 설정하였습니다.
-    const streamUrl = Common.DOMAIN + `/stream`;
+    const streamUrl = `http://localhost:8080/hls/mystream.m3u8`;
     setUrl(streamUrl);
   };
 
