@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import OBSWebSocket from "obs-websocket-js";
-import Common from "../../utils/Common";
 
 const StreamPlayer = () => {
   const [url, setUrl] = useState("");
