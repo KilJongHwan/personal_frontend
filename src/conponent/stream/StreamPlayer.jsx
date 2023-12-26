@@ -12,10 +12,15 @@ const StreamPlayer = () => {
 
   const connectToObs = async () => {
     try {
-      await obs.current.connect("localhost:4444", "6OwgeXx7Fdu22Bgr");
-
+      await obs.current.connect("ws://localhost:4444", "QTZwZJJ7KCW3dw94");
+      // window.addEventListener("beforeunload", function () {
+      //   obs.current.disconnect();
+      // });
+      obs.on("ConnectionClosed", () => {
+        console.log("Connection closed. Reconnecting in 5 seconds...");
+        setTimeout(connectToObs, 5000);
+      });
       console.log("Success! Connected to OBS.");
-      console.log(obs.current);
     } catch (err) {
       console.log("Connection failed: ", err);
     }
@@ -30,12 +35,11 @@ const StreamPlayer = () => {
     // OBS에서 스트리밍을 시작합니다.
     try {
       await obs.current.send("StartStreaming");
-      // ... 나머지 코드 생략 ...
     } catch (err) {
       console.log("Error starting stream: ", err);
     }
 
-    const streamUrl = `http://localhost:8080/hls/mystream.m3u8`;
+    const streamUrl = `http://localhost:3000/stream`;
     setUrl(streamUrl);
   };
 
