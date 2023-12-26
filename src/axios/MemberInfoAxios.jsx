@@ -67,6 +67,14 @@ const MemberInfoAxiosApi = {
       },
     });
   },
+  // ownerId로 채팅방 목록 가져오기
+  chatListByOwnerId: async (ownerId) => {
+    return await axios.get(`${Common.DOMAIN}/chat/rooms/owner/${ownerId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
   // 채팅방 정보 보기
   chatDetail: async (roomId) => {
     return await axios.get(Common.DOMAIN + `/chat/room/${roomId}`, {

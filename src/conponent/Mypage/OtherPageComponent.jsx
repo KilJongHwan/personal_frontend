@@ -50,7 +50,7 @@ import ModalComponent from "../../utils/ModalComponent";
 import { ReactComponent as Edit } from "../../images/Edit.svg";
 import Common from "../../utils/Common";
 
-const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
+const OtherPageComponent = ({ userInfo, userMusic, userPerformance }) => {
   const [chatRooms, setChatRooms] = useState([]);
   const navigate = useNavigate();
   const [chatRoomTitle, setChatRoomTitle] = useState("");
@@ -90,17 +90,7 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
 
     setInputMsg("");
   };
-  const onClickMsgClose = () => {
-    ws.current.send(
-      JSON.stringify({
-        type: "CLOSE",
-        roomId: enterRoomId,
-        sender: sender,
-        message: "종료 합니다.",
-      })
-    );
-    ws.current.close();
-  };
+
   // 이전 채팅 내용을 가져오는 함수
   const loadPreviousChat = async () => {
     try {
@@ -115,42 +105,22 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
   // 화면 하단으로 자동 스크롤
   const chatContainerRef = useRef(null);
 
-  // useEffect(() => {
-  //   // 서버로부터 채팅방 목록을 가져오는 API 호출
-  //   const getChatRoom = async () => {
-  //     try {
-  //       const rsp = await MemberInfoAxiosApi.chatList();
-  //       setChatRooms(rsp.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   const intervalID = setInterval(getChatRoom, 1000);
-  //   return () => {
-  //     clearInterval(intervalID);
-  //   };
-  // }, []);
-
   useEffect(() => {
-    // ownerId로 채팅방 목록을 가져오는 API 호출
+    // 서버로부터 채팅방 목록을 가져오는 API 호출
     const getChatRoom = async () => {
       try {
-        // 유저 정보가 있다고 가정하고, userInfo.id를 통해 ownerId를 가져옴
-        const rsp = await MemberInfoAxiosApi.chatListByOwnerId(userInfo.id);
+        const rsp = await MemberInfoAxiosApi.chatList();
         setChatRooms(rsp.data);
-        console.log(userInfo.id);
+        // console.log(rsp.data);
       } catch (error) {
-        console.error("Failed to fetch chat rooms:", error);
+        console.log(error);
       }
     };
-
     const intervalID = setInterval(getChatRoom, 1000);
-
     return () => {
       clearInterval(intervalID);
     };
-  }, [userInfo]);
-
+  }, []);
   useEffect(() => {
     // 채팅방 정보 가져 오기
     const getChatRoom = async () => {
@@ -187,7 +157,8 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
   }, [chatList]);
   useEffect(() => {
     if (userInfo) {
-      setEmail(userInfo.userEmail);
+      console.log(userInfo.userNickname);
+      setEmail(userInfo.email);
       setSender(userInfo.userNickname);
     }
   }, [userInfo]);
@@ -301,10 +272,7 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
           {userInfo && userInfo.userNickname}
           <Edit />
         </NameText>
-        <SubTitle>
-          노래 {userMusic ? userMusic.length : 0}
-          <RegButton>음원 등록</RegButton>
-        </SubTitle>
+        <SubTitle>노래 {userMusic ? userMusic.length : 0}</SubTitle>
         {userMusic && userMusic.length >= 10 ? (
           <Slider {...settings}>
             {userMusic.map((music, index) => (
@@ -342,7 +310,6 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
           {userPerformance && userPerformance.performances
             ? userPerformance.performances.length
             : 0}
-          <RegButton>공연 등록</RegButton>
         </SubTitle>
         {userPerformance &&
         userPerformance.performances &&
@@ -366,7 +333,6 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
                       {performance.performanceDate}
                     </PerformanceText4>
                     <ButtonBox>
-                      <PerformanceButton>공연 종료</PerformanceButton>
                       <RegButton>자세히</RegButton>
                     </ButtonBox>
                   </PerformanceTextBox>
@@ -393,7 +359,6 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
                     {performance.performanceDate}
                   </PerformanceText4>
                   <ButtonBox>
-                    <PerformanceButton>공연 종료</PerformanceButton>
                     <RegButton>자세히</RegButton>
                   </ButtonBox>
                 </PerformanceTextBox>
@@ -401,30 +366,7 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
             </ItemSlider2>
           ))
         ) : null}
-        <SubTitle>
-          채팅방
-          <ModalComponent
-            open={<RegButton>채팅 등록</RegButton>}
-            content={
-              <Container>
-                <Title>채팅방 생성</Title>
-                <Input
-                  type="text"
-                  value={chatRoomTitle}
-                  onChange={(e) => setChatRoomTitle(e.target.value)}
-                />
-                <ButtonContainer>
-                  <Button onClick={handleCreateChatRoom}>확인</Button>
-                </ButtonContainer>
-              </Container>
-            }
-            openButtonStyle={{
-              bgColor: "rgba(0,0,0,0)",
-              textColor: "black",
-            }}
-            close="닫기"
-          />
-        </SubTitle>
+        <SubTitle>채팅방</SubTitle>
         <ChatingContainer>
           {chatRooms.map((room) => (
             <CardContainer key={room.roomId}>
@@ -457,9 +399,6 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
                       />
                       <SendButton onClick={onClickMsgSend}>전송</SendButton>
                     </div>
-                    <CloseButton onClick={onClickMsgClose}>
-                      채팅 종료 하기
-                    </CloseButton>
                   </ChatContainer>
                 }
                 openButtonStyle={{
@@ -476,4 +415,4 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
   );
 };
 
-export default MypageComponent;
+export default OtherPageComponent;

@@ -15,13 +15,6 @@ const customerKey = "test_sk_5OWRapdA8dJwzRlXG1yRVo1zEqZK";
 export const PayComponent = ({ email, username, phone }) => {
   const [price, setPrice] = useState(100);
 
-  const setParamPrice = (Price) => {
-    if (Price !== null) {
-      Price = parseInt(Price.replace(",", ""));
-      setPrice(Price);
-    }
-  };
-
   const requestPayment = async () => {
     const paymentWidget = paymentWidgetRef.current;
 

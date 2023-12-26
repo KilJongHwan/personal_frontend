@@ -28,7 +28,7 @@ import {
   ButtonText,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Common from "../../utils/Common";
 import CommunityRankComponent from "./CommunityRankComponent";
 import useWebSocket from "../../context/useWebsocket";
@@ -42,7 +42,7 @@ const Post = () => {
   const [sortType, setSortType] = useState("");
   const [newComment, setNewComment] = useState("");
   const [newReply, setNewReply] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("asd123@naver.com");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [replyNickName, setReplyNickName] = useState({});
@@ -51,6 +51,7 @@ const Post = () => {
   const [totalComment, setTotalComment] = useState(0);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { sendMessage } = useWebSocket(Common.SOCKET_URL, email);
 
@@ -71,7 +72,7 @@ const Post = () => {
           sortType,
           currentCommentPage
         );
-        console.log(commentResponse.data.totalPages);
+        console.log(commentResponse.data);
         setComments(commentResponse.data.content);
         setTotalCommentPages(commentResponse.data.totalPages);
         // 전체 댓글 수 조회
@@ -203,7 +204,15 @@ const Post = () => {
     // 댓글 ID에 해당하는 답글 작성자의 비밀번호 업데이트
     setReplyPassword((prev) => ({ ...prev, [commentId]: pass }));
   };
-
+  // 닉네임을 클릭했을 때 이메일 확인 후 이동하는 함수
+  const nicknameClick = (comment) => {
+    if (comment.email !== null) {
+      // 이메일이 있는 경우에만 이동
+      navigate(`/otherpage/${comment.email}`);
+    } else {
+      alert("해당 사용자의 이메일이 없습니다.");
+    }
+  };
   return (
     <PostContainer>
       <CommunityRankComponent categoryName={post.categoryName} />
@@ -248,9 +257,17 @@ const Post = () => {
           .map((comment) => (
             <CommentBox key={comment.commentId}>
               <CommentContent>
-                <>
-                  {comment.nickName}({getPartialIp(comment.ipAddress)})
-                </>
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    nicknameClick(comment);
+                  }}
+                >
+                  {comment.email
+                    ? comment.nickName
+                    : `${comment.nickName}(${getPartialIp(comment.ipAddress)})`}
+                </a>
 
                 <>{Common.formatDate(comment.regDate)}</>
                 <HeadText
@@ -315,10 +332,19 @@ const Post = () => {
               {comment.childComments &&
                 comment.childComments.map((childComment) => (
                   <CommentContent style={{ marginLeft: "20px" }}>
-                    <>
-                      {childComment.nickName} (
-                      {getPartialIp(childComment.ipAddress)})
-                    </>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        nicknameClick(comment);
+                      }}
+                    >
+                      {comment.email
+                        ? comment.nickName
+                        : `${comment.nickName}(${getPartialIp(
+                            comment.ipAddress
+                          )})`}
+                    </a>
                     <>{Common.formatDate(childComment.regDate)}</>
                     <HeadText
                       onClick={() =>

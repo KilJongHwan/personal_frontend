@@ -61,7 +61,7 @@ export const Note = styled.div`
 export const CommunityList = styled.div`
   display: flex;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1600px;
   padding: 57.6px 183.99px 57.6px 0px;
   align-items: flex-start;
 `;

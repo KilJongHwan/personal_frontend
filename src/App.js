@@ -4,6 +4,7 @@ import StreamPlayer from "./conponent/stream/StreamPlayer";
 
 import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";
+import OtherPage from "./pages/OtherPage";
 import GlobalStyle from "./style/GlobalStyle";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/community/*" element={<CommunityPage />} />
           <Route path="/" element={<MyPage />} />
           <Route path="/stream" element={<StreamPlayer />} />
+          <Route path="/otherpage/:email" element={<OtherPage />} />
         </Routes>
       </Router>
     </>

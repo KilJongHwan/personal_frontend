@@ -44,6 +44,7 @@ const MyPage = () => {
     const fetchUserInfoAndMusic = async () => {
       try {
         const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
+        console.log(userInfoResponse.data);
         setUserInfo(userInfoResponse.data);
         if (userInfoResponse.data) {
           const musicResponse = await MemberInfoAxiosApi.getUserMusic(
@@ -93,15 +94,12 @@ const MyPage = () => {
               <InterBox>
                 <InterBoxText>
                   <Heart />
-                  1000
+                  {userMusic && userMusic[0].musicDTO.heartCount}
                 </InterBoxText>
               </InterBox>
             </MainHeadBox>
 
-            <Artist>
-              {/* <MainHeadDateText></MainHeadDateText> */}
-              ARTIST
-            </Artist>
+            <Artist>ARTIST</Artist>
           </ArtistContainer>
           <PointBox>
             <MainHeadText>MY 포인트</MainHeadText>
