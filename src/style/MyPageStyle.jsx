@@ -5,7 +5,7 @@ export const MyPageContainer = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   opacity: 1;
 
   background: #fff;
@@ -550,6 +550,7 @@ export const CardContainer = styled.div`
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   padding: 20px;
+  margin: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
@@ -574,10 +575,9 @@ export const CardButton = styled.button`
 export const ChatingContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 1820px;
-  height: 478px;
-  justify-content: space-between;
-  align-content: space-between;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
 `;
 // 채팅방 생성 모달
 export const Container = styled.div`
