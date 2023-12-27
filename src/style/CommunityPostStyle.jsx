@@ -9,7 +9,6 @@ export const PostContainer = styled.div`
   flex: 1;
 `;
 export const PostSection = styled.div`
-  height: 1494.03px;
   align-self: stretch;
 `;
 export const Heading = styled.div`

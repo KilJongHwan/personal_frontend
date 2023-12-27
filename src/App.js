@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/success" element={<SuccessPage />} />
           {/* 중첩 라우터로 커뮤니티 페이지안에 라우트를 연결해서 페이지안 컴포넌트만 변경 */}
-          <Route path="/community/*" element={<CommunityPage />} />
+          <Route path="/communitypage/*" element={<CommunityPage />} />
           <Route path="/" element={<MyPage />} />
           <Route path="/stream" element={<StreamPlayer />} />
           <Route path="/otherpage/:email" element={<OtherPage />} />

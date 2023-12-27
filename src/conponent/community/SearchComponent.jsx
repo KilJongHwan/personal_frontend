@@ -19,7 +19,7 @@ const SearchComponent = () => {
 
     // navigate를 사용하여 결과 페이지로 이동. 두번째 파라미터로 상태를 전달.
     console.log(result.data);
-    navigate(`/community/search/${keyword}`, {
+    navigate(`/communitypage/search/${keyword}`, {
       state: { result: result.data },
     });
   };

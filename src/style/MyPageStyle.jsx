@@ -21,8 +21,8 @@ export const MainHead = styled.div`
 `;
 export const MainProfile = styled.div`
   position: relative;
-  width: 20em;
-  height: 20em;
+  width: 27em;
+  height: 27em;
   flex-shrink: 0;
   border-radius: 20em;
   border: 50px solid #fff;
@@ -408,13 +408,11 @@ export const PerformanceText4 = styled.p`
   line-height: normal;
   margin: 0;
   padding: 0;
-  padding-bottom: 20px;
+  margin-bottom: 10px;
 `;
 export const ButtonBox = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0;
-  padding: 0;
 `;
 export const PerformanceButton = styled.button`
   width: 96.759px;
