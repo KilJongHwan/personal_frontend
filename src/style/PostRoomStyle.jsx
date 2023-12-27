@@ -132,6 +132,11 @@ export const CommentContent = styled.div`
     margin-left: 20px;
   }
 `;
+export const CommentNickname = styled.a`
+  color: #000000; /* 검은색 */
+  text-decoration: none; /* 밑줄 없애기 */
+  font-weight: bold; /* 진하게 */
+`;
 
 export const CommentHeader = styled.div`
   display: flex;

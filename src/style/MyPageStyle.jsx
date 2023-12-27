@@ -230,6 +230,7 @@ export const RegButton = styled.button`
 `;
 export const ItemList = styled.div`
   display: flex;
+  overflow: auto;
   width: 100%;
   height: 20em;
   flex-direction: row;
@@ -242,7 +243,8 @@ export const ItemSlider = styled.div`
 `;
 export const ItemSlider2 = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 85vh;
+  padding: 1.5em;
 `;
 export const Picture = styled.div`
   width: 171px;
@@ -333,7 +335,7 @@ export const PerformanceBox = styled.div`
   padding-top: 20px;
   padding-bottom: 20px;
   width: 406px;
-  height: 678px;
+  height: 700px;
   flex-shrink: 0;
   border-radius: 30px;
   opacity: 1;

@@ -26,6 +26,7 @@ import {
   PostNickName,
   CommentBox,
   ButtonText,
+  CommentNickname,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -257,7 +258,7 @@ const Post = () => {
           .map((comment) => (
             <CommentBox key={comment.commentId}>
               <CommentContent>
-                <a
+                <CommentNickname
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
@@ -267,7 +268,7 @@ const Post = () => {
                   {comment.email
                     ? comment.nickName
                     : `${comment.nickName}(${getPartialIp(comment.ipAddress)})`}
-                </a>
+                </CommentNickname>
 
                 <>{Common.formatDate(comment.regDate)}</>
                 <HeadText
@@ -332,7 +333,7 @@ const Post = () => {
               {comment.childComments &&
                 comment.childComments.map((childComment) => (
                   <CommentContent style={{ marginLeft: "20px" }}>
-                    <a
+                    <CommentNickname
                       href="#"
                       onClick={(e) => {
                         e.preventDefault();
@@ -344,7 +345,7 @@ const Post = () => {
                         : `${comment.nickName}(${getPartialIp(
                             comment.ipAddress
                           )})`}
-                    </a>
+                    </CommentNickname>
                     <>{Common.formatDate(childComment.regDate)}</>
                     <HeadText
                       onClick={() =>
