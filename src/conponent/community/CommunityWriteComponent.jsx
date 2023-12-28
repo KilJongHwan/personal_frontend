@@ -13,7 +13,7 @@ import {
   WriteHeadingText,
   WriteSection,
 } from "../../style/CommunityPostWriteStyle";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import AxiosApi from "../../axios/CommunityAxios";
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +26,9 @@ const WriteComponent = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
+  const [mediaPath, setMediaPath] = useState([]);
 
+  const quillRef = useRef(null);
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -38,14 +40,47 @@ const WriteComponent = () => {
       }
     };
 
-    getCategories();
-  }, []);
+    const quillInstance = quillRef.current.getEditor();
+    const changeHandler = function () {
+      // 편집기 내용에서 이미지와 동영상 태그 찾기
+      const Delta = quillInstance.getContents();
+      const mediaTags = [];
+      Delta.ops.forEach((op) => {
+        if (op.insert && op.insert.image) {
+          mediaTags.push(op.insert.image);
+        }
+        if (op.insert && op.insert.video) {
+          mediaTags.push(op.insert.video);
+        }
+      });
+      // mediaPath 상태 업데이트
 
+      setMediaPath(mediaTags);
+
+      // content에서 이미지와 동영상 태그 제거하고 상태 업데이트
+      const textOnly = quillInstance.getText();
+      setContent(textOnly);
+      console.log(textOnly);
+    };
+
+    quillInstance.on("text-change", changeHandler);
+
+    getCategories();
+
+    return () => {
+      // Cleanup function
+      quillInstance.off("text-change", changeHandler);
+    };
+  }, []);
+  useEffect(() => {
+    console.log(mediaPath);
+  }, [mediaPath]);
   const PostRegister = async () => {
     const communityDTO = {
       email: email,
       title: title,
       content: content,
+      mediaPaths: mediaPath,
       categoryId: selectedCategory,
       nickName: nickName,
       password: password,
@@ -117,7 +152,8 @@ const WriteComponent = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <StyledReactQuill
-            value={content}
+            ref={quillRef}
+            defaultValue={content}
             onChange={(value) => setContent(value)}
             modules={modules}
           />

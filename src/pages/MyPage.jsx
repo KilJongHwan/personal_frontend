@@ -23,6 +23,7 @@ import {
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 import ModalComponent from "../utils/ModalComponent";
 import PayComponent from "../conponent/Mypage/PayComponent.tsx";
+import Category from "../conponent/Category.jsx";
 
 const MyPage = () => {
   const [email, setEmail] = useState("asd123@naver.com");
