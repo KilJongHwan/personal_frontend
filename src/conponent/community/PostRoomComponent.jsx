@@ -241,7 +241,9 @@ const Post = () => {
       </PostHeader>
       <PostBody>
         {mediaHtml}
-        <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
+        {post.content && (
+          <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
+        )}
       </PostBody>
       <PostVotes>
         <PostUpvote onClick={() => vote(true)}>
