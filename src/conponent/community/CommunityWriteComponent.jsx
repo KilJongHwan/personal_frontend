@@ -26,8 +26,7 @@ const WriteComponent = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
-  const [mediaPath, setMediaPath] = useState([]);
-  const imagePositions = [];
+  const [text, setText] = useState([]);
 
   const quillRef = useRef(null);
   useEffect(() => {
@@ -57,9 +56,8 @@ const WriteComponent = () => {
       });
       // mediaPath 상태 업데이트
 
-      setMediaPath(mediaTags);
+      setText(mediaTags);
 
-      console.log("Image Positions:", imagePositions);
       // content에서 이미지와 동영상 태그 제거하고 상태 업데이트
       const textOnly = quillInstance.getText();
       setContent(textOnly);
@@ -75,15 +73,12 @@ const WriteComponent = () => {
       quillInstance.off("text-change", changeHandler);
     };
   }, []);
-  useEffect(() => {
-    console.log(mediaPath);
-  }, [mediaPath]);
   const PostRegister = async () => {
     const communityDTO = {
       email: email,
       title: title,
       content: content,
-      mediaPaths: mediaPath,
+      text: text,
       categoryId: selectedCategory,
       nickName: nickName,
       password: password,

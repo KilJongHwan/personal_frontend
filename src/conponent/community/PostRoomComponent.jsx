@@ -56,13 +56,6 @@ const Post = () => {
 
   const { sendMessage } = useWebSocket(Common.SOCKET_URL, email);
 
-  // mediaPaths를 배열로 변환
-  const mediaHtml =
-    post.mediaPaths &&
-    post.mediaPaths.map((mediaData, index) => (
-      <img key={index} src={mediaData} alt={`media-${index}`} />
-    ));
-
   const getPartialIp = (ipAddress) => {
     if (!ipAddress) return "";
     const segments = ipAddress.split(".");
@@ -240,10 +233,7 @@ const Post = () => {
         </WriterInfo>
       </PostHeader>
       <PostBody>
-        {mediaHtml}
-        {post.content && (
-          <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
-        )}
+        <PostContent dangerouslySetInnerHTML={{ __html: post.content }} />
       </PostBody>
       <PostVotes>
         <PostUpvote onClick={() => vote(true)}>
