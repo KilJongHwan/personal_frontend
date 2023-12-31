@@ -76,12 +76,7 @@ export const Aside = styled.div`
   flex-shrink: 0;
   align-self: stretch;
   @media (max-width: 768px) {
-    flex: 1;
-    max-width: none;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1;
+    display: none;
   }
 `;
 
@@ -92,6 +87,8 @@ export const CommunityDashboard = styled.div`
   border-radius: 10.8px;
   border: 1px solid #e6e6e6;
   opacity: 1;
+  @media (max-width: 768px) {
+  }
 `;
 export const TextCenter = styled.div`
   display: flex;
@@ -99,6 +96,8 @@ export const TextCenter = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+  @media (max-width: 768px) {
+  }
 `;
 export const TextFrame = styled.div`
   display: flex;
@@ -107,6 +106,8 @@ export const TextFrame = styled.div`
   flex-direction: column;
   align-items: center;
   align-self: stretch;
+  @media (max-width: 768px) {
+  }
 `;
 export const TextLog = styled.p`
   display: flex;
@@ -123,12 +124,16 @@ export const TextLog = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 16.2px;
+  @media (max-width: 768px) {
+  }
 `;
 export const DashboardButtonFrame = styled.div`
   display: flex;
   width: 218.81px;
   flex-direction: column;
   align-items: flex-start;
+  @media (max-width: 768px) {
+  }
 `;
 export const DashboardButton = styled.button`
   width: 100%;
