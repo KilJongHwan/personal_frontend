@@ -27,6 +27,7 @@ import {
   CommentBox,
   ButtonText,
   CommentNickname,
+  InfoContainer,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -300,7 +301,7 @@ const Post = () => {
                   <FormContainer>
                     {!email && (
                       <InformationContainer>
-                        <FormContainer>
+                        <InfoContainer>
                           <SmallInput
                             type="text"
                             value={replyNickName[comment.commentId] || ""}
@@ -325,7 +326,7 @@ const Post = () => {
                             }
                             placeholder="비밀번호를 입력하세요"
                           />
-                        </FormContainer>
+                        </InfoContainer>
                       </InformationContainer>
                     )}
                     <LargeInput
@@ -393,7 +394,7 @@ const Post = () => {
             {!email && (
               <>
                 <InformationContainer>
-                  <FormContainer>
+                  <InfoContainer>
                     <SmallInput
                       type="text"
                       value={nickName}
@@ -406,7 +407,7 @@ const Post = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="비밀번호를 입력하세요"
                     />
-                  </FormContainer>
+                  </InfoContainer>
                 </InformationContainer>
               </>
             )}

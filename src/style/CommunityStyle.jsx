@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import img from "../images/ProFileimage.png";
 
 export const Page = styled.div`
   display: flex;
@@ -183,8 +182,8 @@ export const CommunityProfileImg = styled.div`
   position: absolute;
   opacity: 1;
   background-size: cover;
-  background: url(${img}), lightgray 40.482px 0px / 62.998% 100% no-repeat;
-
+  background: ${(props) =>
+    `url(${props.img}), lightgray 40.482px 0px / 62.998% 100% no-repeat`};
   box-shadow: 0px 8px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 export const CommunityMenuList = styled.div`
@@ -203,7 +202,7 @@ export const CommunityMenuItem = styled.div`
   width: 264px;
   flex-direction: column;
   align-items: flex-start;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
 `;
@@ -214,8 +213,16 @@ export const CommunityLink = styled.div`
   align-items: center;
   justify-content: center;
   align-self: stretch;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 100%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 9999px;
+    border: 1px solid #000;
+
+    opacity: 1;
+
+    background: rgba(102, 185, 255, 0.25);
   }
 `;
 export const CommunitySVG = styled.div`
@@ -223,7 +230,7 @@ export const CommunitySVG = styled.div`
   align-items: center;
   gap: 10px;
   align-self: stretch;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
 `;
@@ -237,6 +244,7 @@ export const CommunityMenuText = styled.a`
   line-height: 21.6px;
   @media (max-width: 1024px) {
     width: 100%;
+    text-align: center;
   }
 `;
 export const CommunityMenuButton = styled.div`
@@ -260,6 +268,8 @@ export const CommunityItem = styled.div`
 
   @media (max-width: 1024px) {
     width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 `;
 export const CommunityItemList = styled.div`

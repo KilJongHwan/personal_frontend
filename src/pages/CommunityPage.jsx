@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link as RouterLink,
+} from "react-router-dom";
 
 import { ReactComponent as SvgS } from "../images/music-svgrepo-com.svg";
 import { ReactComponent as Menu } from "../images/Menu.svg";
@@ -49,15 +54,22 @@ import CommunityComponent from "../conponent/community/CommunityComponent";
 import CommunitySearchComponent from "../conponent/community/CommunitySearchComponent";
 import Post from "../conponent/community/PostRoomComponent";
 import WriteComponent from "../conponent/community/CommunityWriteComponent";
+import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("asd123@naver.com");
+  const [userInfo, setUserInfo] = useState(null);
   const { message: wsMessage } = useWebSocket(Common.SOCKET_URL, email);
   const ListOpen = () => {
     setIsList(!isList);
   };
+  const Link = styled(RouterLink)`
+    display: block;
+    width: 100%;
+  `;
+
   const RotatedDown = styled(Down)`
     transition: transform 0.3s ease-in-out;
     transform: ${(props) =>
@@ -73,6 +85,12 @@ const CommunityPage = () => {
         console.log(error);
       }
     };
+    const getUserInfo = async () => {
+      const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
+      console.log(userInfoResponse.data);
+      setUserInfo(userInfoResponse.data);
+    };
+    getUserInfo();
     getCategories();
   }, []);
 
@@ -95,7 +113,7 @@ const CommunityPage = () => {
                   <CommunityProfileFrame>
                     <CommunityProfilePart></CommunityProfilePart>
                   </CommunityProfileFrame>
-                  <CommunityProfileImg />
+                  <CommunityProfileImg img={userInfo} />
                 </CommunityProfile>
                 <TextCenter>
                   <TextFrame>
@@ -103,7 +121,7 @@ const CommunityPage = () => {
                   </TextFrame>
                 </TextCenter>
                 <DashboardButtonFrame>
-                  <DashboardButton>로그인 / 회원가입</DashboardButton>
+                  <DashboardButton>로그인</DashboardButton>
                 </DashboardButtonFrame>
               </CommunityDashboard>
               <CommunityMenuList>

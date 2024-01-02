@@ -197,18 +197,24 @@ export const SmallInput = styled.input`
   ${InputCommonStyle}
   width: 100%;
   height: 30px;
-  border: 1px solid #1e90ff;
+  border: 1px solid #0d47a1;
   border-radius: 5px;
-  background-color: #e6f2ff;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 `;
 
 export const LargeInput = styled.textarea`
   ${InputCommonStyle}
+  padding: 10px;
   width: 100%;
   height: 100px;
-  border: 1px solid #1e90ff;
+  border: 1px solid #0d47a1;
   border-radius: 5px;
-  background-color: #e6f2ff;
+  background: rgba(255, 255, 255, 0.9);
+
   @media (max-width: 1024px) {
     height: 200px;
   }
@@ -217,10 +223,9 @@ export const LargeInput = styled.textarea`
 export const CommentButton = styled.button`
   ${InputCommonStyle}
   width: 300px;
-  border: 1px solid #1e90ff;
+  border: 1px solid #0d47a1;
   border-radius: 5px;
-  background-color: #e6f2ff;
-  box-shadow: 0px 0px 10px rgba(70, 130, 180, 0.3);
+  background-color: #e3f2fd;
   &:after {
     clear: both;
     display: block;
@@ -237,23 +242,33 @@ export const FormContainer = styled.div`
   display: flex;
   width: 100%;
   gap: 1em;
-  border: 1px solid #1e90ff;
-  border-radius: 5px;
-  background-color: #e6f2ff;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(70, 130, 180, 0.3);
+  padding: 0;
+  background-color: rgba(238, 238, 238, 0.1);
+  color: #1e90ff;
 
   @media (max-width: 1024px) {
     flex-direction: column;
   }
 `;
+export const InfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0.6em;
+  background-color: rgba(238, 238, 238, 0.1);
+  color: #1e90ff;
 
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
+`;
 export const CommentForm = styled.form`
   display: block;
   padding: 12px;
   background: #fafafa;
-  border-top: 2px solid #3f82e7;
-  border-bottom: 2px solid #3f82e7;
+  border-top: 2px solid #90caf9; // 색상 변경
+  border-bottom: 2px solid #90caf9; // 색상 변경
   font-size: 12px;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "맑은 고딕", arial, Dotum, 돋움, sans-serif;
@@ -270,7 +285,7 @@ export const Dropdown = styled.select`
   font-size: 16px;
   &:focus {
     outline: none;
-    border-color: #4a90e2;
+    border-color: #90caf9;
   }
 `;
 

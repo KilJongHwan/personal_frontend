@@ -19,7 +19,7 @@ export const Heading = styled.div`
   padding-right: 614.04px;
   flex-direction: column;
   align-items: flex-start;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 100%;
     padding: 0;
   }
@@ -49,7 +49,7 @@ export const Block = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: -15.61px;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     max-width: 500px;
   }
 `;
@@ -61,7 +61,7 @@ export const ButtonFlex = styled.div`
   gap: 0px 7px;
   align-self: stretch;
   flex-wrap: wrap;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 100%;
   }
 `;
@@ -108,8 +108,9 @@ export const SwiperWrapper = styled.div`
   height: 300px;
   padding-bottom: 0.1px;
   column-count: 2;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: flex;
+    width: 100%;
     height: 100%;
     flex-direction: column;
     justify-content: center;
@@ -120,6 +121,9 @@ export const SwiperSlide = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const RoundedMd = styled.div`
   display: flex;
@@ -128,6 +132,9 @@ export const RoundedMd = styled.div`
   gap: 28.8px;
   align-self: stretch;
   border-radius: 5.4px;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const PostRankList = styled.div`
   display: flex;
@@ -136,6 +143,9 @@ export const PostRankList = styled.div`
   align-items: flex-start;
   flex: 1;
   align-self: stretch;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const PostRankListItem = styled.div`
   display: flex;
@@ -147,6 +157,11 @@ export const PostRankListItem = styled.div`
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 10px;
+  @media (max-width: 1024px) {
+    width: 100%;
+    align-items: center;
+    margin-bottom: 0;
+  }
 `;
 export const PostRankLink = styled.div`
   display: flex;
