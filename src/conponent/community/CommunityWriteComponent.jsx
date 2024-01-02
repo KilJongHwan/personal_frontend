@@ -71,6 +71,15 @@ const WriteComponent = () => {
     };
   }, []);
   const PostRegister = async () => {
+    if (!title.trim() || !content.trim()) {
+      alert("제목과 내용을 입력하세요.");
+      return;
+    }
+
+    if (!email && (!nickName.trim() || !password.trim())) {
+      alert("닉네임과 비밀번호를 입력하세요.");
+      return;
+    }
     const communityDTO = {
       email: email,
       title: title,

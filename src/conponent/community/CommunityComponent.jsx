@@ -230,7 +230,7 @@ const CommunityComponent = () => {
                     onClick={() => pageClick(pageNum - 1)}
                     active={currentPage === pageNum - 1}
                   >
-                    <Page selected={currentPage === pageNum - 1} href="#">
+                    <Page selected={currentPage === pageNum - 1}>
                       {pageNum}
                     </Page>
                   </MiddlePage>

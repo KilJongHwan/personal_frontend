@@ -107,6 +107,15 @@ const Post = () => {
   };
   const commentWrite = async () => {
     try {
+      if (!newComment.trim()) {
+        // Check if newComment is empty or contains only whitespace
+        alert("댓글 내용을 입력하세요.");
+        return;
+      }
+      if (!nickName.trim() || !password.trim()) {
+        alert("닉네임과 비밀번호를 모두 입력하세요.");
+        return;
+      }
       const response = await CommunityAxiosApi.commentWrite(
         email,
         nickName,
@@ -138,6 +147,15 @@ const Post = () => {
   // 대댓글 작성 함수
   const replyWrite = async (parentCommentId) => {
     try {
+      if (!newReply.trim()) {
+        // Check if newReply is empty or contains only whitespace
+        alert("대댓글 내용을 입력하세요.");
+        return;
+      }
+      if (!replyAuthorName.trim() || !replyAuthorPassword.trim()) {
+        alert("답글 작성자 닉네임과 비밀번호를 모두 입력하세요.");
+        return;
+      }
       const replyAuthorName = replyNickName[parentCommentId];
       const replyAuthorPassword = replyPassword[parentCommentId];
 
@@ -260,7 +278,6 @@ const Post = () => {
             <CommentBox key={comment.commentId}>
               <CommentContent>
                 <CommentNickname
-                  href="#"
                   onClick={(e) => {
                     e.preventDefault();
                     nicknameClick(comment);
@@ -335,7 +352,6 @@ const Post = () => {
                 comment.childComments.map((childComment) => (
                   <CommentContent style={{ marginLeft: "20px" }}>
                     <CommentNickname
-                      href="#"
                       onClick={(e) => {
                         e.preventDefault();
                         nicknameClick(comment);

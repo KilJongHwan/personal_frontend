@@ -38,6 +38,7 @@ import {
   CommunityItem,
   CommunityItemList,
   MessageBox,
+  SVGX,
 } from "../style/CommunityStyle";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -110,7 +111,9 @@ const CommunityPage = () => {
                   <Link to="/communitypage">
                     <CommunityLink>
                       <CommunitySVG>
-                        <Menu />
+                        <SVGX>
+                          <Menu />
+                        </SVGX>
                         <CommunityItem>
                           <CommunityMenuText>전체 게시판</CommunityMenuText>
                         </CommunityItem>
@@ -120,7 +123,9 @@ const CommunityPage = () => {
 
                   <CommunityLink>
                     <CommunityMenuButton>
-                      <Talk />
+                      <SVGX>
+                        <Talk />
+                      </SVGX>
                       <CommunityItem onClick={ListOpen}>
                         <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
                       </CommunityItem>

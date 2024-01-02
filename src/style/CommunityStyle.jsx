@@ -6,6 +6,8 @@ export const Page = styled.div`
   height: auto;
   flex-direction: column;
   align-items: flex-start;
+  @media (max-width: 1024px) {
+  }
 `;
 export const Hidden = styled.div`
   display: flex;
@@ -40,6 +42,11 @@ export const Title = styled.a`
   font-style: normal;
   font-weight: 700;
   /* line-height: 48px; */
+  @media (max-width: 1024px) {
+    width: 501px;
+    height: 83px;
+    flex-shrink: 0;
+  }
 `;
 export const Note = styled.div`
   display: flex;
@@ -64,6 +71,10 @@ export const CommunityList = styled.div`
   max-width: 1600px;
   padding: 57.6px 183.99px 57.6px 0px;
   align-items: flex-start;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding: 0;
+  }
 `;
 export const Aside = styled.div`
   display: flex;
@@ -75,8 +86,9 @@ export const Aside = styled.div`
   gap: 14.39px;
   flex-shrink: 0;
   align-self: stretch;
-  @media (max-width: 768px) {
-    display: none;
+  @media (max-width: 1024px) {
+    max-width: 100%;
+    padding-bottom: 0;
   }
 `;
 
@@ -87,8 +99,25 @@ export const CommunityDashboard = styled.div`
   border-radius: 10.8px;
   border: 1px solid #e6e6e6;
   opacity: 1;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
+    display: none;
   }
+`;
+export const DashboardButtonFrame = styled.div`
+  display: flex;
+  width: 218.81px;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+export const DashboardButton = styled.button`
+  width: 100%;
+  border-radius: 7.2px;
+  border-top: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
+  border-left: 1px solid #d8d8d8;
+  opacity: 1;
+  background: linear-gradient(180deg, #66b9ff 32.2%, #5de2cc 99.85%);
 `;
 export const TextCenter = styled.div`
   display: flex;
@@ -96,8 +125,6 @@ export const TextCenter = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  @media (max-width: 768px) {
-  }
 `;
 export const TextFrame = styled.div`
   display: flex;
@@ -106,8 +133,6 @@ export const TextFrame = styled.div`
   flex-direction: column;
   align-items: center;
   align-self: stretch;
-  @media (max-width: 768px) {
-  }
 `;
 export const TextLog = styled.p`
   display: flex;
@@ -124,26 +149,6 @@ export const TextLog = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 16.2px;
-  @media (max-width: 768px) {
-  }
-`;
-export const DashboardButtonFrame = styled.div`
-  display: flex;
-  width: 218.81px;
-  flex-direction: column;
-  align-items: flex-start;
-  @media (max-width: 768px) {
-  }
-`;
-export const DashboardButton = styled.button`
-  width: 100%;
-  border-radius: 7.2px;
-  border-top: 1px solid #d8d8d8;
-  border-right: 1px solid #d8d8d8;
-  border-bottom: 1px solid #d8d8d8;
-  border-left: 1px solid #d8d8d8;
-  opacity: 1;
-  background: linear-gradient(180deg, #66b9ff 32.2%, #5de2cc 99.85%);
 `;
 export const CommunityProfile = styled.span`
   display: flex;
@@ -188,12 +193,19 @@ export const CommunityMenuList = styled.div`
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
+  @media (max-width: 1024px) {
+    padding-bottom: 0;
+    width: 100%;
+  }
 `;
 export const CommunityMenuItem = styled.div`
   display: flex;
   width: 264px;
   flex-direction: column;
   align-items: flex-start;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 export const CommunityLink = styled.div`
   display: flex;
@@ -202,12 +214,18 @@ export const CommunityLink = styled.div`
   align-items: center;
   justify-content: center;
   align-self: stretch;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 export const CommunitySVG = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
   align-self: stretch;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 export const CommunityMenuText = styled.a`
   width: 300px;
@@ -217,6 +235,9 @@ export const CommunityMenuText = styled.a`
   font-style: normal;
   font-weight: 700;
   line-height: 21.6px;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const CommunityMenuButton = styled.div`
   display: flex;
@@ -224,7 +245,9 @@ export const CommunityMenuButton = styled.div`
   align-items: flex-start;
   align-self: stretch;
 
-  border-radius: 10.8px;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const CommunityItem = styled.div`
   display: flex;
@@ -233,14 +256,20 @@ export const CommunityItem = styled.div`
   width: 200px;
   align-items: flex-start;
   align-self: stretch;
+  cursor: pointer;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 export const CommunityItemList = styled.div`
   display: flex;
-  /* margin-left: 2em; */
   width: 100%;
   flex-direction: column;
   align-items: center;
-  /* align-self: stretch; */
+  @media (max-width: 1024px) {
+    flex-direction: row;
+  }
 `;
 export const CommunitySection = styled.div`
   display: flex;
@@ -270,4 +299,9 @@ export const MessageBox = styled.div`
   bottom: 0;
   width: 50%;
   animation: ${fadeInOut} 4s ease-in-out forwards;
+`;
+export const SVGX = styled.div`
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
