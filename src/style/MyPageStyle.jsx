@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import profile from "../images/ProFileimage.png";
 
 export const MyPageContainer = styled.div`
   margin: 0;
@@ -9,15 +8,25 @@ export const MyPageContainer = styled.div`
   opacity: 1;
 
   background: #fff;
+  @media (max-width: 1024px) {
+    position: relative;
+  }
 `;
 export const MainHead = styled.div`
-  position: relative;
-
   display: flex;
+  position: relative;
   height: 24em;
   flex-shrink: 0;
   background: linear-gradient(98deg, #008bff 3.66%, #61e6ca 97.99%);
   overflow: hidden;
+  @media (max-width: 1024px) {
+    background: white;
+    width: 100%;
+    height: 100%;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 export const MainProfile = styled.div`
   position: relative;
@@ -25,12 +34,42 @@ export const MainProfile = styled.div`
   height: 27em;
   flex-shrink: 0;
   border-radius: 20em;
-  border: 50px solid #fff;
+  border: 20px solid #fff;
   opacity: 1;
-  background: url(${profile}) no-repeat center / contain, lightgray;
+  background: url(${(props) => props.profile}) no-repeat center / cover,
+    lightgray;
   margin-top: 1.5em;
   margin-left: 5em;
+  img {
+    display: none;
+  }
+  @media (max-width: 1024px) {
+    margin: 0;
+    width: 20em;
+    height: 20em;
+    border: 8px solid transparent;
+    border-radius: 148px;
+    background-image: linear-gradient(#444444, #444444),
+      linear-gradient(to right, #fbfcb9be, #ffcdf3aa, #65d3ffaa);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    img {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 148px;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
+
 export const MainHeadBox = styled.div`
   display: flex;
   justify-content: center;
@@ -39,6 +78,11 @@ export const MainHeadBox = styled.div`
   flex: 1;
   flex-direction: row;
   margin: auto;
+  @media (max-width: 1024px) {
+    margin: 0;
+    flex-direction: column;
+    position: none;
+  }
 `;
 export const MainHeadText = styled.div`
   display: flex;
@@ -54,6 +98,10 @@ export const MainHeadText = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  @media (max-width: 1024px) {
+    color: black;
+    font-weight: 0;
+  }
 `;
 export const MainHeadDateText = styled.div`
   display: flex;
@@ -75,6 +123,10 @@ export const ArtistContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 500px;
+  @media (max-width: 1024px) {
+    width: 100%;
+    flex-direction: row;
+  }
 `;
 export const Artist = styled.div`
   display: flex;
@@ -89,6 +141,9 @@ export const Artist = styled.div`
   font-style: normal;
   font-weight: 100;
   line-height: 1;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const InterBox = styled.div`
@@ -107,6 +162,10 @@ export const InterBox = styled.div`
   flex: 1;
 
   background: #fff;
+  @media (max-width: 1024px) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 export const InterBoxText = styled.div`
   display: flex;
@@ -118,12 +177,17 @@ export const InterBoxText = styled.div`
   flex: 1;
   flex-shrink: 0;
   color: #000;
+  padding: 10px;
 
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  @media (max-width: 1024px) {
+    width: 100%;
+    flex-direction: row;
+  }
 `;
 export const PointBox = styled.div`
   position: absolute;
@@ -141,12 +205,39 @@ export const PointBox = styled.div`
   font-weight: 700;
   line-height: normal;
   opacity: 1;
+  @media (max-width: 1024px) {
+    position: relative;
+    right: 0;
+    color: rgb(0, 0, 0);
+    width: 85%;
+    flex-direction: row;
+    border-radius: 50px;
+    opacity: 1;
+    background: linear-gradient(91deg, #008bff 1.65%, #61e6ca 110.08%);
+    display: flex;
+
+    justify-content: center;
+    flex-shrink: 0;
+
+    color: #fff;
+
+    font-family: Noto Sans KR;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
 `;
 export const MoveButtonBox = styled.div`
   display: flex;
   width: 250px;
   justify-content: space-between;
   padding: 10px;
+  @media (max-width: 1024px) {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 `;
 export const MoveButton = styled.button`
   width: 120px;
@@ -166,6 +257,23 @@ export const MoveButton = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  .svg-wrapper {
+    display: none;
+  }
+  @media (max-width: 1024px) {
+    display: flex;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    color: transparent;
+
+    width: 100%;
+
+    /* border: none; */
+    .svg-wrapper {
+      display: block;
+    }
+  }
 `;
 export const ContentContainer = styled.div`
   display: flex;
@@ -188,6 +296,9 @@ export const NameText = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const SubTitle = styled.div`

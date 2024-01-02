@@ -28,6 +28,7 @@ import {
   ButtonText,
   CommentNickname,
   InfoContainer,
+  CommentPageButton,
 } from "../../style/PostRoomStyle";
 import CommunityAxiosApi from "../../axios/CommunityAxios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -380,14 +381,20 @@ const Post = () => {
             </CommentBox>
           ))}
         {currentCommentPage > 0 && (
-          <button onClick={() => setCurrentCommentPage(currentCommentPage - 1)}>
-            이전
-          </button>
+          <CommentPageButton
+            onClick={() => setCurrentCommentPage(currentCommentPage - 1)}
+          >
+            <div className="front">이전</div>
+            <div className="back">Prev</div>
+          </CommentPageButton>
         )}
         {currentCommentPage + 1 < totalCommentPages && (
-          <button onClick={() => setCurrentCommentPage(currentCommentPage + 1)}>
-            다음
-          </button>
+          <CommentPageButton
+            onClick={() => setCurrentCommentPage(currentCommentPage + 1)}
+          >
+            <div className="front">다음</div>
+            <div className="back">Next</div>
+          </CommentPageButton>
         )}
         <CommentForm>
           <FormContainer>

@@ -105,13 +105,12 @@ export const Swiper = styled.div`
 `;
 export const SwiperWrapper = styled.div`
   display: block;
-  height: 300px;
+  height: 100%;
   padding-bottom: 0.1px;
   column-count: 2;
   @media (max-width: 1024px) {
     display: flex;
     width: 100%;
-    height: 100%;
     flex-direction: column;
     justify-content: center;
   }

@@ -50,16 +50,16 @@ import styled from "styled-components";
 import AxiosApi from "../axios/CommunityAxios";
 import Common from "../utils/Common";
 import useWebSocket from "../context/useWebsocket";
-import CommunityComponent from "../conponent/community/CommunityComponent";
-import CommunitySearchComponent from "../conponent/community/CommunitySearchComponent";
-import Post from "../conponent/community/PostRoomComponent";
-import WriteComponent from "../conponent/community/CommunityWriteComponent";
+import CommunityComponent from "../component/community/CommunityComponent";
+import CommunitySearchComponent from "../component/community/CommunitySearchComponent";
+import Post from "../component/community/PostRoomComponent";
+import WriteComponent from "../component/community/CommunityWriteComponent";
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [email, setEmail] = useState("asd123@naver.com");
+  const [email, setEmail] = useState("");
   const [userInfo, setUserInfo] = useState(null);
   const { message: wsMessage } = useWebSocket(Common.SOCKET_URL, email);
   const ListOpen = () => {

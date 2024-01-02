@@ -5,8 +5,6 @@ export const Page = styled.div`
   height: auto;
   flex-direction: column;
   align-items: flex-start;
-  @media (max-width: 1024px) {
-  }
 `;
 export const Hidden = styled.div`
   display: flex;
@@ -40,7 +38,6 @@ export const Title = styled.a`
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
-  /* line-height: 48px; */
   @media (max-width: 1024px) {
     width: 501px;
     height: 83px;
@@ -67,7 +64,6 @@ export const Note = styled.div`
 export const CommunityList = styled.div`
   display: flex;
   width: 100%;
-  max-width: 1600px;
   padding: 57.6px 183.99px 57.6px 0px;
   align-items: flex-start;
   @media (max-width: 1024px) {
@@ -295,19 +291,19 @@ const fadeInOut = keyframes`
   100% { opacity: 0; }
 `;
 export const MessageBox = styled.div`
-  height: 6%;
   border: 1px solid black;
   padding: 10px;
   margin: 10px 0;
+  height: 10%;
+  width: 50%;
   display: flex;
-  position: relative;
+  position: fixed;
   justify-content: center;
   align-items: center;
   background-color: #f8f8f8;
-  z-index: 100;
-  position: fixed;
+  z-index: 1000;
   bottom: 0;
-  width: 50%;
+  left: 25%;
   animation: ${fadeInOut} 4s ease-in-out forwards;
 `;
 export const SVGX = styled.div`

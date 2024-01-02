@@ -1,6 +1,6 @@
 import "./App.css";
-import { SuccessPage } from "./conponent/Mypage/SuccessComponent";
-import StreamPlayer from "./conponent/stream/StreamPlayer";
+import { SuccessPage } from "./component/Mypage/SuccessComponent";
+import StreamPlayer from "./component/stream/StreamPlayer";
 
 import CommunityPage from "./pages/CommunityPage";
 import MyPage from "./pages/MyPage";

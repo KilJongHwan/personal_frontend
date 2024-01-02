@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import MypageComponent from "../conponent/Mypage/MypageComponent";
+import MypageComponent from "../component/Mypage/MypageComponent";
+import depositPath from "../images/Deposit_white.svg";
+import whitdrawPath from "../images/Whitdraw_white.svg";
 import { ReactComponent as Heart } from "../images/HeartBox.svg";
-import { ReactComponent as Subs } from "../images/SubscriberBox.svg";
 
 import {
   Artist,
@@ -22,8 +23,7 @@ import {
 } from "../style/MyPageStyle";
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 import ModalComponent from "../utils/ModalComponent";
-import PayComponent from "../conponent/Mypage/PayComponent.tsx";
-import Category from "../conponent/Category.jsx";
+import PayComponent from "../component/Mypage/PayComponent.tsx";
 
 const MyPage = () => {
   const [email, setEmail] = useState("asd123@naver.com");
@@ -82,7 +82,16 @@ const MyPage = () => {
     <>
       <MyPageContainer>
         <MainHead>
-          <MainProfile></MainProfile>
+          <MainProfile
+            profile={userMusic && userMusic[0].musicDTO.thumbnailImage}
+          >
+            {
+              <img
+                src={userMusic && userMusic[0].musicDTO.thumbnailImage}
+                alt="Profile"
+              />
+            }
+          </MainProfile>
           <ArtistContainer>
             <MainHeadBox>
               <MainHeadText>
@@ -110,7 +119,14 @@ const MyPage = () => {
               {userInfo && (
                 <>
                   <ModalComponent
-                    open={<MoveButton>충전하기</MoveButton>}
+                    open={
+                      <MoveButton>
+                        <div className="svg-wrapper">
+                          <img src={depositPath} alt="Deposit" />
+                        </div>
+                        충전하기
+                      </MoveButton>
+                    }
                     content={
                       <PayComponent
                         email={userInfo.userEmail}
@@ -125,7 +141,14 @@ const MyPage = () => {
                     close="닫기"
                   />
                   <ModalComponent
-                    open={<MoveButton>환전하기</MoveButton>}
+                    open={
+                      <MoveButton>
+                        <div className="svg-wrapper">
+                          <img src={whitdrawPath} alt="Whitdraw" />
+                        </div>
+                        환전하기
+                      </MoveButton>
+                    }
                     content={
                       <ExchangeContainer>
                         <CashInput
