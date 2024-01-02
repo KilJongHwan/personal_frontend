@@ -43,7 +43,7 @@ const Post = () => {
   const [sortType, setSortType] = useState("");
   const [newComment, setNewComment] = useState("");
   const [newReply, setNewReply] = useState("");
-  const [email, setEmail] = useState("asd123@naver.com");
+  const [email, setEmail] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const [replyNickName, setReplyNickName] = useState({});

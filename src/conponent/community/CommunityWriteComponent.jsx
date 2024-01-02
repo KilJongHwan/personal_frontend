@@ -20,13 +20,13 @@ import { useNavigate } from "react-router-dom";
 const WriteComponent = () => {
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const [content, setContent] = useState("");
   const [nickName, setNickName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
-  const [text, setText] = useState([]);
 
   const quillRef = useRef(null);
   useEffect(() => {
@@ -54,13 +54,10 @@ const WriteComponent = () => {
           mediaTags.push(op.insert.video);
         }
       });
-      // mediaPath 상태 업데이트
-
-      setText(mediaTags);
 
       // content에서 이미지와 동영상 태그 제거하고 상태 업데이트
       const textOnly = quillInstance.getText();
-      setContent(textOnly);
+      setText(textOnly);
       console.log(textOnly);
     };
 
