@@ -3,7 +3,23 @@ import moment from "moment";
 import "moment/locale/ko"; // 한글 로컬라이제이션
 moment.locale("ko"); // 한글 설정 적용
 
+export const CHORD8_DOMAIN = "";
+
 const Common = {
+  // accessToken
+  setAccessToken: (accessToken) => {
+    return window.localStorage.setItem("accessToken", accessToken);
+  },
+  getAccessToken: () => {
+    return window.localStorage.getItem("accessToken");
+  },
+  // refreshToken
+  setRefreshToken: (refreshToken) => {
+    return window.localStorage.setItem("refreshToken", refreshToken);
+  },
+  getRefreshToken: () => {
+    return window.localStorage.getItem("refreshToken");
+  },
   DOMAIN: "http://localhost:8111",
   SOCKET_URL: "ws://localhost:8111/ws/comment",
   SOCKET_CHAT_URL: "ws://localhost:8111/ws/chat",

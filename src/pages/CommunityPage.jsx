@@ -44,6 +44,7 @@ import {
   CommunityItemList,
   MessageBox,
   SVGX,
+  Fixed,
 } from "../style/CommunityStyle";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -108,69 +109,71 @@ const CommunityPage = () => {
           </Container>
           <CommunityList>
             <Aside>
-              <CommunityDashboard>
-                <CommunityProfile>
-                  <CommunityProfileFrame>
-                    <CommunityProfilePart></CommunityProfilePart>
-                  </CommunityProfileFrame>
-                  <CommunityProfileImg img={userInfo} />
-                </CommunityProfile>
-                <TextCenter>
-                  <TextFrame>
-                    <TextLog>로그인 후 더 편하게 이용해 보세요</TextLog>
-                  </TextFrame>
-                </TextCenter>
-                <DashboardButtonFrame>
-                  <DashboardButton>로그인</DashboardButton>
-                </DashboardButtonFrame>
-              </CommunityDashboard>
-              <CommunityMenuList>
-                <CommunityMenuItem>
-                  <Link to="/communitypage">
-                    <CommunityLink>
-                      <CommunitySVG>
-                        <SVGX>
-                          <Menu />
-                        </SVGX>
-                        <CommunityItem>
-                          <CommunityMenuText>전체 게시판</CommunityMenuText>
-                        </CommunityItem>
-                      </CommunitySVG>
-                    </CommunityLink>
-                  </Link>
+              <Fixed>
+                <CommunityDashboard>
+                  <CommunityProfile>
+                    <CommunityProfileFrame>
+                      <CommunityProfilePart></CommunityProfilePart>
+                    </CommunityProfileFrame>
+                    <CommunityProfileImg img={userInfo} />
+                  </CommunityProfile>
+                  <TextCenter>
+                    <TextFrame>
+                      <TextLog>로그인 후 더 편하게 이용해 보세요</TextLog>
+                    </TextFrame>
+                  </TextCenter>
+                  <DashboardButtonFrame>
+                    <DashboardButton>로그인</DashboardButton>
+                  </DashboardButtonFrame>
+                </CommunityDashboard>
+                <CommunityMenuList>
+                  <CommunityMenuItem>
+                    <Link to="/communitypage">
+                      <CommunityLink>
+                        <CommunitySVG>
+                          <SVGX>
+                            <Menu />
+                          </SVGX>
+                          <CommunityItem>
+                            <CommunityMenuText>전체 게시판</CommunityMenuText>
+                          </CommunityItem>
+                        </CommunitySVG>
+                      </CommunityLink>
+                    </Link>
 
-                  <CommunityLink>
-                    <CommunityMenuButton>
-                      <SVGX>
-                        <Talk />
-                      </SVGX>
-                      <CommunityItem onClick={ListOpen}>
-                        <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
-                      </CommunityItem>
-                      <RotatedDown isRotated={isList}></RotatedDown>
-                    </CommunityMenuButton>
-                  </CommunityLink>
-                  {isList && (
-                    <CommunityItemList>
-                      {categories.map((category) => (
-                        <Link
-                          to={`/communitypage/${category.categoryId}`}
-                          key={category.categoryId}
-                        >
-                          <CommunityLink key={category.categoryId}>
-                            <CommunityItem>
-                              <CommunityMenuText>
-                                {category.categoryName} 게시판
-                              </CommunityMenuText>
-                              <Star />
-                            </CommunityItem>
-                          </CommunityLink>
-                        </Link>
-                      ))}
-                    </CommunityItemList>
-                  )}
-                </CommunityMenuItem>
-              </CommunityMenuList>
+                    <CommunityLink>
+                      <CommunityMenuButton>
+                        <SVGX>
+                          <Talk />
+                        </SVGX>
+                        <CommunityItem onClick={ListOpen}>
+                          <CommunityMenuText>일반 커뮤니티</CommunityMenuText>
+                        </CommunityItem>
+                        <RotatedDown isRotated={isList}></RotatedDown>
+                      </CommunityMenuButton>
+                    </CommunityLink>
+                    {isList && (
+                      <CommunityItemList>
+                        {categories.map((category) => (
+                          <Link
+                            to={`/communitypage/${category.categoryId}`}
+                            key={category.categoryId}
+                          >
+                            <CommunityLink key={category.categoryId}>
+                              <CommunityItem>
+                                <CommunityMenuText>
+                                  {category.categoryName} 게시판
+                                </CommunityMenuText>
+                                <Star />
+                              </CommunityItem>
+                            </CommunityLink>
+                          </Link>
+                        ))}
+                      </CommunityItemList>
+                    )}
+                  </CommunityMenuItem>
+                </CommunityMenuList>
+              </Fixed>
             </Aside>
             <Routes>
               <Route path="/" element={<CommunityComponent />} />

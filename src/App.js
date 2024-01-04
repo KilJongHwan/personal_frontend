@@ -1,8 +1,12 @@
+import { store } from "./context/store";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers";
 import "./App.css";
 import { SuccessPage } from "./component/Mypage/SuccessComponent";
 import StreamPlayer from "./component/stream/StreamPlayer";
 
 import CommunityPage from "./pages/CommunityPage";
+import LoginPage from "./pages/LoginPage";
 import MyPage from "./pages/MyPage";
 import OtherPage from "./pages/OtherPage";
 import GlobalStyle from "./style/GlobalStyle";
@@ -11,6 +15,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
+      <Provider store={store}>
+        <MyPage></MyPage>
+      </Provider>
       <GlobalStyle />
       <Router>
         <Routes>
@@ -20,6 +27,7 @@ function App() {
           <Route path="/" element={<MyPage />} />
           <Route path="/stream" element={<StreamPlayer />} />
           <Route path="/otherpage/:email" element={<OtherPage />} />
+          <Route path="/login" element={<LoginPage></LoginPage>} />
         </Routes>
       </Router>
     </>

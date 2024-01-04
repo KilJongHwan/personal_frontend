@@ -24,14 +24,18 @@ import {
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 import ModalComponent from "../utils/ModalComponent";
 import PayComponent from "../component/Mypage/PayComponent.tsx";
+import { jwtDecode } from "jwt-decode";
+import Common from "../utils/Common.jsx";
+import { useDispatch } from "react-redux";
+import userSlice from "../context/userSlice.jsx";
 
 const MyPage = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("asd123@naver.com");
   const [userInfo, setUserInfo] = useState(null);
   const [userMusic, setUserMusic] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
   const [amount, setAmount] = useState(0);
-
   const amountChange = (e) => {
     const inputAmount = e.target.value;
 
@@ -41,6 +45,11 @@ const MyPage = () => {
     }
     setAmount(inputAmount);
   };
+  useEffect(() => {
+    const decode = jwtDecode(Common.getAccessToken());
+    setEmail(decode.sub);
+  }, []);
+
   useEffect(() => {
     const fetchUserInfoAndMusic = async () => {
       try {
