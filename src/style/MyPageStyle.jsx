@@ -86,10 +86,10 @@ export const MainHeadBox = styled.div`
 `;
 export const MainHeadText = styled.div`
   display: flex;
-  width: 200px;
+  width: 10em;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   flex-shrink: 0;
   opacity: 1;
   color: #fff;
@@ -192,7 +192,8 @@ export const InterBoxText = styled.div`
 export const PointBox = styled.div`
   position: absolute;
   display: flex;
-  right: 50px;
+  right: 1em;
+  width: 7em;
   height: 100%;
   flex-direction: column;
   justify-content: center;
@@ -200,14 +201,14 @@ export const PointBox = styled.div`
   flex-shrink: 0;
   color: #fff;
   font-family: Noto Sans KR;
-  font-size: 3em;
+  font-size: 4em;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   opacity: 1;
   @media (max-width: 1024px) {
     position: relative;
-    right: 0;
+    padding: 10px;
     color: rgb(0, 0, 0);
     width: 85%;
     flex-direction: row;
@@ -230,13 +231,13 @@ export const PointBox = styled.div`
 `;
 export const MoveButtonBox = styled.div`
   display: flex;
-  width: 250px;
+  width: 100%;
   justify-content: space-between;
   padding: 10px;
   @media (max-width: 1024px) {
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 6em;
   }
 `;
 export const MoveButton = styled.button`
@@ -268,8 +269,6 @@ export const MoveButton = styled.button`
     color: transparent;
 
     width: 100%;
-
-    /* border: none; */
     .svg-wrapper {
       display: block;
     }
