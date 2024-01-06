@@ -16,20 +16,19 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <MyPage></MyPage>
+        <GlobalStyle />
+        <Router>
+          <Routes>
+            <Route path="/success" element={<SuccessPage />} />
+            {/* 중첩 라우터로 커뮤니티 페이지안에 라우트를 연결해서 페이지안 컴포넌트만 변경 */}
+            <Route path="/communitypage/*" element={<CommunityPage />} />
+            <Route path="/" element={<MyPage />} />
+            <Route path="/stream" element={<StreamPlayer />} />
+            <Route path="/otherpage/:email" element={<OtherPage />} />
+            <Route path="/login" element={<LoginPage></LoginPage>} />
+          </Routes>
+        </Router>
       </Provider>
-      <GlobalStyle />
-      <Router>
-        <Routes>
-          <Route path="/success" element={<SuccessPage />} />
-          {/* 중첩 라우터로 커뮤니티 페이지안에 라우트를 연결해서 페이지안 컴포넌트만 변경 */}
-          <Route path="/communitypage/*" element={<CommunityPage />} />
-          <Route path="/" element={<MyPage />} />
-          <Route path="/stream" element={<StreamPlayer />} />
-          <Route path="/otherpage/:email" element={<OtherPage />} />
-          <Route path="/login" element={<LoginPage></LoginPage>} />
-        </Routes>
-      </Router>
     </>
   );
 }

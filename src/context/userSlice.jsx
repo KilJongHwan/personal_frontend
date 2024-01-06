@@ -1,12 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
-import { decode as jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import Common from "../utils/Common.jsx";
 
+const token = Common.getAccessToken();
+const decode = token ? jwtDecode(token).sub : "";
+
+// 사용자 정보를 비동기적으로 가져오는 액션 생성
 export const fetchUserInfo = createAsyncThunk(
   "user/fetchUserInfo",
   async (_, { getState }) => {
+    // 현재 리덕스 상태에서 이메일 가져오기
     const { email } = getState().user;
+    // Axios API를 이용해서 userInfo를 가져와서 리턴
     const response = await MemberInfoAxiosApi.getUserInfo(email);
     return response.data;
   }
@@ -34,11 +40,11 @@ export const fetchUserPerformance = createAsyncThunk(
   }
 );
 
+// 초기 이메일 값을 설정
 const initialEmail = (() => {
-  const token = Common.getAccessToken();
   if (token) {
     try {
-      return jwtDecode(token).sub;
+      return decode;
     } catch (error) {
       console.error("Invalid token", error);
       return "";
@@ -58,9 +64,11 @@ const userSlice = createSlice({
     error: null,
   },
   reducers: {},
+  // createAsyncThunk에서 생성한 액션들에 대한 리듀서를 정의
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserInfo.fulfilled, (state, action) => {
+        // 각각의 액션 성공 시, 상태를 업데이트
         state.userInfo = action.payload;
       })
       .addCase(fetchUserMusic.fulfilled, (state, action) => {

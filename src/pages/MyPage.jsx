@@ -24,17 +24,14 @@ import {
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 import ModalComponent from "../utils/ModalComponent";
 import PayComponent from "../component/Mypage/PayComponent.tsx";
-import { jwtDecode } from "jwt-decode";
-import Common from "../utils/Common.jsx";
-import { useDispatch } from "react-redux";
-import userSlice from "../context/userSlice.jsx";
+import { useSelector } from "react-redux";
 
 const MyPage = () => {
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState("asd123@naver.com");
-  const [userInfo, setUserInfo] = useState(null);
-  const [userMusic, setUserMusic] = useState(null);
-  const [userPerformance, setUserPerformance] = useState(null);
+  const email = useSelector((state) => state.user.email);
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const userMusic = useSelector((state) => state.user.userMusic);
+  const userPerformance = useSelector((state) => state.user.userPerformance);
+
   const [amount, setAmount] = useState(0);
   const amountChange = (e) => {
     const inputAmount = e.target.value;
@@ -45,36 +42,7 @@ const MyPage = () => {
     }
     setAmount(inputAmount);
   };
-  useEffect(() => {
-    const decode = jwtDecode(Common.getAccessToken());
-    setEmail(decode.sub);
-  }, []);
 
-  useEffect(() => {
-    const fetchUserInfoAndMusic = async () => {
-      try {
-        const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
-        console.log(userInfoResponse.data);
-        setUserInfo(userInfoResponse.data);
-        if (userInfoResponse.data) {
-          const musicResponse = await MemberInfoAxiosApi.getUserMusic(
-            userInfoResponse.data.id
-          );
-          setUserMusic(musicResponse.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    const fetchData = async () => {
-      const response = await MemberInfoAxiosApi.getUserInfoByPerformanceEmail(
-        email
-      );
-      setUserPerformance(response.data);
-    };
-    fetchData();
-    fetchUserInfoAndMusic();
-  }, [email]);
   const exchangePoints = async () => {
     try {
       const response = await MemberInfoAxiosApi.exchangePoints(email, amount);
