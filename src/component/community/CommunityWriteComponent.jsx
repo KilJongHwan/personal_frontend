@@ -161,14 +161,15 @@ const WriteComponent = () => {
             onChange={(value) => setContent(value)}
             modules={modules}
           />
-          <CancelButton onClick={() => navigate("/")}>
-            <div className="front">취소</div>
-            <div className="back">cancel</div>
-          </CancelButton>
+
           <WriteButton onClick={PostRegister}>
             <div className="front">등록</div>
             <div className="back">submit</div>
           </WriteButton>
+          <CancelButton onClick={() => navigate("/")}>
+            <div className="front">취소</div>
+            <div className="back">cancel</div>
+          </CancelButton>
         </WriteSection>
       </WriteContainer>
     </>

@@ -56,7 +56,7 @@ const SignUpAxios = {
       userEmail: email,
       userPassword: password,
     };
-    return await axios.post(CHORD8_DOMAIN + "/auth/login", login);
+    return await axios.post(Common.DOMAIN + "/auth/login", login);
   },
 
   // 어드민 로그인

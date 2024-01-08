@@ -23,7 +23,7 @@ export const MainHead = styled.div`
     background: white;
     width: 100%;
     height: 100%;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     flex-direction: column;
   }

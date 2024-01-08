@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MypageComponent from "../component/Mypage/MypageComponent";
 import depositPath from "../images/Deposit_white.svg";
 import whitdrawPath from "../images/Whitdraw_white.svg";
@@ -24,7 +24,12 @@ import {
 import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
 import ModalComponent from "../utils/ModalComponent";
 import PayComponent from "../component/Mypage/PayComponent.tsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchUserInfo,
+  fetchUserMusic,
+  fetchUserPerformance,
+} from "../context/userSlice.jsx";
 
 const MyPage = () => {
   const email = useSelector((state) => state.user.email);
@@ -32,7 +37,22 @@ const MyPage = () => {
   const userMusic = useSelector((state) => state.user.userMusic);
   const userPerformance = useSelector((state) => state.user.userPerformance);
 
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchUserInfo());
+      await dispatch(fetchUserMusic());
+      await dispatch(fetchUserPerformance());
+      setLoading(false);
+    };
+    fetchData();
+  }, [dispatch]);
+
   const [amount, setAmount] = useState(0);
+
   const amountChange = (e) => {
     const inputAmount = e.target.value;
 

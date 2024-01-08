@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import Common from "../utils/Common.jsx";
 
 const token = Common.getAccessToken();
-const decode = token ? jwtDecode(token).sub : "";
+const decode = token ? jwtDecode(token) : "";
 
 // 사용자 정보를 비동기적으로 가져오는 액션 생성
 export const fetchUserInfo = createAsyncThunk(
@@ -44,7 +44,10 @@ export const fetchUserPerformance = createAsyncThunk(
 const initialEmail = (() => {
   if (token) {
     try {
-      return decode;
+      // console.log(decode);
+      // return decode;
+      console.log(window.localStorage.getItem("email"));
+      return window.localStorage.getItem("email");
     } catch (error) {
       console.error("Invalid token", error);
       return "";
