@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MypageComponent from "../component/Mypage/MypageComponent";
 import depositPath from "../images/Deposit_white.svg";
 import whitdrawPath from "../images/Whitdraw_white.svg";

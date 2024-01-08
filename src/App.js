@@ -1,6 +1,5 @@
 import { store } from "./context/store";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers";
 import "./App.css";
 import { SuccessPage } from "./component/Mypage/SuccessComponent";
 import StreamPlayer from "./component/stream/StreamPlayer";

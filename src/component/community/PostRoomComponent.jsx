@@ -149,18 +149,17 @@ const Post = () => {
   // 대댓글 작성 함수
   const replyWrite = async (parentCommentId) => {
     try {
-      if (!newReply.trim()) {
-        // Check if newReply is empty or contains only whitespace
+      if (!newReply[parentCommentId]) {
         alert("대댓글 내용을 입력하세요.");
-        return;
-      }
-      if (!replyAuthorName.trim() || !replyAuthorPassword.trim()) {
-        alert("답글 작성자 닉네임과 비밀번호를 모두 입력하세요.");
         return;
       }
       const replyAuthorName = replyNickName[parentCommentId];
       const replyAuthorPassword = replyPassword[parentCommentId];
 
+      if (!replyAuthorName || !replyAuthorPassword) {
+        alert("답글 작성자 닉네임과 비밀번호를 모두 입력하세요.");
+        return;
+      }
       const response = await CommunityAxiosApi.replyWrite(
         email,
         replyAuthorName,
