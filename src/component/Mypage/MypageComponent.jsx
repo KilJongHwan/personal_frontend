@@ -211,19 +211,6 @@ const MypageComponent = ({ userInfo, userMusic, userPerformance }) => {
       console.error("Failed to load previous chat:", error);
     }
   };
-  // 세션 counts 가져오는 api
-  const fetchSessionCounts = async () => {
-    const updatedChatRooms = await Promise.all(
-      chatRooms.map(async (room) => {
-        const response = await MemberInfoAxiosApi.chatSessionCount(room.roomId);
-        // console.log(response.data);
-        return { ...room, sessionCount: response.data };
-      })
-    );
-
-    setChatRooms(updatedChatRooms);
-    // console.log(chatRooms);
-  };
   const handleCreateChatRoom = async () => {
     const response = await MemberInfoAxiosApi.chatCreate(email, chatRoomTitle);
     console.log(response.data);

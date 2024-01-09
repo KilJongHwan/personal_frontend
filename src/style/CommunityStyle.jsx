@@ -20,6 +20,9 @@ export const Container = styled.div`
   align-items: center;
   gap: 60px;
   align-self: stretch;
+  @media (max-width: 768px) {
+    width: 470px;
+  }
 `;
 
 export const Section = styled.div`
