@@ -55,13 +55,14 @@ import CommunityComponent from "../component/community/CommunityComponent";
 import CommunitySearchComponent from "../component/community/CommunitySearchComponent";
 import Post from "../component/community/PostRoomComponent";
 import WriteComponent from "../component/community/CommunityWriteComponent";
-import MemberInfoAxiosApi from "../axios/MemberInfoAxios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserInfo } from "../context/userSlice";
 
 const CommunityPage = () => {
   const [isList, setIsList] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [email, setEmail] = useState("");
-  const [userInfo, setUserInfo] = useState(null);
+  const email = useSelector((state) => state.user.email);
+  const userInfo = useSelector((state) => state.user.userInfo);
   const { message: wsMessage } = useWebSocket(Common.SOCKET_URL, email);
   const ListOpen = () => {
     setIsList(!isList);
@@ -70,30 +71,34 @@ const CommunityPage = () => {
     display: block;
     width: 100%;
   `;
-
   const RotatedDown = styled(Down)`
     transition: transform 0.3s ease-in-out;
     transform: ${(props) =>
       props.isRotated ? "rotate(180deg)" : "rotate(0deg)"};
   `;
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchUserInfo());
+      setLoading(false);
+    };
+    fetchData();
+  }, [dispatch]);
   useEffect(() => {
     const getCategories = async () => {
       try {
         const rsp = await AxiosApi.cateList();
-        console.log(rsp.data);
         setCategories(rsp.data);
+        console.log(userInfo);
       } catch (error) {
         console.log(error);
       }
     };
-    const getUserInfo = async () => {
-      const userInfoResponse = await MemberInfoAxiosApi.getUserInfo(email);
-      console.log(userInfoResponse.data);
-      setUserInfo(userInfoResponse.data);
-    };
-    getUserInfo();
     getCategories();
-  }, []);
+  }, [email]);
 
   return (
     <>
@@ -115,16 +120,18 @@ const CommunityPage = () => {
                     <CommunityProfileFrame>
                       <CommunityProfilePart></CommunityProfilePart>
                     </CommunityProfileFrame>
-                    <CommunityProfileImg img={userInfo} />
+                    <CommunityProfileImg
+                      img={userInfo && userInfo.profileImg}
+                    />
                   </CommunityProfile>
                   <TextCenter>
                     <TextFrame>
                       <TextLog>로그인 후 더 편하게 이용해 보세요</TextLog>
                     </TextFrame>
                   </TextCenter>
-                  <DashboardButtonFrame>
+                  {/* <DashboardButtonFrame>
                     <DashboardButton>로그인</DashboardButton>
-                  </DashboardButtonFrame>
+                  </DashboardButtonFrame> */}
                 </CommunityDashboard>
                 <CommunityMenuList>
                   <CommunityMenuItem>

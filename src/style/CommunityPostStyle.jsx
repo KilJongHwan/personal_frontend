@@ -390,6 +390,10 @@ export const PostPage = styled.div`
   gap: 9px;
   align-self: stretch;
   opacity: 1;
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 10px;
+  }
 `;
 export const Pagination = styled.div`
   display: flex;
